@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, View, Text, Alert, TouchableOpacity} from 'react-native';
+// import { accessibilityProps } from 'react-native-paper/lib/typescript/src/components/MaterialCommunityIcon';
 
-function FooterComponent() {
+function FooterComponent(props) {
   return (
     <View style={styles.footer}>
       <TouchableOpacity onPress={() => Alert.alert('button is pressed')}>
-        <Text style={styles.footerText}>admin portal</Text>
+        <Text style={styles.footerText}>{props.portal}</Text>
       </TouchableOpacity>
       <View style={styles.buttonsInLine}>
         <TouchableOpacity onPress={toContact}>

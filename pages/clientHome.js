@@ -11,8 +11,8 @@ const ClientHome: () => React$Node = () => {
       <StatusBar barStyle="light-content" />
       <SafeAreaView>
         <HeaderComponent />
-        <ButtonGridComponent />
-        <FooterComponent />
+        <ButtonGridComponent text='What resources are you looking for today?' hint='(Select One)'/>
+        <FooterComponent portal='admin portal'/>
       </SafeAreaView>
     </>
   );
