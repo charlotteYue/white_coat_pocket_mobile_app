@@ -23,16 +23,11 @@ const items = [
   {name: 'Housing'},
 ];
 
-const windowHeight = Dimensions.get('window').height;
+// const windowHeight = Dimensions.get('window').height;
 
-function ButtonGridComponent() {
+function ButtonGridComponent(props) {
   return (
-    <View
-      style={{
-        height: windowHeight - 100,
-        backgroundColor: '#ffffff',
-        alignItems: 'center',
-      }}>
+    <View style={styles.main}>
       <View style={styles.intro}>
         <Text style={styles.introText}>
           The White Coat Pocket Guide aims to inform providers about the
@@ -43,9 +38,9 @@ function ButtonGridComponent() {
       <View style={styles.buttonContainer}>
         <View>
           <Text style={styles.buttonIntroText}>
-            What resources are you looking for today?
+            {props.text}
           </Text>
-          <Text style={styles.buttonHintText}>(Select one)</Text>
+  <Text style={styles.buttonHintText}>{props.hint}</Text>
         </View>
       </View>
 
@@ -75,6 +70,10 @@ function ButtonGridComponent() {
 }
 
 const styles = StyleSheet.create({
+  main: {
+    backgroundColor: '#ffffff',
+        alignItems: 'center',
+  },
   intro: {
     marginTop: 20,
     marginLeft: 20,
