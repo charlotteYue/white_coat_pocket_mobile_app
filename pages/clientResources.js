@@ -11,14 +11,23 @@ import Footer from './components/FooterComponent.js';
 import SegmentTab from './components/segmenTabBar.js';
 
 export default class ClientResources extends Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     return (
       <>
         <SafeAreaView>
-          <HeaderWithIconComponent />
+          <HeaderWithIconComponent 
+          navigation={this.props.navigation} 
+          back="ClientHome"
+          home="ClientHome"/>
           <ScrollView style={{ marginTop: 50 }}>
-            <SegmentTab categoryName="healthcare Services"/>
-            <ResourcesList />
+            <SegmentTab/>
+            <ResourcesList 
+            categoryName={this.props.categoryName}
+            navigation={this.props.navigation} 
+            name="ClientServices"/>
             <Footer />
           </ScrollView>
         </SafeAreaView>

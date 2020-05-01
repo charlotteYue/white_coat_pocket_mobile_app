@@ -36,6 +36,8 @@ import FooterComponent from './components/FooterComponent.js';
               text="What resources are you looking for today?"
               hint="(Select One)"
               buttons={items}
+              navigation={this.props.navigation} 
+              name="ClientResources"
             />
             <FooterComponent
               navigation={this.props.navigation}

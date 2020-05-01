@@ -95,7 +95,6 @@ export default class App extends React.Component {
             />
           </Stack.Navigator>
         </NavigationContainer>
-        {/* <ClientResources /> */}
       </>
     );
   }
