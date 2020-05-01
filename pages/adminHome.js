@@ -18,15 +18,28 @@ import { ScrollView } from 'react-native-gesture-handler';
 // function AdminHome({navigation})
 class AdminHome extends React.Component{
   render() {
+    const { route }=this.props;
+    console.log(route.params);
+    let arr=new Array();
+    for(var key in route.params){
+      arr.push(key)
+    }
+    let items=new Array();
+    for( var a in arr){
+      items.push(route.params[a]);
+    }
     return (
       <>
         <StatusBar barStyle="light-content" />
         <SafeAreaView>
           <HeaderComponent />
           <ScrollView>
-            <ButtonGridComponent text='Welcome Administrator'/>
+            <ButtonGridComponent text='Welcome Administrator'buttons={items}/>
             <CreateButtonComponent />
-            <FooterComponent navigation={this.props.navigation} name="ClientHome" portal="client portal"/>
+            <FooterComponent navigation={this.props.navigation} 
+            name="ClientHome" 
+            portal="client portal"
+            />
           </ScrollView>
         </SafeAreaView>
   

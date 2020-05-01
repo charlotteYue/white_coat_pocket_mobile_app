@@ -19,6 +19,7 @@ import ClientServices from './pages/clientServices.js';
 
 const Stack = createStackNavigator();
 
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -31,13 +32,25 @@ export default class App extends React.Component {
     this._onPressLogout = this._onPressLogout.bind(this);
   }
 
+
   componentDidMount() {
     this._loadClient();
   }
 
   render() {
     let loginStatus = 'Currently logged out.';
-
+    const items = [
+      {name: 'Substance Use'},
+      {name: 'Mental Health'},
+      {name: 'Healthcare'},
+      {name: 'IPV'},
+      {name: 'Immigration'},
+      {name: 'Housing'},
+      {name: 'Lifestyle'},
+      {name: 'LGBTQ+'},
+      {name: 'Housing'},
+    ];
+    
     if (this.state.currentUserId) {
       loginStatus = `Currently logged in as ${this.state.currentUserId}!`;}
 
@@ -64,11 +77,13 @@ export default class App extends React.Component {
             <Stack.Screen
               name="ClientHome"
               component={ClientHome}
-              options={{ title: 'Welcome' }}
+              // options={{ title: 'Welcome' }}
+              initialParams={items}
             />
             <Stack.Screen
               name="AdminHome"
               component={AdminHome}
+              initialParams={items}
             />
             <Stack.Screen
               name="ClientResources"

@@ -13,17 +13,17 @@ import {
 import {FlatGrid} from 'react-native-super-grid';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const items = [
-  {name: 'Substance Use'},
-  {name: 'Mental Health'},
-  {name: 'Healthcare'},
-  {name: 'IPV'},
-  {name: 'Immigration'},
-  {name: 'Housing'},
-  {name: 'Lifestyle'},
-  {name: 'LGBTQ+'},
-  {name: 'Housing'},
-];
+// const items = [
+//   {name: 'Substance Use'},
+//   {name: 'Mental Health'},
+//   {name: 'Healthcare'},
+//   {name: 'IPV'},
+//   {name: 'Immigration'},
+//   {name: 'Housing'},
+//   {name: 'Lifestyle'},
+//   {name: 'LGBTQ+'},
+//   {name: 'Housing'},
+// ];
 
 // const windowHeight = Dimensions.get('window').height;
 
@@ -52,7 +52,7 @@ class ButtonGridComponent extends React.Component {
         <SafeAreaView>
           <FlatGrid
             itemDimension={100}
-            items={items}
+            items={this.props.buttons}
             style={styles.gridView}
             renderItem={({item}) => (
               <View>

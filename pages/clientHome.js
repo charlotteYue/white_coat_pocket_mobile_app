@@ -16,6 +16,16 @@ import FooterComponent from './components/FooterComponent.js';
 // function ClientHome({ navigation })
  class ClientHome extends React.Component {
    render() {
+    const { route }=this.props;
+    console.log(route.params);
+    let arr=new Array();
+    for(var key in route.params){
+      arr.push(key)
+    }
+    let items=new Array();
+    for( var a in arr){
+      items.push(route.params[a]);
+    }
     return (
       <>
         <StatusBar barStyle="light-content" />
@@ -25,6 +35,7 @@ import FooterComponent from './components/FooterComponent.js';
             <ButtonGridComponent
               text="What resources are you looking for today?"
               hint="(Select One)"
+              buttons={items}
             />
             <FooterComponent
               navigation={this.props.navigation}
