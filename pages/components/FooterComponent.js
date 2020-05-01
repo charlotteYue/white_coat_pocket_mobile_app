@@ -1,25 +1,48 @@
 import React from 'react';
 import {StyleSheet, View, Text, Alert, TouchableOpacity} from 'react-native';
-// import { accessibilityProps } from 'react-native-paper/lib/typescript/src/components/MaterialCommunityIcon';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createStackNavigator} from '@react-navigation/stack';
 
-function FooterComponent(props) {
+// import ClientHome from '../clientHome.js';
+// import AdminHome from '../adminHome.js';
+
+// const Stack = createStackNavigator();
+
+function FooterComponent({navigation,name,portal}) {
   return (
-    <View style={styles.footer}>
-      <TouchableOpacity onPress={() => Alert.alert('button is pressed')}>
-        <Text style={styles.footerText}>{props.portal}</Text>
-      </TouchableOpacity>
-      <View style={styles.buttonsInLine}>
-        <TouchableOpacity onPress={toContact}>
-          <Text style={styles.footerText}>contact us</Text>
+    // <AppContainer>
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={() => navigation.navigate({name})}>
+          <Text style={styles.footerText}>{portal}</Text>
         </TouchableOpacity>
-        <Text> | </Text>
-        <TouchableOpacity onPress={toFeedback}>
-          <Text style={styles.footerText}>Feedback</Text>
-        </TouchableOpacity>
+        
+        <View style={styles.buttonsInLine}>
+          <TouchableOpacity onPress={toContact}>
+            <Text style={styles.footerText}>contact us</Text>
+          </TouchableOpacity>
+          <Text> | </Text>
+          <TouchableOpacity onPress={toFeedback}>
+            <Text style={styles.footerText}>Feedback</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    // </AppContainer>
+    
   );
 }
+
+// const AppNavigator = createStackNavigator({
+//   Client: {
+//     screen: ClientHome
+//   },
+//   Admin: {
+//     screen: AdminHome
+//   }
+// },{
+//   initialRouteName: "Client"
+// });
+
+// const AppContainer = createAppContainer(AppNavigator);
 
 function toContact() {
   Alert.alert('navigate to contact page');

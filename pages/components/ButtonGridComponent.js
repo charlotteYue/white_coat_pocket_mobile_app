@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   StyleSheet,
-  ScrollView,
+  // ScrollView,
+  SafeAreaView,
   View,
   Text,
   Alert,
@@ -10,6 +11,7 @@ import {
 } from 'react-native';
 
 import {FlatGrid} from 'react-native-super-grid';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const items = [
   {name: 'Substance Use'},
@@ -23,11 +25,11 @@ const items = [
   {name: 'Housing'},
 ];
 
-// const windowHeight = Dimensions.get('window').height;
+const windowHeight = Dimensions.get('window').height;
 
 function ButtonGridComponent(props) {
   return (
-    <View style={styles.main}>
+    <ScrollView style={styles.main}>
       <View style={styles.intro}>
         <Text style={styles.introText}>
           The White Coat Pocket Guide aims to inform providers about the
@@ -40,11 +42,12 @@ function ButtonGridComponent(props) {
           <Text style={styles.buttonIntroText}>
             {props.text}
           </Text>
-  <Text style={styles.buttonHintText}>{props.hint}</Text>
+            <Text style={styles.buttonHintText}>{props.hint}</Text>
         </View>
       </View>
 
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      {/* <ScrollView > */}
+      <SafeAreaView>
         <FlatGrid
           itemDimension={100}
           items={items}
@@ -64,15 +67,18 @@ function ButtonGridComponent(props) {
             </View>
           )}
         />
-      </ScrollView>
-    </View>
+      {/* </ScrollView> */}
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     backgroundColor: '#ffffff',
-        alignItems: 'center',
+    // alignItems: 'center',
+    // flexDirection:'column',
+    // flex: 1 ,
   },
   intro: {
     marginTop: 20,
@@ -86,7 +92,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    margin: 20,
+    margin: 10,
   },
 
   buttonIntroText: {
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
+    // padding: 10,
     height: 100,
   },
 
