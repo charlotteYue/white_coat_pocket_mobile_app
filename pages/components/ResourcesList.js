@@ -1,8 +1,14 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import { Stitch } from 'mongodb-stitch-react-native-sdk';
+import React, { Component } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+} from 'react-native';
 
-
+import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+import { json } from 'body-parser';
+ 
 class ResourcesList extends Component {
   constructor(props) {
     super(props);
@@ -17,41 +23,87 @@ class ResourcesList extends Component {
         ],
       },
       showName: false,
+      categoryName: undefined,
+      data: [],
     };
   }
-  renderCategory() {
-    if (this.showName === false || this.showName === undefined) {
-      this.showName = true;
-      return <Text style={styles.Title}>{this.state.resourceList.name}</Text>;
-    } else {
-      return null;
-    }
-  }
-  render() {
-    console.log(this.state.resourceList.resources);
-    return this.state.resourceList.resources.map((item, index) => {
-      return (
-        <View style={styles.container}>
-          <Image
-            source={{
-              uri:
-                'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',
-            }}
-            style={styles.photo}
-          />
-          <View style={styles.container_text}>
-            <Text style={styles.title}>{item}</Text>
-          </View>
-        </View>
 
-        // <View style={styles.container}>
-        //   <View>{this.renderCategory()}</View>
-        //   <View style={styles.item}>
-        //     <Text style={styles.Text}>{item}</Text>
-        //   </View>
-        // </View>
+  renderCategory() {
+    if (
+      this.showName === false ||
+      this.showName === undefined
+    ) {
+      this.showName = true;
+      return (
+        <Text style={styles.Title}>
+          {this.state.resourceList.name}
+        </Text>
       );
-    });
+    }
+    return null;
+  }
+
+  _onLoadCategory(){
+    this.setState({categoryName: this.props.categoryName});
+    console.log('update categoryName', this.categoryName);
+  }
+
+  _onFetch(){
+    const stitchAppClient = Stitch.defaultAppClient
+    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+    stitchAppClient.auth
+        .loginWithCredential(new AnonymousCredential())
+        .then(() => {
+          // Retrieve a database object
+          const conn = mongoClient.db('test')
+
+          // Retrieve the collection in the database
+          const db = conn.collection('providers')
+
+          // Find 10 documents and log them to console.
+          db.find({}, {limit: 10})
+              .toArray()
+              .then(results => console.log('Results:', results))
+              .then((json)=> {
+                this.setState({data: json})
+              })
+              .catch(console.error)
+        })
+        .catch(console.error)
+        console.log('here is the result,', data);
+  }
+
+  render() {
+    console.log(
+      this.state.resourceList.resources
+    );
+    return this.state.resourceList.resources.map(
+      (item, index) => {
+        return (
+          <View style={styles.container}>
+            <Image
+              source={{
+                uri:
+                  'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',
+              }}
+              style={styles.photo}
+            />
+            <View style={styles.container_text}>
+              <Text style={styles.title}>
+                {item}
+              </Text>
+            </View>
+          </View>
+
+          // <View style={styles.container}>
+          //   <View>{this.renderCategory()}</View>
+          //   <View style={styles.item}>
+          //     <Text style={styles.Text}>{item}</Text>
+          //   </View>
+          // </View>
+        );
+      }
+    );
   }
 }
 
@@ -71,7 +123,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: '#000',
   },
   container_text: {
