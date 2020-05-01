@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import { Stitch } from 'mongodb-stitch-react-native-sdk';
+
 
 class ResourcesList extends Component {
   constructor(props) {
@@ -18,8 +20,6 @@ class ResourcesList extends Component {
     };
   }
   renderCategory() {
-    console.log('here');
-    console.log(this.showName);
     if (this.showName === false || this.showName === undefined) {
       this.showName = true;
       return <Text style={styles.Title}>{this.state.resourceList.name}</Text>;
@@ -28,11 +28,8 @@ class ResourcesList extends Component {
     }
   }
   render() {
-    console.log('here');
     console.log(this.state.resourceList.resources);
     return this.state.resourceList.resources.map((item, index) => {
-      console.log(item);
-      console.log(index);
       return (
         <View style={styles.container}>
           <Image
