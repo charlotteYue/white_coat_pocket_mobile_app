@@ -25,7 +25,7 @@ const items = [
   {name: 'Housing'},
 ];
 
-const windowHeight = Dimensions.get('window').height;
+// const windowHeight = Dimensions.get('window').height;
 
 function ButtonGridComponent(props) {
   return (
