@@ -61,7 +61,10 @@ class ButtonGridComponent extends React.Component {
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#649cf5"
-                    onPress={() => this.props.navigation.navigate(this.props.name)}>
+                    onPress={() => {
+                      this.props.navigation.navigate(this.props.name, {categoryName: item.name});
+                    }}
+                    >
                     <View />
                   </TouchableHighlight>
                 </View>

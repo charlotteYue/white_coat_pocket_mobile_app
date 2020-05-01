@@ -12,17 +12,7 @@ class ResourcesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      resourceList: {
-        name: 'Healthcare Services',
-        resources: [
-          'Insurance Navigation',
-          'Free Clinics',
-          'Prescriptions',
-          'Low Cost Primary Care',
-        ],
-      },
       showName: false,
-      categoryName: undefined,
       data: [],
     };
   }
@@ -42,8 +32,18 @@ class ResourcesList extends Component {
     return null;
   }
 
+  componentDidMount(){
+    this._onFetch();
+  }
+
   _onFetch = () =>{
-    const stitchAppClient = Stitch.defaultAppClient
+    const stitchAppClient = Stitch.defaultAppClient;
+    console.log('the category chosen is', this.props.categoryName);
+    const query = {'type': this.props.categoryName};
+    const option = {"projection": {
+      "subtype": 1,
+      "_id": 0,
+    },};
     const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
@@ -55,11 +55,18 @@ class ResourcesList extends Component {
           const db = conn.collection('providers')
 
           // Find 10 documents and log them to console.
-          db.find({}, {limit: 1})
+          db.find(query, option)
               .toArray()
-              .then(results => {
-                console.log('Results:', results)
-                this.setState({data: results})
+              .then(res => {
+                let listSet = new Set();
+                res.forEach(function(item){
+                  listSet.add(item.subtype);
+                })
+                ListArray = new Array();
+                ListArray = Array.from(listSet);
+                this.setState({data: ListArray}, function(){
+                  console.log('data is', this.state.data);
+                })
               })
               .catch(console.error)
         })
@@ -67,10 +74,7 @@ class ResourcesList extends Component {
   }
 
   render() {
-    console.log(
-      this.state.resourceList.resources
-    );
-    return this.state.resourceList.resources.map(
+    return this.state.data.map(
       (item, index) => {
         return (
           <View style={styles.container}>
@@ -82,7 +86,8 @@ class ResourcesList extends Component {
               style={styles.photo}
             />
             <View style={styles.container_text}>
-              <Text style={styles.title} onPress={() => this.props.navigation.navigate(this.props.name)}>
+              <Text style={styles.title} onPress={() => 
+                this.props.navigation.navigate(this.props.name), {serviceName: item}}>
                 {item}
               </Text>
             </View>

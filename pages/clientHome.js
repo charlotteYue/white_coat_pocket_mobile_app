@@ -13,7 +13,6 @@ import ButtonGridComponent from './components/ButtonGridComponent.js';
 import FooterComponent from './components/FooterComponent.js';
 // import AdminHome from './pages/adminHome';
 
-// function ClientHome({ navigation })
  class ClientHome extends React.Component {
    render() {
     const { route }=this.props;

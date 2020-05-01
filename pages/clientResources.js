@@ -15,6 +15,7 @@ export default class ClientResources extends Component {
     super(props);
   }
   render() {
+    const { route }=this.props;
     return (
       <>
         <SafeAreaView>
@@ -25,7 +26,7 @@ export default class ClientResources extends Component {
           <ScrollView style={{ marginTop: 50 }}>
             <SegmentTab/>
             <ResourcesList 
-            categoryName={this.props.categoryName}
+            categoryName={route.params.categoryName}
             navigation={this.props.navigation} 
             name="ClientServices"/>
             <Footer />

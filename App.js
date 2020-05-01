@@ -42,7 +42,7 @@ export default class App extends React.Component {
     const items = [
       {name: 'Substance Use'},
       {name: 'Mental Health'},
-      {name: 'Healthcare'},
+      {name: 'Healthcare Services'},
       {name: 'IPV'},
       {name: 'Immigration'},
       {name: 'Housing'},
