@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
-// import { json } from 'body-parser';
  
 class ResourcesList extends Component {
   constructor(props) {
@@ -43,12 +42,7 @@ class ResourcesList extends Component {
     return null;
   }
 
-  _onLoadCategory(){
-    this.setState({categoryName: this.props.categoryName});
-    console.log('update categoryName', this.categoryName);
-  }
-
-  _onFetch(){
+  _onFetch = () =>{
     const stitchAppClient = Stitch.defaultAppClient
     const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
     stitchAppClient.auth
@@ -61,16 +55,15 @@ class ResourcesList extends Component {
           const db = conn.collection('providers')
 
           // Find 10 documents and log them to console.
-          db.find({}, {limit: 10})
+          db.find({}, {limit: 1})
               .toArray()
-              .then(results => console.log('Results:', results))
-              .then((json)=> {
-                this.setState({data: json})
+              .then(results => {
+                console.log('Results:', results)
+                this.setState({data: results})
               })
               .catch(console.error)
         })
         .catch(console.error)
-        console.log('here is the result,', data);
   }
 
   render() {
@@ -89,7 +82,7 @@ class ResourcesList extends Component {
               style={styles.photo}
             />
             <View style={styles.container_text}>
-              <Text style={styles.title}>
+              <Text style={styles.title} onPress={() => this.props.navigation.navigate(this.props.name)}>
                 {item}
               </Text>
             </View>

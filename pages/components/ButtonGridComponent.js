@@ -61,7 +61,7 @@ class ButtonGridComponent extends React.Component {
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#649cf5"
-                    onPress={() => Alert.alert('pressed!')}>
+                    onPress={() => this.props.navigation.navigate(this.props.name)}>
                     <View />
                   </TouchableHighlight>
                 </View>

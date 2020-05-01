@@ -25,6 +25,8 @@ import FooterComponent from './components/FooterComponent.js';
             <ButtonGridComponent
               text="What resources are you looking for today?"
               hint="(Select One)"
+              navigation={this.props.navigation} 
+              name="ClientResources"
             />
             <FooterComponent
               navigation={this.props.navigation}

@@ -18,7 +18,8 @@ class HeaderwithIcon extends Component {
         <Header style={styles.header}>
           <Left>
             <Button transparent>
-              <Icon style={{color: 'white'}} name="arrow-back" />
+              <Icon style={{color: 'white'}} name="arrow-back" 
+              onPress={() => this.props.navigation.navigate(this.props.back)}/>
             </Button>
           </Left>
           <Body style={styles.body}>
@@ -26,7 +27,8 @@ class HeaderwithIcon extends Component {
           </Body>
           <Right>
             <Button transparent>
-              <Icon style={{color: 'white'}} name="home" />
+              <Icon style={{color: 'white'}} name="home" 
+              onPress={() => this.props.navigation.navigate(this.props.home)}/>
             </Button>
           </Right>
         </Header>
