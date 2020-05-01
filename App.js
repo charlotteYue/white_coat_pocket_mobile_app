@@ -57,7 +57,7 @@ export default class App extends React.Component {
 
     return (
       <>
-        {/* <NavigationContainer>
+        <NavigationContainer>
           <Stack.Navigator
             screenOptions={{ headerShown: false }}
           >
@@ -79,8 +79,8 @@ export default class App extends React.Component {
               component={ClientServices}
             />
           </Stack.Navigator>
-        </NavigationContainer> */}
-        <ClientResources />
+        </NavigationContainer>
+        {/* <ClientResources /> */}
       </>
     );
   }

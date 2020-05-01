@@ -27,50 +27,54 @@ const items = [
 
 // const windowHeight = Dimensions.get('window').height;
 
-function ButtonGridComponent(props) {
-  return (
-    <ScrollView style={styles.main}>
-      <View style={styles.intro}>
-        <Text style={styles.introText}>
-          The White Coat Pocket Guide aims to inform providers about the
-          essentials of navigating community resources and social services.
-        </Text>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <View>
-          <Text style={styles.buttonIntroText}>
-            {props.text}
+// function ButtonGridComponent(props)
+class ButtonGridComponent extends React.Component {
+  render() {
+    return (
+      <ScrollView style={styles.main}>
+        <View style={styles.intro}>
+          <Text style={styles.introText}>
+            The White Coat Pocket Guide aims to inform providers about the
+            essentials of navigating community resources and social services.
           </Text>
-            <Text style={styles.buttonHintText}>{props.hint}</Text>
         </View>
-      </View>
-
-      {/* <ScrollView > */}
-      <SafeAreaView>
-        <FlatGrid
-          itemDimension={100}
-          items={items}
-          style={styles.gridView}
-          renderItem={({item}) => (
-            <View>
-              <View style={styles.itemContainer}>
-                <TouchableHighlight
-                  activeOpacity={1}
-                  style={styles.mainBtn}
-                  underlayColor="#649cf5"
-                  onPress={() => Alert.alert('pressed!')}>
-                  <View />
-                </TouchableHighlight>
+  
+        <View style={styles.buttonContainer}>
+          <View>
+            <Text style={styles.buttonIntroText}>
+              {this.props.text}
+            </Text>
+              <Text style={styles.buttonHintText}>{this.props.hint}</Text>
+          </View>
+        </View>
+  
+        {/* <ScrollView > */}
+        <SafeAreaView>
+          <FlatGrid
+            itemDimension={100}
+            items={items}
+            style={styles.gridView}
+            renderItem={({item}) => (
+              <View>
+                <View style={styles.itemContainer}>
+                  <TouchableHighlight
+                    activeOpacity={1}
+                    style={styles.mainBtn}
+                    underlayColor="#649cf5"
+                    onPress={() => Alert.alert('pressed!')}>
+                    <View />
+                  </TouchableHighlight>
+                </View>
+                <Text style={styles.itemName}>{item.name}</Text>
               </View>
-              <Text style={styles.itemName}>{item.name}</Text>
-            </View>
-          )}
-        />
-      {/* </ScrollView> */}
-      </SafeAreaView>
-    </ScrollView>
-  );
+            )}
+          />
+        {/* </ScrollView> */}
+        </SafeAreaView>
+      </ScrollView>
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({

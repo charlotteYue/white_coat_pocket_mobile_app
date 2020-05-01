@@ -1,12 +1,15 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-function HeaderComponent() {
-  return (
-    <View style={styles.header}>
-      <Text style={styles.headerText}>White Coat Pocket Guide</Text>
-    </View>
-  );
+// function HeaderComponent() 
+class HeaderComponent extends React.Component{
+  render() {
+    return (
+      <View style={styles.header}>
+        <Text style={styles.headerText}>White Coat Pocket Guide</Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

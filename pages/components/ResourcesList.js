@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
-import { json } from 'body-parser';
+// import { json } from 'body-parser';
  
 class ResourcesList extends Component {
   constructor(props) {

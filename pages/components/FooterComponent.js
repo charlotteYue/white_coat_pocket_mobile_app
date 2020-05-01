@@ -8,27 +8,31 @@ import {StyleSheet, View, Text, Alert, TouchableOpacity} from 'react-native';
 
 // const Stack = createStackNavigator();
 
-function FooterComponent({navigation,name,portal}) {
-  return (
-    // <AppContainer>
-      <View style={styles.footer}>
-        <TouchableOpacity onPress={() => navigation.navigate({name})}>
-          <Text style={styles.footerText}>{portal}</Text>
-        </TouchableOpacity>
-        
-        <View style={styles.buttonsInLine}>
-          <TouchableOpacity onPress={toContact}>
-            <Text style={styles.footerText}>contact us</Text>
+// function FooterComponent({navigation,name,portal}) 
+class FooterComponent extends React.Component {
+  render() {
+    return (
+      // <AppContainer>
+        <View style={styles.footer}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.name)}>
+            <Text style={styles.footerText}>{this.props.portal}</Text>
           </TouchableOpacity>
-          <Text> | </Text>
-          <TouchableOpacity onPress={toFeedback}>
-            <Text style={styles.footerText}>Feedback</Text>
-          </TouchableOpacity>
+          
+          <View style={styles.buttonsInLine}>
+            <TouchableOpacity onPress={toContact}>
+              <Text style={styles.footerText}>contact us</Text>
+            </TouchableOpacity>
+            <Text> | </Text>
+            <TouchableOpacity onPress={toFeedback}>
+              <Text style={styles.footerText}>Feedback</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    // </AppContainer>
-    
-  );
+      // </AppContainer>
+      
+    );
+  }
+  
 }
 
 // const AppNavigator = createStackNavigator({

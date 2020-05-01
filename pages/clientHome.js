@@ -13,29 +13,30 @@ import ButtonGridComponent from './components/ButtonGridComponent.js';
 import FooterComponent from './components/FooterComponent.js';
 // import AdminHome from './pages/adminHome';
 
-function ClientHome({ navigation }) {
-  return (
-    <>
-      <StatusBar barStyle="light-content" />
-      <SafeAreaView>
-        <HeaderComponent />
-        <ScrollView>
-          <ButtonGridComponent
-            text="What resources are you looking for today?"
-            hint="(Select One)"
-            navigation={navigation}
-            name="ClientResources"
-            portal="client portal"
-          />
-          <FooterComponent
-            navigation={navigation}
-            name="AdminHome"
-            portal="admin portal"
-          />
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
+// function ClientHome({ navigation })
+ class ClientHome extends React.Component {
+   render() {
+    return (
+      <>
+        <StatusBar barStyle="light-content" />
+        <SafeAreaView>
+          <HeaderComponent />
+          <ScrollView>
+            <ButtonGridComponent
+              text="What resources are you looking for today?"
+              hint="(Select One)"
+            />
+            <FooterComponent
+              navigation={this.props.navigation}
+              name="AdminHome"
+              portal="admin portal"
+            />
+          </ScrollView>
+        </SafeAreaView>
+      </>
+    );
+   }
+  
 }
 
 export default ClientHome;
