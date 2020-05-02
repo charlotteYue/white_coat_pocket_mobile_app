@@ -14,7 +14,43 @@ import {FlatGrid} from 'react-native-super-grid';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class ButtonGridComponent extends React.Component {
+constructor(props){
+  super(props);
+  this.onPress = this.onPress.bind(this);
+  this.state={
+    count: -1,
+  };
+
+}
+  onPress(item,isAdminPortal) {
+    // console.log('isAdmin');
+    // console.log(isAdminPortal)
+    this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
+    this.setState({count:item.count+1})
+    if(!isAdminPortal){
+      this._updateCount();
+    }
+  
+  }
+
+  _updateCount() {
+    console.log('count');
+    console.log(this.state.count);
+    //update db
+  }
+
   render() {
+    
+    function Count(props) {
+      if(props.isAdmin){
+        return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+      }
+      else{
+        return <></>;
+      }
+    }
+
+    
     return (
       <ScrollView>
         <View style={styles.intro}>
@@ -46,11 +82,11 @@ class ButtonGridComponent extends React.Component {
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#fff"
-                    onPress={() => {
-                      this.props.navigation.navigate(this.props.name, {categoryName: item.name});
-                    }}>
-                      <Text style={styles.itemName}>{item.name}</Text>
+                    onPress={() => this.onPress(item,this.props.isAdmin)}>
+                    <Text style={styles.itemName}>{item.name}</Text>
                   </TouchableHighlight>
+                  {/* <Text style={styles.itemCount}>count: {item.count}</Text> */}
+                  <Count isAdmin={this.props.isAdmin} count={item.count}/>
                 </View>
                 {/* <Text style={styles.itemName}>{item.name}</Text> */}
               </View>
@@ -119,6 +155,14 @@ const styles = StyleSheet.create({
   itemName: {
     textAlign: 'center',
     color: '#004D40',
+    fontWeight: 'bold',
+    fontSize: 16,
+    maxWidth: 100,
+  },
+
+  itemCount: {
+    textAlign: 'center',
+    color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
     maxWidth: 100,

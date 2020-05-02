@@ -15,6 +15,11 @@ import FooterComponent from './components/FooterComponent.js';
 // import AdminHome from './pages/adminHome';
 
  class ClientHome extends React.Component {
+   constructor(props){
+     super(props);
+     this.state={isAdmin:false};
+   }
+   
    render() {
     const { route }=this.props;
     console.log(route.params);
@@ -38,6 +43,7 @@ import FooterComponent from './components/FooterComponent.js';
               buttons={items}
               navigation={this.props.navigation} 
               name="ClientResources"
+              isAdmin={false}
             />
           </ScrollView>
           <FooterComponent

@@ -42,15 +42,15 @@ export default class App extends React.Component {
   render() {
     let loginStatus = 'Currently logged out.';
     const items = [
-      {name: 'Healthcare Services'},
-      {name: 'Specialty Healthcare'},
-      {name: 'Behavioral Health'},
-      {name: 'Behavioral Health Cont'},
-      {name: 'Interpersonal Violence'},
-      {name: 'Immigration'},
-      {name: 'Housing'},
-      {name: 'LGBTQ+'},
-      {name: 'Lifestyle'},
+      {name: 'Healthcare Services', count:0},
+      {name: 'Specialty Healthcare', count:0},
+      {name: 'Behavioral Health', count:0},
+      {name: 'Behavioral Health Cont', count:0},
+      {name: 'Interpersonal Violence', count:0},
+      {name: 'Immigration', count:0},
+      {name: 'Housing', count:0},
+      {name: 'LGBTQ+', count:0},
+      {name: 'Lifestyle', count:0},
     ];
     
     if (this.state.currentUserId) {
@@ -90,10 +90,12 @@ export default class App extends React.Component {
             <Stack.Screen
               name="ClientResources"
               component={ClientResources}
+              // initialParams={isAdmin=false}
             />
             <Stack.Screen
               name="ClientServices"
               component={ClientServices}
+              // initialParams={isAdmin=false}
             />
             <Stack.Screen
               name="AdminAddFrom"

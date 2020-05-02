@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
@@ -14,9 +15,11 @@ import { FlatGrid } from 'react-native-super-grid';
 class ResourcesList extends Component {
   constructor(props) {
     super(props);
+    this.onPress = this.onPress.bind(this);
     this.state = {
       showName: false,
       data: [],
+      count: 0,
     };
   }
 
@@ -76,7 +79,36 @@ class ResourcesList extends Component {
         .catch(console.error)
   }
 
+
+  onPress(props,item,isAdminPortal){
+    console.log('isAdmin in respurse list');
+    console.log(isAdminPortal)
+    props.navigation.navigate(this.props.name, {serviceName: item, categoryName: this.props.categoryName, isAdmin: isAdminPortal})
+    this.setState({count:item.count+1})
+    if(!isAdminPortal){
+      this._updateCount();
+    }
+  }
+
+  _updateCount() {
+    console.log('count');
+    console.log(this.state.count);
+    //update db
+  }
+
+
   render() {
+    function Count(props) {
+      console.log('count isadmin in resource');
+      console.log(props)
+      if(props.isAdmin){
+        return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+      }
+      else{
+        return <></>;
+      }
+    }
+
     return this.state.data.map(
       (item) => {
         return (
@@ -89,13 +121,23 @@ class ResourcesList extends Component {
                 }}
                 style={styles.photo}
               />
-              <View style={styles.container_text}>
+              {/* <View style={styles.container_text}>
                 <Text style={styles.title} onPress={() => 
                   this.props.navigation.navigate(this.props.name, 
                   {serviceName: item, categoryName: this.props.categoryName})}>
                   {item}
                 </Text>
-              </View>
+                
+              </View> */}
+
+              <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
+                    <View>
+                    <Text style={styles.title}>{item}</Text>
+                    {/* add a item.count; */}
+                    <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                    </View>
+                
+              </TouchableOpacity>
             </View>
           </ScrollView>
         );
@@ -137,6 +179,14 @@ const styles = StyleSheet.create({
   Title: {
     marginTop: 20,
     fontSize: 30,
+  },
+
+  itemCount: {
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    maxWidth: 100,
   },
 });
 

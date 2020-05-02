@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image,TouchableOpacity} from 'react-native';
 // import {ListAccordion, ListItem, Checkbox} from 'react-native-paper';
 
 import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
@@ -9,9 +9,11 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
 class ServiceList extends Component {
   constructor(props) {
     super(props);
+    this.onPress = this.onPress.bind(this);
     this.state = {
       showName: false,
       data: [],
+      count: 0,
     };
   }
 
@@ -78,16 +80,49 @@ class ServiceList extends Component {
         .catch(console.error)
   }
   
+
+  onPress(props,item,isAdminPortal) {
+    console.log('isAdmin in service');
+    console.log(isAdminPortal)
+    // this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
+    console.log('props in onpress')
+    console.log(props)
+    this.setState({count:item.count+1})
+    if(!isAdminPortal){
+      this._updateCount();
+    }
+  
+  }
+
+  _updateCount() {
+    console.log('count');
+    console.log(this.state.count);
+    //update db
+  }
   render() {
+
+    function Count(props) {
+      console.log('count isadmin in service');
+      console.log(props)
+      if(props.isAdmin){
+        return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+      }
+      else{
+        return <></>;
+      }
+    }
+
     return this.state.data.map(
       (item) => {
         return(
           <View style={styles.main}>
           <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
-            <CollapseHeader style={styles.container}>
-              <View style={styles.textContainer}>
+            <CollapseHeader style={styles.container} >
+              <View style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
                 <Text style={styles.text}>{item.name}</Text>
+                <Count isAdmin={this.props.isAdmin} count={item.count}/>
               </View>
+
             </CollapseHeader>
             <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
               <Text style={styles.subtext}>{item.phone}</Text>
@@ -144,7 +179,15 @@ const styles = StyleSheet.create({
   },
   subtext: {
     color: "#b9e4c9",
-  }
+  },
+
+  itemCount: {
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+    maxWidth: 100,
+  },
 });
 
 export default ServiceList;

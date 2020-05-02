@@ -17,6 +17,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 // function AdminHome({navigation})
 class AdminHome extends React.Component{
+  constructor(props){
+    super(props);
+    // this.state={isAdmin:true};
+  }
   render() {
     const { route }=this.props;
     console.log(route.params);
@@ -34,7 +38,12 @@ class AdminHome extends React.Component{
         <SafeAreaView style={styles.container}>
           <HeaderComponent />
           <ScrollView>
-            <ButtonGridComponent text='Welcome Administrator' buttons={items}/>
+            <ButtonGridComponent 
+            text='Welcome Administrator'
+             buttons={items}
+             navigation={this.props.navigation} 
+              name="ClientResources" 
+              isAdmin={true}/>
             <CreateButtonComponent 
             navigation={this.props.navigation} 
             name="AdminAddFrom"
