@@ -10,26 +10,6 @@ class ServiceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      serviceList: {
-        resources: 'Insurance Navigation',
-        list: [
-          {
-            name: 'HealthSource RI Hotline',
-            contact: '(855)-840-4774',
-            organization: 'Official Marketplace for RI Health Insurance',
-          },
-          {
-            name: 'Providence Community Health Centers',
-            contact: '444-0400',
-            organization: 'In-person Support',
-          },
-          {
-            name: 'RIH Office of Patient Advocacy',
-            contact: '444-5817',
-            organization: 'Patient Representatives',
-          },
-        ],
-      },
       showName: false,
       data: [],
     };
@@ -119,14 +99,6 @@ class ServiceList extends Component {
               </View>
             </CollapseHeader>
             <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column',backgroundColor:'#EDEDED'}}>
-              {/* <Collapse style={{flexDirection:'row'}}>
-                <CollapseHeader>
-                  <Thumbnail source={{uri: 'https://cdn3.iconfinder.com/data/icons/trico-circles-solid/24/Circle-Solid-Phone-512.png'}} />
-                </CollapseHeader>
-                <CollapseBody style={{alignItems:'center',justifyContent:'center',padding:10}}>
-                  <Text>+1 310 346 0018</Text>
-                </CollapseBody>
-              </Collapse> */}
               <Text>{item.phone}</Text>
               <Text>{item.description}</Text>
             </CollapseBody>
@@ -135,16 +107,6 @@ class ServiceList extends Component {
         )
       }
     );
-  //   return this.state.serviceList.list.map((item, index) => {
-  //     console.log(item);
-  //     console.log(index);
-  //     return (
-  //       <ListAccordion title={item.name} icon="folder">
-  //         <ListItem title={item.contact} />
-  //         <ListItem title={item.organization} />
-  //       </ListAccordion>
-  //     );
-  //   });
   }
 }
 
