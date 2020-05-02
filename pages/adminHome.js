@@ -31,7 +31,7 @@ class AdminHome extends React.Component{
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
           <HeaderComponent />
           <ScrollView>
             <ButtonGridComponent text='Welcome Administrator' buttons={items}/>
@@ -39,11 +39,11 @@ class AdminHome extends React.Component{
             navigation={this.props.navigation} 
             name="AdminAddFrom"
             category={items}/>
-            <FooterComponent navigation={this.props.navigation} 
+          </ScrollView>
+          <FooterComponent navigation={this.props.navigation} 
             name="ClientHome" 
             portal="client portal"
             />
-          </ScrollView>
         </SafeAreaView>
   
       </>
@@ -51,5 +51,12 @@ class AdminHome extends React.Component{
   }
   
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#356859',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
 export default AdminHome;

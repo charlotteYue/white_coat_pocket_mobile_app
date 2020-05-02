@@ -17,15 +17,30 @@ class CustomSegmentedControlTab extends Component {
   };
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <SegmentedControlTab
           values={['Home', this.props.categoryName]}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}
+          activeTabStyle= {styles.tab}
+          tabTextStyle={styles.text}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    paddingTop: 10,
+  },
+  tab: {
+    backgroundColor: "#00695C",
+  },
+  text: {
+    color:"#004D40",
+  }
+})
 
 export default CustomSegmentedControlTab;

@@ -82,25 +82,16 @@ class ServiceList extends Component {
     return this.state.data.map(
       (item) => {
         return(
-          <View>
+          <View style={styles.main}>
           <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
-            <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#E6E6E6'}}>
-              <View style={{width:'25%',alignItems:'center'}}>
-                <Image
-                source={{
-                  uri:
-                    'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',
-                }}
-                style={styles.photo}
-                />
-              </View>
-              <View style={{width:'60%'}}>
-                <Text>{item.name}</Text>
+            <CollapseHeader style={styles.container}>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>{item.name}</Text>
               </View>
             </CollapseHeader>
-            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column',backgroundColor:'#EDEDED'}}>
-              <Text>{item.phone}</Text>
-              <Text>{item.description}</Text>
+            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+              <Text style={styles.subtext}>{item.phone}</Text>
+              <Text style={styles.subtext}>{item.description}</Text>
             </CollapseBody>
           </Collapse>
         </View>
@@ -111,23 +102,32 @@ class ServiceList extends Component {
 }
 
 const styles = StyleSheet.create({
+  main: {
+    backgroundColor: "#356859",
+  },
   container: {
     flex: 1,
     flexDirection: 'row',
-    padding: 10,
+    padding: 20,
     marginLeft: 16,
     marginRight: 16,
     marginTop: 20,
     marginBottom: 10,
-    borderRadius: 5,
+    borderRadius: 20,
     borderWidth: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#B2DFDB',
     elevation: 2,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#000',
+  },
+  textContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   description: {
     fontSize: 10,
@@ -138,14 +138,13 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     justifyContent: 'center',
   },
-  photo: {
-    height: 60,
-    width: 60,
+  text: {
+    fontSize: 18,
+    fontWeight: "bold",
   },
-  Title: {
-    marginTop: 20,
-    fontSize: 30,
-  },
+  subtext: {
+    color: "#b9e4c9",
+  }
 });
 
 export default ServiceList;

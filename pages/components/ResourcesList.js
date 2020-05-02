@@ -7,6 +7,9 @@ import {
 } from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatGrid } from 'react-native-super-grid';
  
 class ResourcesList extends Component {
   constructor(props) {
@@ -77,22 +80,24 @@ class ResourcesList extends Component {
     return this.state.data.map(
       (item) => {
         return (
-          <View style={styles.container}>
-            <Image
-              source={{
-                uri:
-                  'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',
-              }}
-              style={styles.photo}
-            />
-            <View style={styles.container_text}>
-              <Text style={styles.title} onPress={() => 
-                this.props.navigation.navigate(this.props.name, 
-                {serviceName: item, categoryName: this.props.categoryName})}>
-                {item}
-              </Text>
+          <ScrollView>
+            <View style={styles.container}>
+              <Image
+                source={{
+                  uri:
+                    'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',
+                }}
+                style={styles.photo}
+              />
+              <View style={styles.container_text}>
+                <Text style={styles.title} onPress={() => 
+                  this.props.navigation.navigate(this.props.name, 
+                  {serviceName: item, categoryName: this.props.categoryName})}>
+                  {item}
+                </Text>
+              </View>
             </View>
-          </View>
+          </ScrollView>
         );
       }
     );
@@ -103,14 +108,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    padding: 10,
+    padding: 20,
     marginLeft: 16,
     marginRight: 16,
     marginTop: 20,
     marginBottom: 10,
-    borderRadius: 5,
+    borderRadius: 20,
     borderWidth: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#B2DFDB',
     elevation: 2,
   },
   title: {
@@ -123,44 +128,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 12,
     justifyContent: 'center',
+    alignItems: "center",
   },
   photo: {
     height: 60,
     width: 60,
   },
-
   Title: {
     marginTop: 20,
     fontSize: 30,
   },
-  //   container: {
-  //     justifyContent: 'center',
-  //     alignItems: 'center',
-  //     padding: 10,
-  //     marginTop: 10,
-  //   },
-
-  //   Text: {
-  //     fontSize: 20,
-  //     textAlign: 'center',
-  //     justifyContent: 'center',
-  //   },
-  //   item: {
-  //     flex: 1,
-  //     margin: 20,
-  //     width: '80%',
-  //     padding: 10,
-  //     borderRadius: 10,
-  //     borderWidth: 1,
-  //     borderColor: '#1e90ff',
-  //     height: 80,
-  //     textAlign: 'center',
-  //     justifyContent: 'center',
-  //     shadowOffset: {width: 10, height: 10},
-  //     shadowColor: 'black',
-  //     shadowOpacity: 1.0,
-  //     shadowRadius: 8,
-  //   },
 });
 
 export default ResourcesList;

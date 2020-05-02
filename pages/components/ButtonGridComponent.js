@@ -16,7 +16,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 class ButtonGridComponent extends React.Component {
   render() {
     return (
-      <ScrollView style={styles.main}>
+      <ScrollView>
         <View style={styles.intro}>
           <Text style={styles.introText}>
             The White Coat Pocket Guide aims to inform providers about the
@@ -45,15 +45,14 @@ class ButtonGridComponent extends React.Component {
                   <TouchableHighlight
                     activeOpacity={1}
                     style={styles.mainBtn}
-                    underlayColor="#649cf5"
+                    underlayColor="#fff"
                     onPress={() => {
                       this.props.navigation.navigate(this.props.name, {categoryName: item.name});
-                    }}
-                    >
-                    <View />
+                    }}>
+                      <Text style={styles.itemName}>{item.name}</Text>
                   </TouchableHighlight>
                 </View>
-                <Text style={styles.itemName}>{item.name}</Text>
+                {/* <Text style={styles.itemName}>{item.name}</Text> */}
               </View>
             )}
           />
@@ -66,12 +65,6 @@ class ButtonGridComponent extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: '#ffffff',
-    // alignItems: 'center',
-    // flexDirection:'column',
-    // flex: 1 ,
-  },
   intro: {
     marginTop: 20,
     marginLeft: 20,
@@ -81,6 +74,8 @@ const styles = StyleSheet.create({
   introText: {
     textAlign: 'center',
     fontSize: 15,
+    color: '#B2DFDB',
+    marginBottom: '10%',
   },
 
   buttonContainer: {
@@ -90,14 +85,14 @@ const styles = StyleSheet.create({
   buttonIntroText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#649cf5',
+    color: '#fff',
     textAlign: 'center',
   },
 
   buttonHintText: {
     fontSize: 15,
     fontStyle: 'italic',
-    color: '#949292',
+    color: '#fff',
     textAlign: 'center',
   },
 
@@ -106,6 +101,7 @@ const styles = StyleSheet.create({
   },
 
   itemContainer: {
+    marginTop: '15%',
     justifyContent: 'center',
     alignItems: 'center',
     // padding: 10,
@@ -113,13 +109,19 @@ const styles = StyleSheet.create({
   },
 
   mainBtn: {
-    height: 100,
-    width: 100,
-    borderRadius: 15,
-    backgroundColor: '#e1ebf0',
+    height: 110,
+    width: 110,
+    borderRadius: 20,
+    backgroundColor: '#b9e4c9',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   itemName: {
     textAlign: 'center',
+    color: '#004D40',
+    fontWeight: 'bold',
+    fontSize: 16,
+    maxWidth: 100,
   },
 });
 

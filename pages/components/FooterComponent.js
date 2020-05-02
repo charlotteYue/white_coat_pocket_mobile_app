@@ -35,19 +35,6 @@ class FooterComponent extends React.Component {
   
 }
 
-// const AppNavigator = createStackNavigator({
-//   Client: {
-//     screen: ClientHome
-//   },
-//   Admin: {
-//     screen: AdminHome
-//   }
-// },{
-//   initialRouteName: "Client"
-// });
-
-// const AppContainer = createAppContainer(AppNavigator);
-
 function toContact() {
   Alert.alert('navigate to contact page');
 }
@@ -59,14 +46,13 @@ function toFeedback() {
 const styles = StyleSheet.create({
   footer: {
     height: 50,
-    backgroundColor: '#ffffff',
     alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
   },
-
   footerText: {
-    color: '#649cf5',
+    color: '#fff',
   },
-
   buttonsInLine: {
     flexDirection: 'row',
   },

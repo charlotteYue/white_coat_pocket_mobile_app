@@ -1,56 +1,56 @@
 import React, {Component} from 'react';
 import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
+  // Container,
+  // Header,
+  // Left,
+  // Body,
+  // Right,
   Button,
   Icon,
-  Title,
+  // Title,
 } from 'native-base';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 
-class HeaderwithIcon extends Component {
+class HeaderWithIcon extends Component {
   render() {
     return (
-      <Container>
-        <Header style={styles.header}>
-          <Left>
-            <Button transparent>
-              <Icon style={{color: 'white'}} name="arrow-back" 
-              onPress={() => this.props.navigation.navigate(this.props.back)}/>
-            </Button>
-          </Left>
-          <Body style={styles.body}>
-            <Title style={styles.headerText}>White Coat Pocket Guide</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon style={{color: 'white'}} name="home" 
-              onPress={() => this.props.navigation.navigate(this.props.home)}/>
-            </Button>
-          </Right>
-        </Header>
-      </Container>
+      <View style={styles.header}>
+        <View style={styles.left}>
+          <Button transparent style={styles.left}>
+            <Icon style={{color: 'white'}} name="arrow-back" 
+            onPress={() => this.props.navigation.navigate(this.props.back)}/>
+          </Button>
+        </View>
+        <View style={styles.center}>
+          <Text style={styles.headerText}>White Coat Pocket Guide</Text>
+        </View>
+        <View style={styles.right}>
+          <Button transparent style={styles.right}>
+            <Icon style={{color: 'white'}} name="home" 
+            onPress={() => this.props.navigation.navigate(this.props.home)}/>
+          </Button>
+        </View>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  body: {
+  left:{
+    flex: 1,
+    left: 0,
+  },
+  center: {
     flex: 3,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   header: {
-    backgroundColor: '#0a5cd1',
-    // width: '10',
+    backgroundColor: '#356859',
     height: 50,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   headerText: {
     color: '#ffffff',
     fontSize: 20,
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderwithIcon;
+export default HeaderWithIcon;

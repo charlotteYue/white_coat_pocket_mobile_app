@@ -22,10 +22,25 @@ class ServiceSegmentedControlTab extends Component {
           values={['Home', this.props.categoryName, this.props.serviceName]}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}
+          activeTabStyle= {styles.tab}
+          tabTextStyle={styles.text}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    paddingTop: 10,
+  },
+  tab: {
+    backgroundColor: "#00695C",
+  },
+  text: {
+    color:"#004D40",
+  }
+})
 
 export default ServiceSegmentedControlTab;

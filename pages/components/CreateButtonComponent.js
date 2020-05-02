@@ -15,7 +15,7 @@ class CreateButtonComponent extends React.Component {
   }
   render() {
     return (
-      <View style={styles.main}>
+      <View style={styles.container}>
             <View style={styles.itemContainer}>
               <Icon name="plus-square-o" size={120}  color='#9DC8EC'
               onPress={() => this.props.navigation.navigate(this.props.name, {categoryList: this.props.category})}/>
@@ -27,25 +27,27 @@ class CreateButtonComponent extends React.Component {
 }
 
 const styles=StyleSheet.create({
-    main: {
-        backgroundColor: '#ffffff',
+    container:{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     itemContainer: {
-        backgroundColor: '#ffffff',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
-        height: 100,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 100,
+      marginBottom: '5%',
       },
     
       mainBtn: {
-        height: 100,
-        width: 100,
+        height: 110,
+        width: 110,
         borderRadius: 15,
         backgroundColor: '#e1ebf0',
       },
       itemName: {
         textAlign: 'center',
+        color: '#B2DFDB',
       },
 })
 

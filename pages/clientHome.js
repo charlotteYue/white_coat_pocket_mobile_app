@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Alert,
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  View
 } from 'react-native';
 
 import { ScrollView } from 'react-native-gesture-handler';
@@ -28,7 +29,7 @@ import FooterComponent from './components/FooterComponent.js';
     return (
       <>
         <StatusBar barStyle="light-content" />
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
           <HeaderComponent />
           <ScrollView>
             <ButtonGridComponent
@@ -38,17 +39,31 @@ import FooterComponent from './components/FooterComponent.js';
               navigation={this.props.navigation} 
               name="ClientResources"
             />
-            <FooterComponent
+          </ScrollView>
+          <FooterComponent
               navigation={this.props.navigation}
               name="Login"
               portal="admin portal"
             />
-          </ScrollView>
         </SafeAreaView>
       </>
     );
    }
   
 }
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#356859',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
 
 export default ClientHome;
