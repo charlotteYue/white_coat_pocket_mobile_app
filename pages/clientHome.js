@@ -40,7 +40,7 @@ import FooterComponent from './components/FooterComponent.js';
             />
             <FooterComponent
               navigation={this.props.navigation}
-              name="AdminHome"
+              name="Login"
               portal="admin portal"
             />
           </ScrollView>
