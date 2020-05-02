@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#004D40',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 15,
     maxWidth: 100,
   },
 
