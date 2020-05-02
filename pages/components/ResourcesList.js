@@ -93,13 +93,6 @@ class ResourcesList extends Component {
               </Text>
             </View>
           </View>
-
-          // <View style={styles.container}>
-          //   <View>{this.renderCategory()}</View>
-          //   <View style={styles.item}>
-          //     <Text style={styles.Text}>{item}</Text>
-          //   </View>
-          // </View>
         );
       }
     );

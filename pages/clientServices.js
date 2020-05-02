@@ -4,7 +4,7 @@ import {SafeAreaView, ScrollView} from 'react-native';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 import ServicesList from './components/ServicesList.js';
 import Footer from './components/FooterComponent.js';
-import SegmentTab from './components/segmentTabBar.js';
+import SegmentTab from './components/serviceSegmentTab.js';
 
 
 export default class ClientServices extends Component {
@@ -24,7 +24,10 @@ export default class ClientServices extends Component {
           back="ClientResources"
           home="ClientHome"/>
           <ScrollView style={{marginTop: 50}}>
-            <SegmentTab />
+            <SegmentTab 
+            categoryName={route.params.categoryName}
+            serviceName ={route.params.serviceName}
+            />
             <ServicesList 
             serviceName ={route.params.serviceName}
             categoryName = {route.params.categoryName}/>

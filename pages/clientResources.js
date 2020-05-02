@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import { Container, Content } from 'native-base';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 import ResourcesList from './components/ResourcesList.js';
 import Footer from './components/FooterComponent.js';
@@ -24,7 +23,9 @@ export default class ClientResources extends Component {
           back="ClientHome"
           home="ClientHome"/>
           <ScrollView style={{ marginTop: 50 }}>
-            <SegmentTab/>
+            <SegmentTab 
+            categoryName={route.params.categoryName}
+            />
             <ResourcesList 
             categoryName={route.params.categoryName}
             navigation={this.props.navigation} 

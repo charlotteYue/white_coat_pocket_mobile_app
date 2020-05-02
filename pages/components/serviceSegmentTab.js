@@ -2,7 +2,7 @@ import SegmentedControlTab from 'react-native-segmented-control-tab';
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-class CustomSegmentedControlTab extends Component {
+class ServiceSegmentedControlTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ class CustomSegmentedControlTab extends Component {
     return (
       <View>
         <SegmentedControlTab
-          values={['Home', this.props.categoryName]}
+          values={['Home', this.props.categoryName, this.props.serviceName]}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}
         />
@@ -28,4 +28,4 @@ class CustomSegmentedControlTab extends Component {
   }
 }
 
-export default CustomSegmentedControlTab;
+export default ServiceSegmentedControlTab;
