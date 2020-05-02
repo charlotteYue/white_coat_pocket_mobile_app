@@ -34,8 +34,11 @@ class AdminHome extends React.Component{
         <SafeAreaView>
           <HeaderComponent />
           <ScrollView>
-            <ButtonGridComponent text='Welcome Administrator'buttons={items}/>
-            <CreateButtonComponent />
+            <ButtonGridComponent text='Welcome Administrator' buttons={items}/>
+            <CreateButtonComponent 
+            navigation={this.props.navigation} 
+            name="AdminAddFrom"
+            category={items}/>
             <FooterComponent navigation={this.props.navigation} 
             name="ClientHome" 
             portal="client portal"

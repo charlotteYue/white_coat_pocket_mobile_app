@@ -10,18 +10,20 @@ import {
 
 // function CreateButtonComponent() 
 class CreateButtonComponent extends React.Component {
+  constructor(props){
+    super(props)
+  }
   render() {
     return (
       <View style={styles.main}>
             <View style={styles.itemContainer}>
               <Icon name="plus-square-o" size={120}  color='#9DC8EC'
-              onPress={() => Alert.alert('pressed!')}/>
+              onPress={() => this.props.navigation.navigate(this.props.name, {categoryList: this.props.category})}/>
             </View>
             <Text style={styles.itemName}>Create A Category</Text>
       </View>
   );
   }
-    
 }
 
 const styles=StyleSheet.create({

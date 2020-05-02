@@ -16,7 +16,7 @@ import ClientHome from './pages/clientHome.js';
 import AdminHome from './pages/adminHome';
 import ClientResources from './pages/clientResources.js';
 import ClientServices from './pages/clientServices.js';
-
+import AdminAddForm from './pages/adminAddForm.js'
 const Stack = createStackNavigator();
 
 
@@ -92,6 +92,10 @@ export default class App extends React.Component {
             <Stack.Screen
               name="ClientServices"
               component={ClientServices}
+            />
+            <Stack.Screen
+              name="AdminAddFrom"
+              component={AdminAddForm}
             />
           </Stack.Navigator>
         </NavigationContainer>

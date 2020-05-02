@@ -13,21 +13,6 @@ import {
 import {FlatGrid} from 'react-native-super-grid';
 import { ScrollView } from 'react-native-gesture-handler';
 
-// const items = [
-//   {name: 'Substance Use'},
-//   {name: 'Mental Health'},
-//   {name: 'Healthcare'},
-//   {name: 'IPV'},
-//   {name: 'Immigration'},
-//   {name: 'Housing'},
-//   {name: 'Lifestyle'},
-//   {name: 'LGBTQ+'},
-//   {name: 'Housing'},
-// ];
-
-// const windowHeight = Dimensions.get('window').height;
-
-// function ButtonGridComponent(props)
 class ButtonGridComponent extends React.Component {
   render() {
     return (
