@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 
-import AddForm from './components/AddFormComponent.js';
+import AddFormComponent from './components/AddFormComponent.js';
 
 export default class AdminAddForm extends Component {
   constructor(props){
@@ -14,7 +14,7 @@ export default class AdminAddForm extends Component {
   }
   render() {
     const { route }=this.props;
-    console.log('params is', route.params.categoryList);
+    console.log('catagory list params is', route.params.categoryList);
     return (
       <>
         <SafeAreaView>
@@ -23,7 +23,7 @@ export default class AdminAddForm extends Component {
           back="AdminHome"
           home="AdminHome"/>
           <ScrollView style={{ marginTop: 50 }}>
-              <AddForm 
+              <AddFormComponent 
               navigation={this.props.navigation} 
               name="AdminHome"
               categoryList={route.params.categoryList}/>

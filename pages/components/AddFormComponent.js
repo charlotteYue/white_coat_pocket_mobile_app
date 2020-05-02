@@ -4,7 +4,7 @@ import {Picker, Text, StyleSheet, View, TextInput, Button, ShadowPropTypesIOS} f
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 import AdminHome from '../adminHome.js';
 
-class adminAddForm extends Component {
+class AddFormComponent extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -25,7 +25,7 @@ class adminAddForm extends Component {
     _onFetch(){
         const stitchAppClient = Stitch.defaultAppClient;
         console.log('the category chosen is', this.props.categoryList);
-        const queryService = {'type': this.state.category};
+        // const queryService = {'type': this.state.category};
         const optionService = {"projection": {
         "subtype": 1,
         "_id": 0,
@@ -90,7 +90,7 @@ class adminAddForm extends Component {
               style={styles.inputStyle}
               value={this.state.contact}
               onChangeText={(input) => this.setState({ contact: input })}/>
-            />
+            
             <Picker
               selectedValue={this.state.category}
               onValueChange={(selectedItem)=> (this.setState({category: selectedItem}))}>
@@ -103,7 +103,7 @@ class adminAddForm extends Component {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              Selected: {category}
+              Selected: {this.state.category}
             </Text>
             <Picker
               selectedValue={this.state.service}
@@ -117,7 +117,7 @@ class adminAddForm extends Component {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              Selected: {service}
+              Selected: {this.state.service}
             </Text>
             <Button
               title="Submit"
@@ -162,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AdminHome;
+export default AddFormComponent;
