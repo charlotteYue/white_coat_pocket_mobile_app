@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
+import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+
 
 class adminAddForm extends Component {
     constructor(props){
@@ -8,6 +10,23 @@ class adminAddForm extends Component {
             username: '',
             password: '',
         }
+    }
+
+    _onLoadAdmin(){
+      const stitchAppClient = Stitch.defaultAppClient;
+      // console.log('client', mongoClient);
+      console.log('username is', this.state.username);
+      console.log('password is', this.state.password);
+      stitchAppClient.auth
+        .loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
+        .then((user) => {
+          console.log(`Logged in as user with id: ${user.id}`)
+        })
+        .catch((err)=> {
+          console.log(err);
+          alert('Username or Password is incorrect');
+          this.props.navigation.navigate("Login");
+        })
     }
   render(){
     return (
@@ -31,7 +50,14 @@ class adminAddForm extends Component {
           <Button
               title="Submit"
               color="#fff"
-              onPress={() => this.props.navigation.navigate("AdminHome")}
+              onPress={() => {
+                try{
+                  this._onLoadAdmin();
+                  this.props.navigation.navigate("AdminHome")
+                }catch(err){
+                  console.log("error 2 is ", err);
+                }
+              }}
             />
         </View>
       );
