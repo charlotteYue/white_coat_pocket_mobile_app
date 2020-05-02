@@ -40,15 +40,15 @@ export default class App extends React.Component {
   render() {
     let loginStatus = 'Currently logged out.';
     const items = [
-      {name: 'Substance Use'},
-      {name: 'Mental Health'},
       {name: 'Healthcare Services'},
-      {name: 'IPV'},
+      {name: 'Specialty Healthcare'},
+      {name: 'Behavioral Health'},
+      {name: 'Behavioral Health Cont'},
+      {name: 'Interpersonal Violence'},
       {name: 'Immigration'},
       {name: 'Housing'},
-      {name: 'Lifestyle'},
       {name: 'LGBTQ+'},
-      {name: 'Housing'},
+      {name: 'Lifestyle'},
     ];
     
     if (this.state.currentUserId) {
