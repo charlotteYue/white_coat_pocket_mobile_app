@@ -25,7 +25,7 @@ class ResourcesList extends Component {
       this.showName = true;
       return (
         <Text style={styles.Title}>
-          {this.state.resourceList.name}
+          {this.props.categoryName}
         </Text>
       );
     }
@@ -75,7 +75,7 @@ class ResourcesList extends Component {
 
   render() {
     return this.state.data.map(
-      (item, index) => {
+      (item) => {
         return (
           <View style={styles.container}>
             <Image
@@ -87,7 +87,8 @@ class ResourcesList extends Component {
             />
             <View style={styles.container_text}>
               <Text style={styles.title} onPress={() => 
-                this.props.navigation.navigate(this.props.name), {serviceName: item}}>
+                this.props.navigation.navigate(this.props.name, 
+                {serviceName: item, categoryName: this.props.categoryName})}>
                 {item}
               </Text>
             </View>

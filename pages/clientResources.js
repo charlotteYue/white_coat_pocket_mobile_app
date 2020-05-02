@@ -8,7 +8,7 @@ import { Container, Content } from 'native-base';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 import ResourcesList from './components/ResourcesList.js';
 import Footer from './components/FooterComponent.js';
-import SegmentTab from './components/segmenTabBar.js';
+import SegmentTab from './components/segmentTabBar.js';
 
 export default class ClientResources extends Component {
   constructor(props){
