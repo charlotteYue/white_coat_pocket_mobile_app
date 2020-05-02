@@ -101,7 +101,8 @@ class ServiceList extends Component {
   render() {
     return this.state.data.map(
       (item) => {
-        <View>
+        return(
+          <View>
           <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
             <CollapseHeader style={{flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#E6E6E6'}}>
               <View style={{width:'25%',alignItems:'center'}}>
@@ -131,6 +132,7 @@ class ServiceList extends Component {
             </CollapseBody>
           </Collapse>
         </View>
+        )
       }
     );
   //   return this.state.serviceList.list.map((item, index) => {
