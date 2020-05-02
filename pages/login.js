@@ -21,10 +21,12 @@ class adminAddForm extends Component {
         .loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
         .then((user) => {
           console.log(`Logged in as user with id: ${user.id}`)
+          this.props.navigation.navigate("AdminHome")
         })
         .catch((err)=> {
           console.log(err);
           alert('Username or Password is incorrect');
+          this.setState({username: '', password: ''});
           this.props.navigation.navigate("Login");
         })
     }
@@ -37,6 +39,7 @@ class adminAddForm extends Component {
               placeholder="Username" 
               value={this.state.username}
               onChangeText={(input) => this.setState({ username: input })}
+              autoCapitalize = 'none'
               style={styles.inputStyle}
               />
             <TextInput
@@ -44,6 +47,7 @@ class adminAddForm extends Component {
               placeholder="Password"
               value={this.state.password}
               onChangeText={(input) => this.setState({ password: input })}
+              autoCapitalize = 'none'
               style={styles.inputStyle}
             />
           </View>
@@ -53,7 +57,6 @@ class adminAddForm extends Component {
               onPress={() => {
                 try{
                   this._onLoadAdmin();
-                  this.props.navigation.navigate("AdminHome")
                 }catch(err){
                   console.log("error 2 is ", err);
                 }
