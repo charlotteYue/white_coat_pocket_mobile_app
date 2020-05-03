@@ -14,13 +14,16 @@ class LoginComponent extends Component {
 
     _onLoadAdmin(){
       const stitchAppClient = Stitch.defaultAppClient;
-      console.log('username is', this.state.username);
-      console.log('password is', this.state.password);
+      const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
       stitchAppClient.auth
         .loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
         .then((user) => {
-          console.log(`Logged in as user with id: ${user.id}`)
-          this.props.navigation.navigate("AdminHome")
+          console.log(`Logged in as user with id: ${user.id}`);
+          const conn = mongoClient.db('test');
+          console.log('username is', this.state.username);
+          console.log('password is', this.state.password);
+          this.props.navigation.navigate("AdminHome", 
+          {connection: conn, username: this.state.username, password: this.state.password,buttons: this.props.buttons});
         })
         .catch((err)=> {
           console.log(err);
@@ -37,7 +40,10 @@ class LoginComponent extends Component {
             <TextInput 
               placeholder="Username" 
               value={this.state.username}
-              onChangeText={(input) => this.setState({ username: input })}
+              onChangeText={(input) => this.setState(
+                //hardcode for testing
+                { username: 'admin' })}
+                // { username: input })}
               autoCapitalize = 'none'
               style={styles.inputStyle}
               />
@@ -45,7 +51,9 @@ class LoginComponent extends Component {
               secureTextEntry={true}
               placeholder="Password"
               value={this.state.password}
-              onChangeText={(input) => this.setState({ password: input })}
+              onChangeText={(input) => this.setState(
+                { password: '7iEY28O4b5' })}
+                // { password: input })}
               autoCapitalize = 'none'
               style={styles.inputStyle}
             />

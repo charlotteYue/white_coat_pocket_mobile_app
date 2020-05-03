@@ -33,7 +33,7 @@ class ClientServices extends Component {
     console.log('service chosen is ', route.params.categoryName);
     return (
       <>
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
           <HeaderWithIconComponent 
           navigation={this.props.navigation} 
           back="ClientResources"

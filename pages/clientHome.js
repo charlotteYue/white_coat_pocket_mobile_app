@@ -21,16 +21,18 @@ import FooterComponent from './components/FooterComponent.js';
    }
    
    render() {
-    const { route }=this.props;
-    console.log(route.params);
-    let arr=new Array();
-    for(var key in route.params){
-      arr.push(key)
-    }
-    let items=new Array();
-    for( var a in arr){
-      items.push(route.params[a]);
-    }
+    const items = [
+      {name: 'Healthcare Services', count:0},
+      {name: 'Specialty Healthcare', count:0},
+      {name: 'Behavioral Health', count:0},
+      {name: 'Behavioral Health Cont', count:0},
+      {name: 'Interpersonal Violence', count:0},
+      {name: 'Immigration', count:0},
+      {name: 'Housing', count:0},
+      {name: 'LGBTQ+', count:0},
+      {name: 'Lifestyle', count:0},
+    ];
+
     return (
       <>
         <StatusBar barStyle="light-content" />
@@ -48,6 +50,7 @@ import FooterComponent from './components/FooterComponent.js';
           </ScrollView>
           <FooterComponent
               navigation={this.props.navigation}
+              buttons={items}
               name="Login"
               portal="admin portal"
             />

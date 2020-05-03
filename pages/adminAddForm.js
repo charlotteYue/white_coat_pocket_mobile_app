@@ -25,6 +25,9 @@ export default class AdminAddForm extends Component {
           <ScrollView>
               <AddFormComponent 
               navigation={this.props.navigation} 
+              connection={route.params.connection}
+              username={route.params.username}
+              password={route.params.password}
               name="AdminHome"
               categoryList={route.params.categoryList}/>
           </ScrollView>
