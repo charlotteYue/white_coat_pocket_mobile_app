@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image,TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native';
 // import {ListAccordion, ListItem, Checkbox} from 'react-native-paper';
 
 import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
@@ -81,7 +81,7 @@ class ServiceList extends Component {
         })
         .catch(console.error)
   }
-  
+
 
   onPress(props,item,isAdminPortal) {
     // console.log('isAdmin in service');
@@ -96,7 +96,7 @@ class ServiceList extends Component {
     if(!isAdminPortal){
       this._updateCount(item);
     }
-  
+
   }
 
   _updateCount=(item)=> {
@@ -147,57 +147,41 @@ class ServiceList extends Component {
         return <></>;
       }
     }
-
-    return this.state.data.map(
-      (item) => {
-        return(
-          <View style={styles.main}>
-          <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
-            <CollapseHeader style={styles.container}  >
-              {/* <View style={styles.textContainer}>
-                <Text style={styles.text} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>{item.name}</Text>
-                <Count isAdmin={this.props.isAdmin} count={item.count}/>
-              </View> */}
-              
-
-              
-              <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
-                    <View style={styles.itemContainer}>
-                    <Text style={styles.text}>{item.name}</Text>
-                    <View style={styles.countContainer}>
-                        <Count isAdmin={this.props.isAdmin} count={item.count}/>
-                      </View>
-                    </View>
-              </TouchableOpacity>
-
-            </CollapseHeader>
-            
-            <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
-              <Text style={styles.subtext}>{item.phone}</Text>
-              <Text style={styles.subtext}>{item.description}</Text>
-            </CollapseBody>
-          </Collapse>
-        </View>
-        )
-      }
+    return (
+        <FlatList
+            data={this.state.data}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) =>
+                <View style={{flex: 1}}>
+                  <Collapse>
+                    <CollapseHeader style={styles.container}  >
+                      <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
+                        <View style={styles.itemContainer}>
+                          <Text style={styles.text}>{item.name}</Text>
+                          <View style={styles.countContainer}>
+                            <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                          </View>
+                        </View>
+                      </TouchableOpacity>
+                    </CollapseHeader>
+                    <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+                      <Text style={styles.subtext}>{item.phone}</Text>
+                      <Text style={styles.subtext}>{item.description}</Text>
+                    </CollapseBody>
+                  </Collapse>
+                </View>}
+        />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  main: {
-    backgroundColor: "#356859",
-  },
   container: {
     flex: 1,
+    height: 100,
     flexDirection: 'row',
     padding: 20,
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 20,
-    marginBottom: 10,
-    borderRadius: 20,
-    borderWidth: 1,
+    borderWidth: 0.5,
     backgroundColor: '#B2DFDB',
     elevation: 2,
     alignItems: "center",
@@ -210,18 +194,13 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   textContainer: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     // height: 50,
   },
   description: {
     fontSize: 10,
-  },
-  container_text: {
-    flex: 1,
-    flexDirection: 'column',
-    marginLeft: 12,
-    justifyContent: 'center',
   },
   text: {
     fontSize: 18,
