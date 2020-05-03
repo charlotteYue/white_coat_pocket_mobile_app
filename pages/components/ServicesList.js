@@ -162,10 +162,11 @@ class ServiceList extends Component {
 
               
               <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
-                    <View>
+                    <View style={styles.itemContainer}>
                     <Text style={styles.text}>{item.name}</Text>
-                    {/* add a item.count; */}
-                    <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                    <View style={styles.countContainer}>
+                        <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                      </View>
                     </View>
               </TouchableOpacity>
 
@@ -237,6 +238,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     maxWidth: 100,
+  },
+  itemContainer: {
+    height: 60,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: 'center',
+    // alignItems: "center",
+  },
+  countContainer: {
+    position: "absolute",
+    bottom: 0,
   },
 });
 

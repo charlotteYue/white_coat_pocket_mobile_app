@@ -11,6 +11,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatGrid } from 'react-native-super-grid';
+import { Row } from 'native-base';
  
 class ResourcesList extends Component {
   constructor(props) {
@@ -131,10 +132,12 @@ class ResourcesList extends Component {
               </View> */}
 
               <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
-                    <View>
-                    <Text style={styles.title}>{item}</Text>
-                    {/* add a item.count; */}
-                    <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                    <View style={styles.itemContainer}>
+                      <Text style={styles.title}>{item}</Text>
+                      {/* add a item.count; */}
+                      <View style={styles.countContainer}>
+                        <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                      </View>
                     </View>
                 
               </TouchableOpacity>
@@ -176,11 +179,6 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
   },
-  Title: {
-    marginTop: 20,
-    fontSize: 30,
-  },
-
   itemCount: {
     textAlign: 'center',
     color: '#fff',
@@ -188,6 +186,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     maxWidth: 100,
   },
+  itemContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: 'center',
+    // alignItems: "center",
+  },
+  countContainer: {
+    position: "absolute",
+    bottom: 0,
+  },
+  count: {
+    color: "#fff",
+  }
 });
 
 export default ResourcesList;
