@@ -34,13 +34,8 @@ class ClientServices extends Component {
     return (
       <>
         <SafeAreaView style={styles.container}>
-<<<<<<< HEAD
-          <HeaderWithIconComponent 
-          navigation={this.props.navigation} 
-=======
           <HeaderWithIconComponent
           navigation={this.props.navigation}
->>>>>>> 595e478042367250c08a92b4dda56c06739accaa
           back="ClientResources"
           home={this.navHome()}/>
           <SegmentTab
