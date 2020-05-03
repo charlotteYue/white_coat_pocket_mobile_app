@@ -17,7 +17,7 @@ class ServiceSegmentedControlTab extends Component {
   };
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <SegmentedControlTab
           values={['Home', this.props.categoryName, this.props.serviceName]}
           selectedIndex={this.state.selectedIndex}
@@ -32,7 +32,8 @@ class ServiceSegmentedControlTab extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    flex: 1,
+    height: 50,
+    width: "100%",
     paddingTop: 10,
   },
   tab: {

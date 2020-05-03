@@ -1,150 +1,180 @@
-import React, {Component} from 'react';
-import {Picker, Text, StyleSheet, View, TextInput, Button, ShadowPropTypesIOS} from 'react-native';
+import React, {Component, Fragment} from 'react';
+import {Picker, Text, StyleSheet, View, TextInput, Button, TouchableHighlight} from 'react-native';
 
-import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+
+import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+
+
 import AdminHome from '../adminHome.js';
-
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+const initialState = {
+  supportSpanish: false,
+  name:'',
+  description:'',
+  contact:'',
+  category: '',
+  service: '',
+}
 class AddFormComponent extends Component {
     constructor(props){
         super(props);
-        this.state={
-            supportSpanish: false,
-            name:'',
-            description:'',
-            contact:'',
-            category: '',
-            service: '',
-            categoryList: [],
-            serviceList: [],
-        };
+        this.state= initialState;
     }
-    componentDidMount(){
-        console.log('herererere');
-        this._onFetch();
-    }
-    _onFetch(){
-        const stitchAppClient = Stitch.defaultAppClient;
-        console.log('the category chosen is', this.props.categoryList);
-        // const queryService = {'type': this.state.category};
-        const optionService = {"projection": {
-        "subtype": 1,
-        "_id": 0,
-        },};
-        const option = {"projection": {
-        "type": 1,
-        "_id": 0,
-        },};
-        const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
-        stitchAppClient.auth
-            .loginWithCredential(new AnonymousCredential())
-            .then(() => {
-            // Retrieve a database object
-            const conn = mongoClient.db('test')
-
-            // Retrieve the collection in the database
-            const db = conn.collection('providers')
-
-            // Find 10 documents and log them to console.
-            db.find({}, optionService)
-                .toArray()
-                .then(res => {
-                    let listSet = new Set();
-                    res.forEach(function(item){
-                    listSet.add(item.subtype);
-                    })
-                    ListArray = new Array();
-                    ListArray = Array.from(listSet);
-                    this.setState({serviceList: ListArray}, function(){
-                    console.log('data is', this.state.serviceList);
-                    })
-                })
-                .catch(console.error)
-
-            })
-            .catch(console.error)
+    reset(){
+      this.setState(initialState);
     }
 
+    _updateNewInstance () {
+      // Retrieve the collection in the database
+      const connection = this.props.connection.collection('providers');
+      const newItem = {
+        'name': this.state.name,
+        'description': this.state.description,
+        'phone': this.state.contact,
+        'type': this.state.category,
+        'subtype': this.state.service
+      }
+      // const stitchAppClient = Stitch.defaultAppClient;
+      // const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+      // stitchAppClient.auth
+      //   .loginWithCredential(new UserPasswordCredential(this.props.username, this.props.password))
+      //   .then((user)=>{
+      //     console.log(`Logged in as user with id: ${user.id}`);
+      //     // Retrieve a database object
+      //     const conn = mongoClient.db('test')
+
+      //     // Retrieve the collection in the database
+      //     const db = conn.collection('providers')
+
+      //     db.insertOne(newItem)
+      //       .then(result=>{console.log('Successfully inserted item with _id', result._id)})
+      //       .catch(err=>console.error(err))
+      //   }).catch(console.error)
+
+      connection.insertOne(newItem)
+        .then(result=>{
+          console.log('Successfully inserted item with _id', result.insertedId);
+          alert('Successfully inserted new service');
+          this.reset();
+          this.props.navigation.navigate(this.props.name, 
+            {categoryList: this.props.category, connection: this.props.connection,
+             username: this.props.username, password: this.props.password})
+        })
+        .catch(err=>{
+          console.error(err)
+          alert('Failed to inserted new service');
+          this.reset();
+          this.props.navigation.navigate(this.props.name, 
+            {categoryList: this.props.category, connection: this.props.connection,
+             username: this.props.username, password: this.props.password})
+        })
+
+      
+    }
   render(){
-      let categoryItems = this.props.categoryList.map((item) =>{
-          return <Picker.Item value={item.name} label={item.name} />
-      })
-      let serviceItems = this.state.serviceList.map((item)=>{
-          return <Picker.Item value={item} label={item} />
-      })
     return (
         <View style={styles.container}>
           <Text style={styles.formLabel}> Add New Medical Services </Text>
-          <View>
-            <TextInput placeholder="Hospital Name" style={styles.inputStyle} 
+          <View style={styles.main}>
+            <Text style={styles.title}>Service Name</Text>
+            <TextInput placeholder="Service Name" style={styles.inputStyle} 
             value={this.state.name}
             onChangeText={(input) => this.setState({ name: input })}/>
+            <Text style={styles.title}>Service Description</Text>
             <TextInput
             //   secureTextEntry={true}
-              placeholder="Hospital description"
+              placeholder="Service description"
               style={styles.inputStyle}
               value={this.state.description}
               onChangeText={(input) => this.setState({ description: input })}
             />
+            <Text style={styles.title}>Service Contact</Text>
             <TextInput
-              placeholder="Hospital Contact"
+              placeholder="Service Contact"
               style={styles.inputStyle}
               value={this.state.contact}
               onChangeText={(input) => this.setState({ contact: input })}/>
-            
-            <Picker
-              selectedValue={this.state.category}
-              onValueChange={(selectedItem)=> (this.setState({category: selectedItem}))}>
-                  {categoryItems}
-            </Picker>
-            <Text
-              style={{
-                fontSize: 30,
-                color: '#fff',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              Selected: {this.state.category}
-            </Text>
-            <Picker
-              selectedValue={this.state.service}
-              onValueChange={(selectedItem)=> (this.setState({service: selectedItem}))}>
-                  {serviceItems}
-            </Picker>
-            <Text
-              style={{
-                fontSize: 30,
-                color: '#fff',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              Selected: {this.state.service}
-            </Text>
-            <Button
-              title="Submit"
-              color="#fff"
-              onPress={() => alert('Simple Button pressed')}
+            <Text style={styles.title}>Hospital Category</Text>
+            <TextInput
+            //   secureTextEntry={true}
+              placeholder="Service Category"
+              style={styles.inputStyle}
+              value={this.state.category}
+              onChangeText={(input) => this.setState({ category: input })}
             />
+            <Text style={styles.title}>Service Type</Text>
+            <TextInput
+            //   secureTextEntry={true}
+              placeholder="Service Type" 
+              style={styles.inputStyle}
+              value={this.state.service}
+              onChangeText={(input) => this.setState({ service: input })}
+            />
+            <View style={{
+              marginTop: 50,
+              alignItems: "center",
+            }}>
+            <TouchableHighlight
+                  activeOpacity={1}
+                  style={styles.btn}
+                  underlayColor="#fff"
+                  onPress={() => this._updateNewInstance()}>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.itemName}>Submit</Text>
+                  </View>
+                </TouchableHighlight>
+            </View>
           </View>
         </View>
       );
   }
 };
 const styles = StyleSheet.create({
-  //Check project repo for styles
   container: {
     flex: 1,
     backgroundColor: '#356859',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inputCombination: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    alignContent: 'center',
+  },
 
+  title: {
+    color: "#b9e4c9",
+    marginTop: 10,
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
   formLabel: {
+    padding: 20,
     fontSize: 20,
     color: '#fff',
   },
+  
+  btn: {
+    height: 30,
+    width: 100,
+    borderRadius: 20,
+    backgroundColor: '#b9e4c9',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  itemName: {
+    textAlign: 'center',
+    color: '#004D40',
+    fontWeight: 'bold',
+    fontSize: 15,
+    maxWidth: 100,
+  },
+
   inputStyle: {
-    marginTop: 20,
-    width: 300,
+    marginTop: 10,
+    width: 250,
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
@@ -160,6 +190,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 20,
   },
+  main: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  }
 });
 
 export default AddFormComponent;

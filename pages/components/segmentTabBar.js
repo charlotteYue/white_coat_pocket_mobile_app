@@ -32,7 +32,8 @@ class CustomSegmentedControlTab extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    flex: 1,
+    height: 50,
+    width: "100%",
     paddingTop: 10,
   },
   tab: {

@@ -5,13 +5,15 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  FlatList
 } from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatGrid } from 'react-native-super-grid';
- 
+import { Row } from 'native-base';
+
 class ResourcesList extends Component {
   constructor(props) {
     super(props);
@@ -70,37 +72,23 @@ class ResourcesList extends Component {
                 })
                 let ListArray = new Array();
                 ListArray = Array.from(listSet);
-                // this.setState({data: ListArray}, function(){
-                //   console.log('data is', this.state.data);
-                // })
                 let arr=new Array();
-                //  ListArray.forEach(function(subtype) {
                   for( var i=0;i<ListArray.length;i++) {
                     let subtype=ListArray[i];
-                   console.log(subtype);
+                  //  console.log(subtype);
                    db.aggregate([
                     {"$match": {"subtype": `${subtype}`}},
                     {"$group": { "_id": null,"totalCount": {"$sum": "$count"} }}
                   ]).toArray()
                   .then(subRes => {
-                    // let map=new Map();
-                    // let arr=new Array();
-                    // res.forEach(function(item){
-                      // map.set(item.subtype,item.totalCount);
-                      // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~')
-                      // console.log(`res length: ${res}`)
-                      // console.log(res)
-                      // console.log(`id: ${res[0]._id}`);
-                      // console.log(`totalCount: ${res[0].totalCount}`);
-                      // console.log(`subtype: ${subtype}`);
-                      // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~')
+
                       let obj=new Object();
                       
                       obj['subtype']=subtype;
                       obj['totalCount']=subRes[0].totalCount;
                       arr.push(obj)
-                      console.log("arr-----------------");
-                      console.log(arr)
+                      // console.log("arr-----------------");
+                      // console.log(arr)
 
                       if(i==ListArray.length){
                         this.setState({data:arr},function (){
@@ -108,32 +96,11 @@ class ResourcesList extends Component {
                           console.log(this.state.data);
                         })
                       }
-                      // this.setState({countObj:obj})
-                    // })
-                    // console.log('arr');
-                    // console.log(arr);
-                    // this.setState({countArr:arr})
-                    // console.log(`map res: ${map}`)
-                    // this.setState({countMap:map});
+
                   }).catch(err => console.error(`Failed to group aggregation: ${err}`))
                  
-                  console.log('arr is~~~~~~~~~~~~');
-                  console.log(arr);
                  
                   }
-
-                //   this.setState({data: arr}, function(){
-                //   console.log('data is');
-                //   console.log(arr);
-                // })
-
-
-
-
-
-
-
-
 
               })
               .catch(console.error)
@@ -205,12 +172,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 20,
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 20,
-    marginBottom: 10,
-    borderRadius: 20,
-    borderWidth: 1,
+    height: 100,
+    borderWidth: 0.5,
     backgroundColor: '#B2DFDB',
     elevation: 2,
   },
@@ -230,11 +193,6 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
   },
-  Title: {
-    marginTop: 20,
-    fontSize: 30,
-  },
-
   itemCount: {
     textAlign: 'center',
     color: '#fff',
@@ -242,6 +200,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     maxWidth: 100,
   },
+  itemContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: 'center',
+    // alignItems: "center",
+  },
+  countContainer: {
+    position: "absolute",
+    bottom: 0,
+  },
+  count: {
+    color: "#fff",
+  }
 });
 
 export default ResourcesList;

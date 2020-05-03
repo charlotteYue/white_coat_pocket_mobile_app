@@ -41,17 +41,6 @@ export default class App extends React.Component {
 
   render() {
     let loginStatus = 'Currently logged out.';
-    const items = [
-      {name: 'Healthcare Services', count:0},
-      {name: 'Specialty Healthcare', count:0},
-      {name: 'Behavioral Health', count:0},
-      {name: 'Behavioral Health Cont', count:0},
-      {name: 'Interpersonal Violence', count:0},
-      {name: 'Immigration', count:0},
-      {name: 'Housing', count:0},
-      {name: 'LGBTQ+', count:0},
-      {name: 'Lifestyle', count:0},
-    ];
     
     if (this.state.currentUserId) {
       loginStatus = `Currently logged in as ${this.state.currentUserId}!`;}
@@ -80,12 +69,10 @@ export default class App extends React.Component {
               name="ClientHome"
               component={ClientHome}
               // options={{ title: 'Welcome' }}
-              initialParams={items}
             />
             <Stack.Screen
               name="AdminHome"
               component={AdminHome}
-              initialParams={items}
             />
             <Stack.Screen
               name="ClientResources"
@@ -98,7 +85,7 @@ export default class App extends React.Component {
               // initialParams={isAdmin=false}
             />
             <Stack.Screen
-              name="AdminAddFrom"
+              name="AdminAddForm"
               component={AdminAddForm}
             />
             <Stack.Screen

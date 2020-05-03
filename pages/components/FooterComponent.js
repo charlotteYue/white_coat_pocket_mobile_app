@@ -14,7 +14,7 @@ class FooterComponent extends React.Component {
     return (
       // <AppContainer>
         <View style={styles.footer}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.name)}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.name, {buttons: this.props.buttons})}>
             <Text style={styles.footerText}>{this.props.portal}</Text>
           </TouchableOpacity>
           
