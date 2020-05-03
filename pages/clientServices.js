@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 
-import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import {SafeAreaView, View, StyleSheet} from 'react-native';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 import ServicesList from './components/ServicesList.js';
 import Footer from './components/FooterComponent.js';
@@ -34,21 +34,26 @@ class ClientServices extends Component {
     return (
       <>
         <SafeAreaView style={styles.container}>
+<<<<<<< HEAD
           <HeaderWithIconComponent 
           navigation={this.props.navigation} 
+=======
+          <HeaderWithIconComponent
+          navigation={this.props.navigation}
+>>>>>>> 595e478042367250c08a92b4dda56c06739accaa
           back="ClientResources"
           home={this.navHome()}/>
-          <SegmentTab 
+          <SegmentTab
             categoryName={route.params.categoryName}
             serviceName ={route.params.serviceName}
             />
-          <ScrollView>
-            <ServicesList 
+          <View style={styles.middle}>
+            <ServicesList
             serviceName ={route.params.serviceName}
             categoryName = {route.params.categoryName}
             isAdmin={route.params.isAdmin}/>
-            <Footer />
-          </ScrollView>
+          </View>
+          <Footer />
         </SafeAreaView>
       </>
     );
@@ -58,9 +63,18 @@ class ClientServices extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor: '#356859',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+
+  middle: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "stretch",
+    width: "100%",
+  },
+
 })
 
 
