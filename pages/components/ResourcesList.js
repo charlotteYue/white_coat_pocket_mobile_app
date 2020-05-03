@@ -83,7 +83,7 @@ class ResourcesList extends Component {
                   .then(subRes => {
 
                       let obj=new Object();
-                      
+
                       obj['subtype']=subtype;
                       obj['totalCount']=subRes[0].totalCount;
                       arr.push(obj)
@@ -98,8 +98,8 @@ class ResourcesList extends Component {
                       }
 
                   }).catch(err => console.error(`Failed to group aggregation: ${err}`))
-                 
-                 
+
+
                   }
 
               })
@@ -138,31 +138,30 @@ class ResourcesList extends Component {
       }
     }
 
-    return this.state.data.map(
-      (item) => {
-        return (
-          <ScrollView>
-            <View style={styles.container}>
-              <Image
-                source={{
-                  uri:
-                    'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',
-                }}
-                style={styles.photo}
-              />
-
-              <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
+    return (
+        <FlatList
+            data={this.state.data}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) =>
+                <View style={styles.container}>
+                  {/*<Image*/}
+                  {/*  source={{*/}
+                  {/*    uri:*/}
+                  {/*      'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',*/}
+                  {/*  }}*/}
+                  {/*  style={styles.photo}*/}
+                  {/*/>*/}
+                  {/*<Text style={[{fontSize: 20}]}>{item}</Text>*/}
+                  <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
                     <View>
-                    <Text style={styles.title}>{item.subtype}</Text>
-                    {/* add a item.count; */}
-                    <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
+                      <Text style={styles.title}>{item.subtype}</Text>
+                      {/* add a item.count; */}
+                      <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
                     </View>
-                
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        );
-      }
+
+                  </TouchableOpacity>
+                </View>}
+        />
     );
   }
 }
