@@ -25,7 +25,7 @@ class ServiceList extends Component {
   }
 
   _renderServiceName() {
-    console.log('get Service name');
+    // console.log('get Service name');
     if (this.showName === false || this.showName === undefined) {
       this.showName = true;
       return (
@@ -38,8 +38,8 @@ class ServiceList extends Component {
 
   _onFetch = () => {
     const stitchAppClient = Stitch.defaultAppClient;
-    console.log('the category chosen is', this.props.categoryName);
-    console.log('the service chosen is', this.props.serviceName);
+    // console.log('the category chosen is', this.props.categoryName);
+    // console.log('the service chosen is', this.props.serviceName);
     const query = {'type': this.props.categoryName, 'subtype': this.props.serviceName };
     const option = {"projection": {
       "name": 1,
@@ -64,7 +64,7 @@ class ServiceList extends Component {
           db.find(query, option)
               .toArray()
               .then(res => {
-                console.log('res is', res);
+                // console.log('res is', res);
                 let hospitalList = new Array()
                 res.forEach(function(item){
                   let instance = new Object();
@@ -86,15 +86,6 @@ class ServiceList extends Component {
 
 
   onPress(props,item,isAdminPortal) {
-    // console.log('isAdmin in service');
-    // console.log(isAdminPortal)
-    // this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
-    // console.log('props in onpress')
-    // console.log(props)
-    // console.log(item)
-    // console.log('-----------------------------')
-    // this.setState({count:item.count+1})
-    // console.log('set done')
     if(!isAdminPortal){
       this._updateCount(item);
     }
@@ -102,13 +93,7 @@ class ServiceList extends Component {
   }
 
   _updateCount=(item)=> {
-    // console.log('count');
-    // console.log(item.count);
-    // console.log(typeof item.count)
-    // console.log(item.name);
-    // const count=item.count+1;
-    // console.log('new count');
-    // console.log(count);
+
     this.setState({serviceItemName: item.name});
     const stitchAppClient = Stitch.defaultAppClient;
     const query = {'name': item.name };
@@ -120,15 +105,15 @@ class ServiceList extends Component {
         .then(() => {
           const conn = mongoClient.db('test')
           const db = conn.collection('providers')
-          console.log('query');
-          console.log(query)
+          // console.log('query');
+          // console.log(query)
           db.updateOne(query, update,options).then(result => {
             const { matchedCount, modifiedCount } = result;
             if(matchedCount && modifiedCount) {
 
-              console.log(`Successfully updated the item.`)
-              console.log(matchedCount);
-              console.log(modifiedCount);
+              // console.log(`Successfully updated the item.`)
+              // console.log(matchedCount);
+              // console.log(modifiedCount);
             }
           })
           .catch(err => console.error(`Failed to update the item: ${err}`))

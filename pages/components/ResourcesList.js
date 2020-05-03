@@ -48,7 +48,7 @@ class ResourcesList extends Component {
 
   _onFetch = () =>{
     const stitchAppClient = Stitch.defaultAppClient;
-    console.log('the category chosen is', this.props.categoryName);
+    // console.log('the category chosen is', this.props.categoryName);
     const query = {'type': this.props.categoryName};
     const option = {"projection": {
       "subtype": 1,
@@ -92,10 +92,10 @@ class ResourcesList extends Component {
                       // console.log("arr-----------------");
                       // console.log(arr)
 
-                      if(i==ListArray.length){
+                      if(arr.length===ListArray.length){
                         this.setState({data:arr},function (){
-                          console.log('data is');
-                          console.log(this.state.data);
+                          // console.log('data is');
+                          // console.log(this.state.data);
                         })
                       }
 
@@ -112,26 +112,14 @@ class ResourcesList extends Component {
 
 
   onPress(props,item,isAdminPortal){
-    console.log('isAdmin in respurse list');
-    console.log(isAdminPortal)
     props.navigation.navigate(this.props.name, {serviceName: item, categoryName: this.props.categoryName, isAdmin: isAdminPortal})
-    this.setState({count:item.count+1})
-    if(!isAdminPortal){
-      this._updateCount();
-    }
   }
 
-  _updateCount() {
-    console.log('count');
-    console.log(this.state.count);
-    //update db
-  }
+
 
 
   render() {
     function Count(props) {
-      console.log('count isadmin in resource');
-      console.log(props)
       if(props.isAdmin){
         return <Text style={styles.itemCount}>Count: {props.count}</Text>;
       }

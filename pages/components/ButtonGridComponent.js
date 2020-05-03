@@ -18,38 +18,29 @@ constructor(props){
   super(props);
   this.onPress = this.onPress.bind(this);
   this.state={
-    count: -1,
+    data: [],
   };
-
 }
+
+
   onPress(item,isAdminPortal) {
-    // console.log('isAdmin');
-    // console.log(isAdminPortal)
     this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
-    this.setState({count:item.count+1})
-    if(!isAdminPortal){
-      this._updateCount();
-    }
   
   }
 
-  _updateCount() {
-    console.log('count');
-    console.log(this.state.count);
-    //update db
-  }
-
   render() {
-    
     function Count(props) {
       if(props.isAdmin){
         // return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+        // console.log(`~~~~~~~~~~~~~~~~~~~~~~~count in Count: ${props.count}`);
+        // console.log(props.count);
         return <Text style={styles.itemCount}>{props.count}</Text>;
       }
       else{
         return <></>;
       }
     }
+
 
     
     return (

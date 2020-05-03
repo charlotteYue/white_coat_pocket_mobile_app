@@ -35,8 +35,8 @@ export default class App extends React.Component {
   }
 
 
-  componentDidMount() {
-    this._loadClient();
+  async componentDidMount() {
+   await this._loadClient();
   }
 
   render() {

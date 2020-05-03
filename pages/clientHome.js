@@ -22,15 +22,15 @@ import FooterComponent from './components/FooterComponent.js';
    
    render() {
     const items = [
-      {name: 'Healthcare Services', count:0},
-      {name: 'Specialty Healthcare', count:0},
-      {name: 'Behavioral Health', count:0},
-      {name: 'Behavioral Health Cont', count:0},
-      {name: 'Interpersonal Violence', count:0},
-      {name: 'Immigration', count:0},
-      {name: 'Housing', count:0},
-      {name: 'LGBTQ+ Resources', count:0},
-      {name: 'Lifestyle', count:0},
+      {name: 'Healthcare Services'},
+      {name: 'Specialty Healthcare'},
+      {name: 'Behavioral Health'},
+      // {name: 'Behavioral Health (Cont.)'},
+      {name: 'Interpersonal Violence'},
+      {name: 'Immigration'},
+      {name: 'Housing'},
+      {name: 'LGBTQ+ Resources'},
+      {name: 'Lifestyle'},
     ];
 
     return (
