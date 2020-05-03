@@ -1,102 +1,45 @@
-import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
-import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+import React, { Component } from 'react';
+
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  StatusBar
+} from 'react-native';
+import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
+import LoginComponent from './components/loginComponent.js';
+import FooterComponent from './components/FooterComponent.js';
 
 
-class adminAddForm extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            username: '',
-            password: '',
-        }
-    }
-
-    _onLoadAdmin(){
-      const stitchAppClient = Stitch.defaultAppClient;
-      // console.log('client', mongoClient);
-      console.log('username is', this.state.username);
-      console.log('password is', this.state.password);
-      stitchAppClient.auth
-        .loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
-        .then((user) => {
-          console.log(`Logged in as user with id: ${user.id}`)
-          this.props.navigation.navigate("AdminHome")
-        })
-        .catch((err)=> {
-          console.log(err);
-          alert('Username or Password is incorrect');
-          this.setState({username: '', password: ''});
-          this.props.navigation.navigate("Login");
-        })
-    }
-  render(){
-    return (
-        <View style={styles.container}>
-          <Text style={styles.formLabel}> Admin Login</Text>
-          <View>
-            <TextInput 
-              placeholder="Username" 
-              value={this.state.username}
-              onChangeText={(input) => this.setState({ username: input })}
-              autoCapitalize = 'none'
-              style={styles.inputStyle}
-              />
-            <TextInput
-              secureTextEntry={true}
-              placeholder="Password"
-              value={this.state.password}
-              onChangeText={(input) => this.setState({ password: input })}
-              autoCapitalize = 'none'
-              style={styles.inputStyle}
-            />
-          </View>
-          <Button
-              title="Submit"
-              color="#fff"
-              onPress={() => {
-                try{
-                  this._onLoadAdmin();
-                }catch(err){
-                  console.log("error 2 is ", err);
-                }
-              }}
-            />
-        </View>
-      );
+class Login extends Component {
+  constructor(props){
+    super(props);
   }
-};
+
+  render() {
+    const { route }=this.props;
+    return (
+      <>
+        <SafeAreaView style={styles.container}>
+        <HeaderWithIconComponent 
+          navigation={this.props.navigation} 
+          back="ClientHome"
+          home="ClientHome"/>
+          <ScrollView>
+            <LoginComponent navigation={this.props.navigation} />
+          </ScrollView>
+          <FooterComponent style={styles.footer} />
+        </SafeAreaView>
+      </>
+    );
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     backgroundColor: '#356859',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+})
 
-  formLabel: {
-    fontSize: 20,
-    color: '#fff',
-  },
-  inputStyle: {
-    marginTop: 20,
-    width: 300,
-    height: 40,
-    paddingHorizontal: 10,
-    borderRadius: 50,
-    backgroundColor: '#b9e4c9',
-  },
-  formText: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-    fontSize: 20,
-  },
-  text: {
-    color: '#fff',
-    fontSize: 20,
-  },
-
-});
-
-export default adminAddForm;
+export default Login;
