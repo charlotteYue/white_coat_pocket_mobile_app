@@ -4,7 +4,8 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  StatusBar
+  StatusBar,
+  View
 } from 'react-native';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 import ResourcesList from './components/ResourcesList.js';
@@ -49,22 +50,23 @@ class ClientResources extends Component {
     const { route }=this.props;
     return (
       <>
+        <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.container}>
-        <HeaderWithIconComponent 
-          navigation={this.props.navigation} 
+        <HeaderWithIconComponent
+          navigation={this.props.navigation}
           back={this.navBack()}
           home={this.navHome()}/>
-          <SegmentTab 
+          <SegmentTab
             categoryName={route.params.categoryName}
             />
-          <ScrollView>
-            <ResourcesList 
+          <View style={styles.middle}>
+            <ResourcesList
             categoryName={route.params.categoryName}
-            navigation={this.props.navigation} 
+            navigation={this.props.navigation}
             name="ClientServices"
             isAdmin={route.params.isAdmin}/>
-          </ScrollView>
-          <FooterComponent style={styles.footer} />
+          </View>
+          <FooterComponent />
         </SafeAreaView>
       </>
     );
@@ -73,9 +75,19 @@ class ClientResources extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor: '#356859',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+
+  middle: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "stretch",
+    width: "100%",
+  },
+
+
 })
 
 export default ClientResources;

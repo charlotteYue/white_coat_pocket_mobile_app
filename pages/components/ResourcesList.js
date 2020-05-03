@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  FlatList
 } from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
@@ -12,7 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatGrid } from 'react-native-super-grid';
 import { Row } from 'native-base';
- 
+
 class ResourcesList extends Component {
   constructor(props) {
     super(props);
@@ -109,42 +110,31 @@ class ResourcesList extends Component {
         return <></>;
       }
     }
+    console.log("DATA: ", this.state.data)
+    return (
+        <FlatList
+          data={this.state.data}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) =>
+              <View style={styles.container}>
+                {/*<Image*/}
+                {/*  source={{*/}
+                {/*    uri:*/}
+                {/*      'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',*/}
+                {/*  }}*/}
+                {/*  style={styles.photo}*/}
+                {/*/>*/}
+                {/*<Text style={[{fontSize: 20}]}>{item}</Text>*/}
+                <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
+                  <View>
+                    <Text style={styles.title}>{item}</Text>
+                    {/* add a item.count; */}
+                    <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                  </View>
 
-    return this.state.data.map(
-      (item) => {
-        return (
-          <ScrollView>
-            <View style={styles.container}>
-              <Image
-                source={{
-                  uri:
-                    'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',
-                }}
-                style={styles.photo}
-              />
-              {/* <View style={styles.container_text}>
-                <Text style={styles.title} onPress={() => 
-                  this.props.navigation.navigate(this.props.name, 
-                  {serviceName: item, categoryName: this.props.categoryName})}>
-                  {item}
-                </Text>
-                
-              </View> */}
-
-              <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
-                    <View style={styles.itemContainer}>
-                      <Text style={styles.title}>{item}</Text>
-                      {/* add a item.count; */}
-                      <View style={styles.countContainer}>
-                        <Count isAdmin={this.props.isAdmin} count={item.count}/>
-                      </View>
-                    </View>
-                
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        );
-      }
+                </TouchableOpacity>
+              </View>}
+        />
     );
   }
 }
@@ -154,12 +144,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 20,
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 20,
-    marginBottom: 10,
-    borderRadius: 20,
-    borderWidth: 1,
+    height: 100,
+    borderWidth: 0.5,
     backgroundColor: '#B2DFDB',
     elevation: 2,
   },
