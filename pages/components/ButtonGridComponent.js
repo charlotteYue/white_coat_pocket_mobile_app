@@ -43,7 +43,8 @@ constructor(props){
     
     function Count(props) {
       if(props.isAdmin){
-        return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+        // return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+        return <Text style={styles.itemCount}>{props.count}</Text>;
       }
       else{
         return <></>;
@@ -83,10 +84,15 @@ constructor(props){
                     style={styles.mainBtn}
                     underlayColor="#fff"
                     onPress={() => this.onPress(item,this.props.isAdmin)}>
-                    <Text style={styles.itemName}>{item.name}</Text>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.itemName}>{item.name}</Text>
+                      <View style={styles.countContainer}>
+                        <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                      </View>
+                    </View>
                   </TouchableHighlight>
-                  {/* <Text style={styles.itemCount}>count: {item.count}</Text> */}
-                  <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                  {/* <Text style={styles.itemName}>{item.name}</Text> */}
+                  {/* <Count isAdmin={this.props.isAdmin} count={item.count}/> */}
                 </View>
                 {/* <Text style={styles.itemName}>{item.name}</Text> */}
               </View>
@@ -144,6 +150,13 @@ const styles = StyleSheet.create({
     height: 100,
   },
 
+  textContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: "column",
+  },
+
   mainBtn: {
     height: 110,
     width: 110,
@@ -160,11 +173,16 @@ const styles = StyleSheet.create({
     maxWidth: 100,
   },
 
+  countContainer: {
+    position: "absolute",
+    bottom: 0,
+  },
+
   itemCount: {
     textAlign: 'center',
-    color: '#fff',
+    color: '#004D40',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 24,
     maxWidth: 100,
   },
 });

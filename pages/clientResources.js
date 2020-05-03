@@ -44,7 +44,6 @@ class ClientResources extends Component {
     }
   }
 
-
   // navHome
   render() {
     const { route }=this.props;
