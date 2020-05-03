@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import {
   SafeAreaView,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 
 import AddFormComponent from './components/AddFormComponent.js';
-
 export default class AdminAddForm extends Component {
   constructor(props){
     super(props);
@@ -17,12 +17,12 @@ export default class AdminAddForm extends Component {
     console.log('catagory list params is', route.params.categoryList);
     return (
       <>
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
           <HeaderWithIconComponent 
           navigation={this.props.navigation} 
           back="AdminHome"
           home="AdminHome"/>
-          <ScrollView style={{ marginTop: 50 }}>
+          <ScrollView>
               <AddFormComponent 
               navigation={this.props.navigation} 
               name="AdminHome"
@@ -33,3 +33,13 @@ export default class AdminAddForm extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: '#356859',
+  },
+})
+
+

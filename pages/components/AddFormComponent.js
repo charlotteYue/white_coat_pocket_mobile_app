@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
-import {Picker, Text, StyleSheet, View, TextInput, Button, ShadowPropTypesIOS} from 'react-native';
+import React, {Component, Fragment} from 'react';
+import {Picker, Text, StyleSheet, View, TextInput, Button} from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+
+
 import AdminHome from '../adminHome.js';
 
 class AddFormComponent extends Component {
@@ -74,7 +76,7 @@ class AddFormComponent extends Component {
     return (
         <View style={styles.container}>
           <Text style={styles.formLabel}> Add New Medical Services </Text>
-          <View>
+          <View style={styles.main}>
             <TextInput placeholder="Hospital Name" style={styles.inputStyle} 
             value={this.state.name}
             onChangeText={(input) => this.setState({ name: input })}/>
@@ -90,38 +92,46 @@ class AddFormComponent extends Component {
               style={styles.inputStyle}
               value={this.state.contact}
               onChangeText={(input) => this.setState({ contact: input })}/>
-            
-            <Picker
-              selectedValue={this.state.category}
-              onValueChange={(selectedItem)=> (this.setState({category: selectedItem}))}>
-                  {categoryItems}
-            </Picker>
             <Text
               style={{
-                fontSize: 30,
+                fontSize: 16,
                 color: '#fff',
                 alignItems: 'center',
                 justifyContent: 'center',
+                fontWeight: 'bold',
+                marginTop: 10,
               }}>
               Selected: {this.state.category}
             </Text>
             <Picker
-              selectedValue={this.state.service}
-              onValueChange={(selectedItem)=> (this.setState({service: selectedItem}))}>
-                  {serviceItems}
+              selectedValue={this.state.category}
+              style={{width: 150, }}
+              onValueChange={(selectedItem)=> (this.setState({category: selectedItem}))}>
+                  {categoryItems}
             </Picker>
+
             <Text
               style={{
-                fontSize: 30,
+                fontSize: 16,
                 color: '#fff',
                 alignItems: 'center',
                 justifyContent: 'center',
+                fontWeight: 'bold',
               }}>
               Selected: {this.state.service}
             </Text>
+            <Picker
+              selectedValue={this.state.service}
+              style={{width: 150}}
+              onValueChange={(selectedItem)=> (this.setState({service: selectedItem}))}>
+                  {serviceItems}
+            </Picker>
             <Button
               title="Submit"
               color="#fff"
+              style={{
+                marginTop: 20,
+              }}
               onPress={() => alert('Simple Button pressed')}
             />
           </View>
@@ -130,21 +140,28 @@ class AddFormComponent extends Component {
   }
 };
 const styles = StyleSheet.create({
-  //Check project repo for styles
   container: {
     flex: 1,
     backgroundColor: '#356859',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  inputCombination: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    alignContent: 'center',
+  },
 
   formLabel: {
+    padding: 20,
     fontSize: 20,
     color: '#fff',
   },
+  
   inputStyle: {
-    marginTop: 20,
-    width: 300,
+    marginTop: 10,
+    width: 250,
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
@@ -160,6 +177,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 20,
   },
+  main: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  }
 });
 
 export default AddFormComponent;
