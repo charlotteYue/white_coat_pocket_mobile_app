@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#356859',
-    height: 50,
+    // height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

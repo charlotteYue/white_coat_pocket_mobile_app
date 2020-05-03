@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   tab: {
-    backgroundColor: "#00695C",
+    backgroundColor: "#356859",
   },
   text: {
-    color:"#004D40",
+    color:"#000",
   }
 })
 

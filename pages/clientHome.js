@@ -29,7 +29,7 @@ import FooterComponent from './components/FooterComponent.js';
       {name: 'Interpersonal Violence', count:0},
       {name: 'Immigration', count:0},
       {name: 'Housing', count:0},
-      {name: 'LGBTQ+', count:0},
+      {name: 'LGBTQ+ Resources', count:0},
       {name: 'Lifestyle', count:0},
     ];
 

@@ -4,14 +4,16 @@ import {
   Text,
   StyleSheet,
   Image,
+  ScrollView,
+  SafeAreaView,
   TouchableOpacity,
+  TouchableHighlight,
   FlatList
 } from 'react-native';
 
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
-import { ScrollView } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { FlatGrid } from 'react-native-super-grid';
+import {FlatGrid} from 'react-native-super-grid';
+// import { ScrollView } from 'react-native-gesture-handler';
 import { Row } from 'native-base';
 
 class ResourcesList extends Component {
@@ -139,79 +141,173 @@ class ResourcesList extends Component {
     }
 
     return (
-        <FlatList
-            data={this.state.data}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) =>
-                <View style={styles.container}>
-                  {/*<Image*/}
-                  {/*  source={{*/}
-                  {/*    uri:*/}
-                  {/*      'https://www.pikpng.com/pngl/m/170-1708125_medical-icon-png-medical-icon-clipart.png',*/}
-                  {/*  }}*/}
-                  {/*  style={styles.photo}*/}
-                  {/*/>*/}
-                  {/*<Text style={[{fontSize: 20}]}>{item}</Text>*/}
-                  <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
-                    <View>
-                      <Text style={styles.title}>{item.subtype}</Text>
-                      {/* add a item.count; */}
-                      <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
-                    </View>
+        // <FlatList
+        //     data={this.state.data}
+        //     keyExtractor={(item, index) => index.toString()}
+        //     renderItem={({item}) =>
+        //         <View>
+        //           <View style={styles.container}>
+        //           <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
+        //             <View>
+        //               <Text style={styles.title}>{item.subtype}</Text>
+        //               {/* add a item.count; */}
+        //               <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
+        //             </View>
 
-                  </TouchableOpacity>
-                </View>}
-        />
+        //             </TouchableOpacity>
+        //           </View>
+        //           <View style={styles.line}></View>
+        //           <View style={styles.lineBreak}></View>
+        //         </View>}
+        // />
+
+        <ScrollView >
+          <SafeAreaView>
+          <FlatGrid
+            itemDimension={120}
+            items={this.state.data}
+            style={styles.gridView}
+            spacing={20}
+            renderItem={({item}) => (
+              <View>
+                <View style={styles.itemContainer}>
+                  <TouchableHighlight
+                    activeOpacity={1}
+                    style={styles.mainBtn}
+                    underlayColor="#fff"
+                    onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.itemName}>{item.subtype}</Text>
+                      <View style={styles.countContainer}>
+                        <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
+                      </View>
+                    </View>
+                  </TouchableHighlight>
+                  {/* <Text style={styles.itemName}>{item.name}</Text> */}
+                  {/* <Count isAdmin={this.props.isAdmin} count={item.count}/> */}
+                </View>
+                {/* <Text style={styles.itemName}>{item.name}</Text> */}
+              </View>
+            )}
+          />
+        {/* </ScrollView> */}
+        </SafeAreaView>
+        </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  
+  gridView: {
     flex: 1,
-    flexDirection: 'row',
-    padding: 20,
-    height: 100,
-    borderWidth: 0.5,
-    backgroundColor: '#B2DFDB',
-    elevation: 2,
+    marginLeft: "10%",
+    marginRight: "10%",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-  container_text: {
-    flex: 1,
-    flexDirection: 'column',
-    marginLeft: 12,
+
+  itemContainer: {
+    marginTop: '15%',
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center',
+    // padding: 10,
+    height: 100,
   },
-  photo: {
-    height: 60,
-    width: 60,
+  
+  textContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: "column",
   },
-  itemCount: {
+
+  mainBtn: {
+    height: 130,
+    width: 130,
+    borderRadius: 20,
+    backgroundColor: '#B2DFDB',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  itemName: {
     textAlign: 'center',
-    color: '#fff',
+    color: '#004D40',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 15,
     maxWidth: 100,
   },
-  itemContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: 'center',
-    // alignItems: "center",
-  },
+
   countContainer: {
     position: "absolute",
     bottom: 0,
   },
-  count: {
-    color: "#fff",
-  }
+
+  itemCount: {
+    textAlign: 'center',
+    color: '#004D40',
+    fontWeight: 'bold',
+    fontSize: 24,
+    maxWidth: 100,
+
+  },
+  
+  // container: {
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   padding: 20,
+  //   height: 100,
+  //   borderWidth: 0.5,
+  //   borderColor: "#e0e0e0",
+  //   backgroundColor: '#fff',
+  // },
+
+
+  // title: {
+  //   fontSize: 20,
+  //   fontWeight: 'bold',
+  //   color: '#000',
+  // },
+  // container_text: {
+  //   flex: 1,
+  //   flexDirection: 'column',
+  //   marginLeft: 12,
+  //   justifyContent: 'center',
+  //   alignItems: "center",
+  // },
+  // photo: {
+  //   height: 60,
+  //   width: 60,
+  // },
+  // itemCount: {
+  //   textAlign: 'center',
+  //   color: '#fff',
+  //   fontWeight: 'bold',
+  //   fontSize: 16,
+  //   maxWidth: 100,
+  // },
+  // itemContainer: {
+  //   flex: 1,
+  //   flexDirection: "row",
+  //   justifyContent: 'center',
+  //   // alignItems: "center",
+  // },
+  // countContainer: {
+  //   position: "absolute",
+  //   bottom: 0,
+  // },
+  // count: {
+  //   color: "#fff",
+  // },
+  // line: {
+  //   height: 0.5,
+  //   color: '#e0e0e0',
+  //   backgroundColor: '#e0e0e0',
+  // },
+  // lineBreak: {
+  //   height: 5,
+  //   color: '#e0e0e0',
+  //   backgroundColor: '#e0e0e0',
+  // }
+
 });
 
 export default ResourcesList;

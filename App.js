@@ -58,7 +58,6 @@ export default class App extends React.Component {
         title="Logout"
       />
     );
-
     return (
       <>
         <NavigationContainer>
