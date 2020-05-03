@@ -13,7 +13,7 @@ class ServiceList extends Component {
     this.state = {
       showName: false,
       data: [],
-      count: 0,
+      serviceItemName: '',
     };
   }
 
@@ -89,10 +89,10 @@ class ServiceList extends Component {
     // this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
     // console.log('props in onpress')
     // console.log(props)
-    console.log(item)
-    console.log('-----------------------------')
+    // console.log(item)
+    // console.log('-----------------------------')
     // this.setState({count:item.count+1})
-    console.log('set done')
+    // console.log('set done')
     if(!isAdminPortal){
       this._updateCount(item);
     }
@@ -100,13 +100,14 @@ class ServiceList extends Component {
   }
 
   _updateCount=(item)=> {
-    console.log('count');
-    console.log(item.count);
-    console.log(typeof item.count)
-    console.log(item.name);
-    const count=item.count+1;
-    console.log('new count');
-    console.log(count);
+    // console.log('count');
+    // console.log(item.count);
+    // console.log(typeof item.count)
+    // console.log(item.name);
+    // const count=item.count+1;
+    // console.log('new count');
+    // console.log(count);
+    this.setState({serviceItemName: item.name});
     const stitchAppClient = Stitch.defaultAppClient;
     const query = {'name': item.name };
     const update={"$inc": {"count": 1}};
