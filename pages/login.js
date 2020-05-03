@@ -21,8 +21,8 @@ class Login extends Component {
     return (
       <>
         <SafeAreaView style={styles.container}>
-        <HeaderWithIconComponent 
-          navigation={this.props.navigation} 
+        <HeaderWithIconComponent
+          navigation={this.props.navigation}
           back="ClientHome"
           home="ClientHome"/>
           <ScrollView>
@@ -37,8 +37,9 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor: '#356859',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
 
