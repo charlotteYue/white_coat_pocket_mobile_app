@@ -45,6 +45,7 @@ class ServiceList extends Component {
       "description": 1,
       "supportSpanish": 1,
       "_id": 0,
+      "count": 1,
     },};
     const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
     stitchAppClient.auth
@@ -69,6 +70,7 @@ class ServiceList extends Component {
                   instance["phone"] = item.phone;
                   instance["description"] = item.description;
                   instance["supportSpanish"] = item.supportSpanish;
+                  instance["count"]=item.count;
                   hospitalList.push(instance);
                 })
                 this.setState({data: hospitalList}, function(){
@@ -82,28 +84,61 @@ class ServiceList extends Component {
   
 
   onPress(props,item,isAdminPortal) {
-    console.log('isAdmin in service');
-    console.log(isAdminPortal)
+    // console.log('isAdmin in service');
+    // console.log(isAdminPortal)
     // this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
-    console.log('props in onpress')
-    console.log(props)
-    this.setState({count:item.count+1})
+    // console.log('props in onpress')
+    // console.log(props)
+    console.log(item)
+    console.log('-----------------------------')
+    // this.setState({count:item.count+1})
+    console.log('set done')
     if(!isAdminPortal){
-      this._updateCount();
+      this._updateCount(item);
     }
   
   }
 
-  _updateCount() {
+  _updateCount=(item)=> {
     console.log('count');
-    console.log(this.state.count);
-    //update db
+    console.log(item.count);
+    console.log(typeof item.count)
+    console.log(item.name);
+    const count=item.count+1;
+    console.log('new count');
+    console.log(count);
+    const stitchAppClient = Stitch.defaultAppClient;
+    const query = {'name': item.name };
+    const update={"$inc": {"count": 1}};
+    const options = { "upsert": false };
+    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+    stitchAppClient.auth
+        .loginWithCredential(new AnonymousCredential())
+        .then(() => {
+          const conn = mongoClient.db('test')
+          const db = conn.collection('providers')
+          console.log('query');
+          console.log(query)
+          db.updateOne(query, update,options).then(result => {
+            const { matchedCount, modifiedCount } = result;
+            if(matchedCount && modifiedCount) {
+
+              console.log(`Successfully updated the item.`)
+              console.log(matchedCount);
+              console.log(modifiedCount);
+            }
+          })
+          .catch(err => console.error(`Failed to update the item: ${err}`))
+        })
+        .catch(console.error)
   }
+
+
   render() {
 
     function Count(props) {
-      console.log('count isadmin in service');
-      console.log(props)
+      // console.log('count isadmin in service');
+      // console.log(props)
       if(props.isAdmin){
         return <Text style={styles.itemCount}>Count: {props.count}</Text>;
       }
@@ -117,13 +152,24 @@ class ServiceList extends Component {
         return(
           <View style={styles.main}>
           <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
-            <CollapseHeader style={styles.container} >
-              <View style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
-                <Text style={styles.text}>{item.name}</Text>
+            <CollapseHeader style={styles.container}  >
+              {/* <View style={styles.textContainer}>
+                <Text style={styles.text} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>{item.name}</Text>
                 <Count isAdmin={this.props.isAdmin} count={item.count}/>
-              </View>
+              </View> */}
+              
+
+              
+              <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
+                    <View>
+                    <Text style={styles.text}>{item.name}</Text>
+                    {/* add a item.count; */}
+                    <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                    </View>
+              </TouchableOpacity>
 
             </CollapseHeader>
+            
             <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
               <Text style={styles.subtext}>{item.phone}</Text>
               <Text style={styles.subtext}>{item.description}</Text>
@@ -154,6 +200,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignItems: "center",
     justifyContent: "center",
+    // height: 50,
   },
   title: {
     fontSize: 20,
@@ -163,6 +210,7 @@ const styles = StyleSheet.create({
   textContainer: {
     justifyContent: "center",
     alignItems: "center",
+    // height: 50,
   },
   description: {
     fontSize: 10,
@@ -176,6 +224,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: "bold",
+    // height: 50,
   },
   subtext: {
     color: "#b9e4c9",
