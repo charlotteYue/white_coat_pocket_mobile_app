@@ -68,11 +68,73 @@ class ResourcesList extends Component {
                 res.forEach(function(item){
                   listSet.add(item.subtype);
                 })
-                ListArray = new Array();
+                let ListArray = new Array();
                 ListArray = Array.from(listSet);
-                this.setState({data: ListArray}, function(){
-                  console.log('data is', this.state.data);
-                })
+                // this.setState({data: ListArray}, function(){
+                //   console.log('data is', this.state.data);
+                // })
+                let arr=new Array();
+                //  ListArray.forEach(function(subtype) {
+                  for( var i=0;i<ListArray.length;i++) {
+                    let subtype=ListArray[i];
+                   console.log(subtype);
+                   db.aggregate([
+                    {"$match": {"subtype": `${subtype}`}},
+                    {"$group": { "_id": null,"totalCount": {"$sum": "$count"} }}
+                  ]).toArray()
+                  .then(subRes => {
+                    // let map=new Map();
+                    // let arr=new Array();
+                    // res.forEach(function(item){
+                      // map.set(item.subtype,item.totalCount);
+                      // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~')
+                      // console.log(`res length: ${res}`)
+                      // console.log(res)
+                      // console.log(`id: ${res[0]._id}`);
+                      // console.log(`totalCount: ${res[0].totalCount}`);
+                      // console.log(`subtype: ${subtype}`);
+                      // console.log('~~~~~~~~~~~~~~~~~~~~~~~~~')
+                      let obj=new Object();
+                      
+                      obj['subtype']=subtype;
+                      obj['totalCount']=subRes[0].totalCount;
+                      arr.push(obj)
+                      console.log("arr-----------------");
+                      console.log(arr)
+
+                      if(i==ListArray.length){
+                        this.setState({data:arr},function (){
+                          console.log('data is');
+                          console.log(this.state.data);
+                        })
+                      }
+                      // this.setState({countObj:obj})
+                    // })
+                    // console.log('arr');
+                    // console.log(arr);
+                    // this.setState({countArr:arr})
+                    // console.log(`map res: ${map}`)
+                    // this.setState({countMap:map});
+                  }).catch(err => console.error(`Failed to group aggregation: ${err}`))
+                 
+                  console.log('arr is~~~~~~~~~~~~');
+                  console.log(arr);
+                 
+                  }
+
+                //   this.setState({data: arr}, function(){
+                //   console.log('data is');
+                //   console.log(arr);
+                // })
+
+
+
+
+
+
+
+
+
               })
               .catch(console.error)
         })
@@ -121,20 +183,12 @@ class ResourcesList extends Component {
                 }}
                 style={styles.photo}
               />
-              {/* <View style={styles.container_text}>
-                <Text style={styles.title} onPress={() => 
-                  this.props.navigation.navigate(this.props.name, 
-                  {serviceName: item, categoryName: this.props.categoryName})}>
-                  {item}
-                </Text>
-                
-              </View> */}
 
-              <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
+              <TouchableOpacity style={styles.container_text} onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
                     <View>
-                    <Text style={styles.title}>{item}</Text>
+                    <Text style={styles.title}>{item.subtype}</Text>
                     {/* add a item.count; */}
-                    <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                    <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
                     </View>
                 
               </TouchableOpacity>
