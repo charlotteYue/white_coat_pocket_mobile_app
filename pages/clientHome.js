@@ -52,7 +52,7 @@ import FooterComponent from './components/FooterComponent.js';
               navigation={this.props.navigation}
               buttons={items}
               name="Login"
-              portal="admin portal"
+              portal="Admin portal"
             />
         </SafeAreaView>
       </>
