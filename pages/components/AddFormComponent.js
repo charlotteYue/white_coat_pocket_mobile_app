@@ -132,7 +132,7 @@ class AddFormComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#356859',
+    backgroundColor: '#1565C0',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: "#b9e4c9",
+    color: "#E3F2FD",
     marginTop: 10,
     fontWeight: 'bold',
     fontSize: 15,
@@ -159,14 +159,16 @@ const styles = StyleSheet.create({
     height: 30,
     width: 100,
     borderRadius: 20,
-    backgroundColor: '#b9e4c9',
+    backgroundColor: '#1E88E5',
     alignItems: 'center',
     justifyContent: 'center',
+    borderColor:'#1976D2', 
+    borderWidth: 5, 
   },
 
   itemName: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#E3F2FD',
     fontWeight: 'bold',
     fontSize: 15,
     maxWidth: 100,
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
-    backgroundColor: '#b9e4c9',
+    backgroundColor: '#E3F2FD',
   },
   formText: {
     alignItems: 'center',

@@ -60,7 +60,7 @@ class LoginComponent extends Component {
           </View>
           <Button
               title="Submit"
-              color="#fff"
+              color="#1E88E5"
               onPress={() => {
                 try{
                   this._onLoadAdmin();
@@ -76,7 +76,7 @@ class LoginComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#356859',
+    backgroundColor: '#1565C0',
     alignItems: 'center',
     marginTop: "60%",
   },
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
-    backgroundColor: '#b9e4c9',
+    backgroundColor: '#E3F2FD',
   },
   formText: {
     alignItems: 'center',

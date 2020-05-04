@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   introText: {
     textAlign: 'center',
     fontSize: 15,
-    color: '#B2DFDB',
+    color: '#E3F2FD',
     marginBottom: '10%',
   },
 
@@ -152,13 +152,17 @@ const styles = StyleSheet.create({
     height: 110,
     width: 110,
     borderRadius: 20,
-    backgroundColor: '#b9e4c9',
+    backgroundColor: '#ffff',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth:6,
+    borderColor:'#E3F2FD', 
+    shadowRadius:10, 
+    shadowColor: '#4FC3F7', 
   },
   itemName: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#0D47A1',
     fontWeight: 'bold',
     fontSize: 15,
     maxWidth: 100,
@@ -171,7 +175,7 @@ const styles = StyleSheet.create({
 
   itemCount: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#448AFF',
     fontWeight: 'bold',
     fontSize: 24,
     maxWidth: 100,

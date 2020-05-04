@@ -212,13 +212,15 @@ const styles = StyleSheet.create({
     height: 130,
     width: 130,
     borderRadius: 20,
-    backgroundColor: '#B2DFDB',
+    backgroundColor: '#ffff',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth:6,
+    borderColor:'#E3F2FD', 
   },
   itemName: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#01579B',
     fontWeight: 'bold',
     fontSize: 15,
     maxWidth: 100,
@@ -231,7 +233,7 @@ const styles = StyleSheet.create({
 
   itemCount: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#448AFF',
     fontWeight: 'bold',
     fontSize: 24,
     maxWidth: 100,

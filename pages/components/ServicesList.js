@@ -244,10 +244,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 20,
     borderWidth: 0.5,
-    backgroundColor: '#B2DFDB',
+    backgroundColor: '#BBDEFB',
     elevation: 2,
     alignItems: "center",
     justifyContent: "center",
+    borderBottomWidth:5, 
+    borderColor: '#90CAF9', 
     // height: 50,
   },
   title: {
@@ -267,18 +269,20 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: "bold",
+    color: '#0D47A1', 
     // height: 50,
   },
   subtext: {
-    color: "#b9e4c9",
+    color: "#ffffff",
   },
 
   itemCount: {
     textAlign: 'center',
-    color: '#000',
+    color: '#448AFF',
     fontWeight: 'bold',
     fontSize: 20,
     maxWidth: 100,
+    marginLeft: 10, 
   },
   itemContainer: {
     height: 60,
