@@ -12,26 +12,73 @@ import { ScrollView } from 'react-native-gesture-handler';
 import HeaderComponent from './components/HeaderComponent.js';
 import ButtonGridComponent from './components/ButtonGridComponent.js';
 import FooterComponent from './components/FooterComponent.js';
-// import AdminHome from './pages/adminHome';
+import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
  class ClientHome extends React.Component {
    constructor(props){
      super(props);
-     this.state={isAdmin:false};
+     this.state={
+      currentUserId: undefined,
+      client: undefined,
+      data: [],
+     };
+     this._loadClient = this._loadClient.bind(this);
+     this._getCategories=this._getCategories.bind(this)
    }
-   
+
+   async componentDidMount(){
+    await this._loadClient();
+    this._getCategories();
+  }
+
+  async _loadClient() {
+    console.log('here in app.js');
+    await Stitch.initializeDefaultAppClient(
+      'wcpg-bxtzi'
+    ).then(client => {
+      this.setState({ client });
+      if (client.auth.isLoggedIn) {
+        this.setState({
+          currentUserId: client.auth.user.id,
+        });
+      }
+    });
+  }
+
+  _getCategories= () => {
+    console.log("here in client")
+    const stitchAppClient = Stitch.defaultAppClient;
+    console.log('here')
+    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+
+    stitchAppClient.auth
+        .loginWithCredential(new AnonymousCredential())
+        .then(() => { 
+          const conn = mongoClient.db('test')
+          const db = conn.collection('providers')
+          db.aggregate(
+            [{"$group": { "_id": "$type" }}]
+          )
+          .toArray()
+          .then( res => {
+            let arr=new Array();
+            let obj=new Object();
+            for(var i=0;i<res.length;i++){
+              let obj=new Object();
+              obj["name"]=res[i]._id;
+              arr.push(obj);
+            }
+            this.setState({data:arr}, function() {
+                console.log(this.state.data);
+              })
+          }).catch(err => console.error(`Failed to group aggregation: ${err}`))
+
+        }).catch(console.error)
+
+  }
+
    render() {
-    const items = [
-      {name: 'Healthcare Services'},
-      {name: 'Specialty Healthcare'},
-      {name: 'Behavioral Health'},
-      // {name: 'Behavioral Health (Cont.)'},
-      {name: 'Interpersonal Violence'},
-      {name: 'Immigration'},
-      {name: 'Housing'},
-      {name: 'LGBTQ+ Resources'},
-      {name: 'Lifestyle'},
-    ];
+    const items = this.state.data;
 
     return (
       <>
