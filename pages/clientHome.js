@@ -155,7 +155,7 @@ class ClientHome extends React.Component {
               navigation={this.props.navigation}
               buttons={items}
               name="Login"
-              portal="admin portal"
+              portal="Admin portal"
             />
         </SafeAreaView>
       </>

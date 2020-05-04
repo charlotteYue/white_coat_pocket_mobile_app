@@ -121,7 +121,7 @@ class ResourcesList extends Component {
   render() {
     function Count(props) {
       if(props.isAdmin){
-        return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+        return <Text style={styles.itemCount}>{props.count}</Text>;
       }
       else{
         return <></>;

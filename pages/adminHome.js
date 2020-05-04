@@ -100,7 +100,7 @@ componentDidMount(){
           <FooterComponent navigation={this.props.navigation} 
             buttons={route.params.buttons}
             name="ClientHome" 
-            portal="client portal"
+            portal="Client portal"
             />
         </SafeAreaView>
   

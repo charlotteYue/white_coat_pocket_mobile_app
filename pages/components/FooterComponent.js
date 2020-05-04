@@ -20,7 +20,7 @@ class FooterComponent extends React.Component {
           
           <View style={styles.buttonsInLine}>
             <TouchableOpacity onPress={toContact}>
-              <Text style={styles.footerText}>contact us</Text>
+              <Text style={styles.footerText}>Contact us</Text>
             </TouchableOpacity>
             <Text> | </Text>
             <TouchableOpacity onPress={toFeedback}>

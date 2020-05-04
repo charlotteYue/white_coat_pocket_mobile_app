@@ -128,163 +128,165 @@ class ServiceList extends Component {
       // console.log('count isadmin in service');
       // console.log(props)
       if(props.isAdmin){
-        return <Text style={styles.itemCount}>Count: {props.count}</Text>;
+        return <Text style={styles.itemCount}>{props.count}</Text>;
       }
       else{
         return <></>;
       }
     }
     return (
-      <FlatList 
-          data={this.state.data}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) =>
-          <View style={styles.container}>
-            <View style={styles.container_text}>
-              <Text style={styles.title}>
-                {item.name}
-              </Text>
-              <View style={styles.container_detail}>
-                <View style={{flex: 1, flexDirection: "column"}}>
-                  <Text style={{fontSize: 12}}>Description: {item.description}</Text>
-                  <Text style={{fontSize: 12}}>Contact: {item.phone}</Text>
-                </View>
-                <View style={styles.countContainer}>
-                  <Count isAdmin={this.props.isAdmin} count={item.count}/>
-                </View>
-                
-              </View>
-            </View>
-          </View>}
-      />
+      // <FlatList 
+      //     data={this.state.data}
+      //     keyExtractor={(item, index) => index.toString()}
+      //     renderItem={({item}) =>
+      //     <View style={styles.container}>
+      //       <View style={styles.container_text}>
+      //         <Text style={styles.title}>
+      //           {item.name}
+      //         </Text>
+      //         <View style={{flex: 1, flexDirection: "column"}}>
+      //             <Text style={{fontSize: 12}}>Description: {item.description}</Text>
+      //             <Text style={{fontSize: 12}}>Contact: {item.phone}</Text>
+      //           </View>
+      //         <View style={styles.countContainer}>
+      //             <Count isAdmin={this.props.isAdmin} count={item.count}/>
+      //           </View>
+      //         {/* <View style={styles.container_detail}>
+      //           <View style={{flex: 1, flexDirection: "column"}}>
+      //             <Text style={{fontSize: 12}}>Description: {item.description}</Text>
+      //             <Text style={{fontSize: 12}}>Contact: {item.phone}</Text>
+      //           </View>
+      //         </View> */}
+      //       </View>
+      //     </View>}
+      // />
+        <FlatList
+            data={this.state.data}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) =>
+                <View style={{flex: 1}}>
+                  <Collapse>
+                    <CollapseHeader style={styles.container}  >
+                      <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
+                        <View style={styles.itemContainer}>
+                          <Text style={styles.text}>{item.name}</Text>
+                          <View style={styles.countContainer}>
+                            <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                          </View>
+                        </View>
+                      </TouchableOpacity>
+                    </CollapseHeader>
+                    <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+                      <Text style={styles.subtext}>{item.phone}</Text>
+                      <Text style={styles.subtext}>{item.description}</Text>
+                    </CollapseBody>
+                  </Collapse>
+                </View>}
+        />
     );
-        // <FlatList
-            // data={this.state.data}
-            // keyExtractor={(item, index) => index.toString()}
-            // renderItem={({item}) =>
-        //         <View style={{flex: 1}}>
-        //           <Collapse>
-        //             <CollapseHeader style={styles.container}  >
-        //               <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
-        //                 <View style={styles.itemContainer}>
-        //                   <Text style={styles.text}>{item.name}</Text>
-        //                   <View style={styles.countContainer}>
-        //                     <Count isAdmin={this.props.isAdmin} count={item.count}/>
-        //                   </View>
-        //                 </View>
-        //               </TouchableOpacity>
-        //             </CollapseHeader>
-        //             <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
-        //               <Text style={styles.subtext}>{item.phone}</Text>
-        //               <Text style={styles.subtext}>{item.description}</Text>
-        //             </CollapseBody>
-        //           </Collapse>
-        //         </View>}
-        // />
-    // );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    // padding: 10,
-    marginLeft: 16,
-    marginRight: 16,
-    marginTop: 20,
-    marginBottom: 10,
-    borderRadius: 25,
-    height: 130,
-    // backgroundColor: '#FFF',
-    elevation: 2,
-    padding:20,
-    backgroundColor:'#E0F2F1',
-    // shadowColor: "#B2DFDB",
-    // shadowOpacity: 0.8,
-    // shadowRadius: 2,
-    // shadowOffset: {
-    //   height: 5,
-    //   width: 5,
-    // }
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-  container_text: {
-    flex: 1,
-    flexDirection: 'column',
-    marginLeft: 12,
-    justifyContent: 'center',
-  },
-  container_detail: {
-    flex: 1,
-    flexDirection: "row",
-    marginTop: 10,
-  },
-
-  Title: {
-    marginTop: 20,
-    fontSize: 30,
-  },
-
-  countContainer: {
-    position: "absolute",
-    right: 0,
-  },
-
-
   // container: {
   //   flex: 1,
-  //   height: 100,
   //   flexDirection: 'row',
-  //   padding: 20,
-  //   borderWidth: 0.5,
-  //   backgroundColor: '#B2DFDB',
+  //   // padding: 10,
+  //   marginLeft: 16,
+  //   marginRight: 16,
+  //   marginTop: 20,
+  //   marginBottom: 10,
+  //   borderRadius: 25,
+  //   height: 130,
+  //   // backgroundColor: '#FFF',
   //   elevation: 2,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   // height: 50,
+  //   padding:20,
+  //   backgroundColor:'#E0F2F1',
+  //   // shadowColor: "#B2DFDB",
+  //   // shadowOpacity: 0.8,
+  //   // shadowRadius: 2,
+  //   // shadowOffset: {
+  //   //   height: 5,
+  //   //   width: 5,
+  //   // }
   // },
   // title: {
   //   fontSize: 20,
   //   fontWeight: 'bold',
   //   color: '#000',
   // },
-  // textContainer: {
+  // container_text: {
   //   flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   // height: 50,
+  //   flexDirection: 'column',
+  //   marginLeft: 12,
+  //   justifyContent: 'center',
   // },
-  // description: {
-  //   fontSize: 10,
-  // },
-  // text: {
-  //   fontSize: 18,
-  //   fontWeight: "bold",
-  //   // height: 50,
-  // },
-  // subtext: {
-  //   color: "#b9e4c9",
-  // },
-
-  // itemCount: {
-  //   textAlign: 'center',
-  //   color: '#fff',
-  //   fontWeight: 'bold',
-  //   fontSize: 16,
-  //   maxWidth: 100,
-  // },
-  // itemContainer: {
-  //   height: 60,
+  // container_detail: {
   //   flex: 1,
   //   flexDirection: "row",
-  //   justifyContent: 'center',
-  //   // alignItems: "center",
+  //   marginTop: 10,
   // },
+
+  // Title: {
+  //   marginTop: 20,
+  //   fontSize: 30,
+  // },
+
+  // countContainer: {
+  //   position: "absolute",
+  //   right: 0,
+  // },
+
+
+  container: {
+    flex: 1,
+    height: 100,
+    flexDirection: 'row',
+    padding: 20,
+    borderWidth: 0.5,
+    backgroundColor: '#B2DFDB',
+    elevation: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    // height: 50,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    // height: 50,
+  },
+  description: {
+    fontSize: 10,
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: "bold",
+    // height: 50,
+  },
+  subtext: {
+    color: "#b9e4c9",
+  },
+
+  itemCount: {
+    textAlign: 'center',
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: 20,
+    maxWidth: 100,
+  },
+  itemContainer: {
+    height: 60,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: 'center',
+    // alignItems: "center",
+  },
 });
 
 export default ServiceList;
