@@ -16,13 +16,13 @@ export default class FeedbackPage extends Component {
     return (
       <>
         <SafeAreaView style={styles.container}>
-          <HeaderWithIconComponent 
-          navigation={this.props.navigation} 
+          <HeaderWithIconComponent
+          navigation={this.props.navigation}
           back="ClientHome"
           home="ClientHome"/>
-          <ScrollView>
-              <FeedbackComponent 
-              navigation={this.props.navigation} 
+          <ScrollView style={styles.scrolling}>
+              <FeedbackComponent
+              navigation={this.props.navigation}
               success="ClientHome"
               fail="Feedback"/>
           </ScrollView>
@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#1565C0',
+  },
+  scrolling: {
+    marginBottom: 60,
   },
 });
 

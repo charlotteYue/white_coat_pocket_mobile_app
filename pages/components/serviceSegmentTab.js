@@ -6,7 +6,7 @@ class ServiceSegmentedControlTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0,
+      selectedIndex: 2,
     };
   }
   handleIndexChange = index => {

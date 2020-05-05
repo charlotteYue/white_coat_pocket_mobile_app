@@ -1,12 +1,12 @@
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 class CustomSegmentedControlTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0,
+      selectedIndex: 1,
     };
   }
   handleIndexChange = index => {

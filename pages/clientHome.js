@@ -54,7 +54,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
 
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
-        .then(() => { 
+        .then(() => {
           const conn = mongoClient.db('test');
           const db = conn.collection('providers');
           db.aggregate(
@@ -86,12 +86,12 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.container}>
           <HeaderComponent />
-          <ScrollView>
+          <ScrollView style={styles.scrolling}>
             <ButtonGridComponent
               text="What resources are you looking for today?"
               hint="(Select One)"
               buttons={items}
-              navigation={this.props.navigation} 
+              navigation={this.props.navigation}
               name="ClientResources"
               isAdmin={this.state.isAdmin}
             />
@@ -107,7 +107,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
       </>
     );
    }
-  
+
 }
 
 const styles = StyleSheet.create({
@@ -121,6 +121,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#1565C0',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  scrolling: {
+    marginBottom: 60,
   },
 });
 

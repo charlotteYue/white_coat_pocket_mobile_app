@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StyleSheet, 
   SafeAreaView, 
-  StatusBar
+  StatusBar,
 } from 'react-native';
 
 import HeaderComponent from './components/HeaderComponent.js';
@@ -81,8 +81,8 @@ handler(arr) {
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.container}>
           <HeaderComponent />
-          <ScrollView>
-            <ButtonGridComponent 
+          <ScrollView style={styles.scrolling}>
+            <ButtonGridComponent
             text='Welcome Administrator'
             // buttons={route.params.buttons}
             buttons={this.state.data}
@@ -98,18 +98,18 @@ handler(arr) {
             action={this.handler}
             />
           </ScrollView>
-          <FooterComponent navigation={this.props.navigation} 
+          <FooterComponent navigation={this.props.navigation}
             buttons={route.params.buttons}
-            name="ClientHome" 
+            name="ClientHome"
             portal="Client portal"
             feedback="AdminFeedback"
             />
         </SafeAreaView>
-  
+
       </>
     );
   }
-  
+
 }
 const styles = StyleSheet.create({
   container: {
@@ -117,6 +117,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#1565C0',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  scrolling: {
+    marginBottom: 60,
   },
 });
 export default AdminHome;
