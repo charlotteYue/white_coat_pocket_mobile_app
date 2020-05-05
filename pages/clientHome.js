@@ -5,7 +5,6 @@ import {
   Alert,
   SafeAreaView,
   StatusBar,
-  View
 } from 'react-native';
 
 import { ScrollView } from 'react-native-gesture-handler';
@@ -62,6 +61,10 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
           )
           .toArray()
           .then( res => {
+            if (typeof res === undefined) {
+              Alert.alert('no content for your selection');
+              return;
+            }
             const arr = new Array();
             // const obj = new Object();
             for (let i = 0; i < res.length; i++) {
@@ -70,9 +73,9 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
               arr.push(obj);
             }
             this.setState({data: arr}, function() {
-                console.log(this.state.data);
+                // console.log(this.state.data);
               });
-          }).catch(err => console.error(`Failed to group aggregation: ${err}`));
+          }).catch(() => Alert.alert('no content for your selection'));
 
         }).catch(console.error);
 

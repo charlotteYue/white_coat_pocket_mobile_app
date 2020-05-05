@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput, TouchableHighlight} from 'react-native';
+import {Text, StyleSheet, View, TextInput, TouchableHighlight, Alert} from 'react-native';
 
 
 import { Stitch, UserPasswordCredential, RemoteMongoClient, AnonymousCredential } from 'mongodb-stitch-react-native-sdk';
@@ -98,7 +98,7 @@ class AddFormComponent extends Component {
                 this.props.action(this.state.data);
                 this.props.navigation.navigate(this.props.name, 
                   {username: this.props.username, password: this.props.password});
-            }).catch(err => console.error(`Failed to group aggregation: ${err}`));
+            }).catch(() => Alert.alert('no content for your selection'));
     
           }).catch(console.error);
     

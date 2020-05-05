@@ -37,8 +37,8 @@ constructor(props) {
     }
 
 
-    console.log('is admin for count:');
-    console.log(this.props.isAdmin);
+    // console.log('is admin for count:');
+    // console.log(this.props.isAdmin);
 
     return (
       <ScrollView>

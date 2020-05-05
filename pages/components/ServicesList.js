@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, FlatList, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Alert, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 // import {ListAccordion, ListItem, Checkbox} from 'react-native-paper';
 
 import {Collapse, CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
@@ -64,6 +64,10 @@ class ServiceList extends Component {
               .toArray()
               .then(res => {
                 // console.log('res is', res);
+                if (res.length === 0) {
+                  Alert.alert('no content for your selection');
+                  return;
+                }
                 const hospitalList = new Array();
                 res.forEach(function(item) {
                   const instance = new Object();

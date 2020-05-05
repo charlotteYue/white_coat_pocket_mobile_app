@@ -3,6 +3,7 @@ import {
   StyleSheet, 
   SafeAreaView, 
   StatusBar,
+  Alert,
 } from 'react-native';
 
 import HeaderComponent from './components/HeaderComponent.js';
@@ -54,6 +55,10 @@ handler(arr) {
             ]).toArray()
             .then(res => {
                 const obj = new Object();
+                if (res.length === 0) {
+                  Alert.alert('no content for your selection');
+                  return;
+                }
                 obj['name'] = category;
                 obj['count'] = res[0].totalCount;
                 arr.push(obj);
@@ -61,7 +66,10 @@ handler(arr) {
                   this.setState({data: arr}, function() {
                   });
                 }
-            }).catch(err => console.error(`Failed to group aggregation: ${err}`));
+            }).catch(
+              // err => console.error(`Failed to group aggregation: ${err}`)
+              () => Alert.alert('no content for your selection')
+              );
 
           }
 

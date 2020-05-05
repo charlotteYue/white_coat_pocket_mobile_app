@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
+  Alert,
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
@@ -83,7 +83,11 @@ class ResourcesList extends Component {
                     {'$group': { '_id': null, 'totalCount': {'$sum': '$count'} }}
                   ]).toArray()
                   .then(subRes => {
-
+                    // console.log(subRes);
+                    if (subRes.length === 0) {
+                      Alert.alert('no content for your selection');
+                      return;
+                    }
                       const obj = new Object();
 
                       obj['subtype'] = subtype;
