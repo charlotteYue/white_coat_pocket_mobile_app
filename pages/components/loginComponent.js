@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
+import {Text, StyleSheet, View, TextInput, TouchableHighlight} from 'react-native';
 import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
 
@@ -56,17 +56,22 @@ class LoginComponent extends Component {
               style={styles.inputStyle}
             />
           </View>
-          <Button
-              title="Submit"
-              color="#1E88E5"
-              onPress={() => {
-                try {
-                  this._onLoadAdmin();
-                } catch (err) {
-                  console.log(err);
-                }
-              }}
-            />
+
+          <TouchableHighlight
+                  activeOpacity={1}
+                  style={styles.btn}
+                  underlayColor="#fff"
+                  onPress={() => {
+                    try {
+                      this._onLoadAdmin();
+                    } catch (err) {
+                      console.log(err);
+                    }
+                  }}>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.itemName}>Submit</Text>
+                  </View>
+          </TouchableHighlight>
         </View>
       );
   }
@@ -104,6 +109,24 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 20,
   },
+  btn: {
+    height: 40,
+    width: 120,
+    marginTop: 30,
+    borderRadius: 20,
+    backgroundColor: '#1E88E5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#1976D2', 
+    borderWidth: 5, 
+  },
+  itemName: {
+    textAlign: 'center',
+    color: '#E3F2FD',
+    fontWeight: 'bold',
+    fontSize: 15,
+    maxWidth: 100,
+  }
 
 });
 

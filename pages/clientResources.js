@@ -51,7 +51,7 @@ class ClientResources extends Component {
       <>
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.container}>
-        <HeaderWithIconComponent
+          <HeaderWithIconComponent
           navigation={this.props.navigation}
           back={this.navBack()}
           home={this.navHome()}/>

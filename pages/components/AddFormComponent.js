@@ -1,12 +1,10 @@
-import React, {Component, Fragment} from 'react';
-import {Picker, Text, StyleSheet, View, TextInput, Button, TouchableHighlight} from 'react-native';
+import React, {Component} from 'react';
+import {Text, StyleSheet, View, TextInput, TouchableHighlight} from 'react-native';
 
 
 import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
 
-import AdminHome from '../adminHome.js';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 const initialState = {
   supportSpanish: false,
   name: '',
@@ -117,7 +115,7 @@ class AddFormComponent extends Component {
                   <View style={styles.textContainer}>
                     <Text style={styles.itemName}>Submit</Text>
                   </View>
-                </TouchableHighlight>
+            </TouchableHighlight>
             </View>
           </View>
         </View>
