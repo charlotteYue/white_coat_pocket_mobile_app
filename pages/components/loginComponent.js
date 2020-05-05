@@ -4,35 +4,33 @@ import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitc
 
 
 class LoginComponent extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             username: '',
             password: '',
-        }
+        };
     }
 
-    _onLoadAdmin(){
+    _onLoadAdmin() {
       const stitchAppClient = Stitch.defaultAppClient;
-      const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
       stitchAppClient.auth
         .loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
         .then((user) => {
           console.log(`Logged in as user with id: ${user.id}`);
-          const conn = mongoClient.db('test');
           console.log('username is', this.state.username);
           console.log('password is', this.state.password);
-          this.props.navigation.navigate("AdminHome", 
-          {connection: conn, username: this.state.username, password: this.state.password,buttons: this.props.buttons});
+          this.props.navigation.navigate('AdminHome', 
+          {username: this.state.username, password: this.state.password, buttons: this.props.buttons});
         })
-        .catch((err)=> {
+        .catch((err) => {
           console.log(err);
           alert('Username or Password is incorrect');
           this.setState({username: '', password: ''});
-          this.props.navigation.navigate("Login");
-        })
+          this.props.navigation.navigate('Login');
+        });
     }
-  render(){
+  render() {
     return (
         <View style={styles.container}>
           <Text style={styles.formLabel}> Admin Login</Text>
@@ -41,7 +39,7 @@ class LoginComponent extends Component {
               placeholder="Username" 
               value={this.state.username}
               onChangeText={(input) => this.setState(
-                //hardcode for testing
+                // hardcode for testing
                 { username: 'admin' })}
                 // { username: input })}
               autoCapitalize = 'none'
@@ -62,9 +60,9 @@ class LoginComponent extends Component {
               title="Submit"
               color="#1E88E5"
               onPress={() => {
-                try{
+                try {
                   this._onLoadAdmin();
-                }catch(err){
+                } catch (err) {
                   console.log(err);
                 }
               }}
@@ -72,13 +70,13 @@ class LoginComponent extends Component {
         </View>
       );
   }
-};
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1565C0',
     alignItems: 'center',
-    marginTop: "60%",
+    marginTop: '60%',
   },
 
   formLabel: {

@@ -42,77 +42,77 @@ class ResourcesList extends Component {
     return null;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this._onFetch();
   }
 
-  _onFetch = () =>{
+  _onFetch = () => {
     const stitchAppClient = Stitch.defaultAppClient;
     // console.log('the category chosen is', this.props.categoryName);
     const query = {'type': this.props.categoryName};
-    const option = {"projection": {
-      "subtype": 1,
-      "_id": 0,
-    },};
-    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+    const option = {'projection': {
+      'subtype': 1,
+      '_id': 0,
+    }, };
+    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
           // Retrieve a database object
-          const conn = mongoClient.db('test')
+          const conn = mongoClient.db('test');
 
           // Retrieve the collection in the database
-          const db = conn.collection('providers')
+          const db = conn.collection('providers');
 
           // Find 10 documents and log them to console.
           db.find(query, option)
               .toArray()
               .then(res => {
-                let listSet = new Set();
-                res.forEach(function(item){
+                const listSet = new Set();
+                res.forEach(function(item) {
                   listSet.add(item.subtype);
-                })
+                });
                 let ListArray = new Array();
                 ListArray = Array.from(listSet);
-                let arr=new Array();
-                  for( var i=0;i<ListArray.length;i++) {
-                    let subtype=ListArray[i];
+                const arr = new Array();
+                  for ( let i = 0; i < ListArray.length; i++) {
+                    const subtype = ListArray[i];
                   //  console.log(subtype);
                    db.aggregate([
-                    {"$match": {"subtype": `${subtype}`}},
-                    {"$group": { "_id": null,"totalCount": {"$sum": "$count"} }}
+                    {'$match': {'subtype': `${subtype}`}},
+                    {'$group': { '_id': null, 'totalCount': {'$sum': '$count'} }}
                   ]).toArray()
                   .then(subRes => {
 
-                      let obj=new Object();
+                      const obj = new Object();
 
-                      obj['subtype']=subtype;
-                      obj['totalCount']=subRes[0].totalCount;
-                      arr.push(obj)
+                      obj['subtype'] = subtype;
+                      obj['totalCount'] = subRes[0].totalCount;
+                      arr.push(obj);
                       // console.log("arr-----------------");
                       // console.log(arr)
 
-                      if(arr.length===ListArray.length){
-                        this.setState({data:arr},function (){
+                      if (arr.length === ListArray.length) {
+                        this.setState({data: arr}, function () {
                           // console.log('data is');
                           // console.log(this.state.data);
-                        })
+                        });
                       }
 
-                  }).catch(err => console.error(`Failed to group aggregation: ${err}`))
+                  }).catch(err => console.error(`Failed to group aggregation: ${err}`));
 
 
                   }
 
               })
-              .catch(console.error)
+              .catch(console.error);
         })
-        .catch(console.error)
+        .catch(console.error);
   }
 
 
-  onPress(props,item,isAdminPortal){
-    props.navigation.navigate(this.props.name, {serviceName: item, categoryName: this.props.categoryName, isAdmin: isAdminPortal})
+  onPress(props, item, isAdminPortal) {
+    props.navigation.navigate(this.props.name, {serviceName: item, categoryName: this.props.categoryName, isAdmin: isAdminPortal});
   }
 
 
@@ -120,10 +120,10 @@ class ResourcesList extends Component {
 
   render() {
     function Count(props) {
-      if(props.isAdmin){
+      if (props.isAdmin) {
         return <Text style={styles.itemCount}>{props.count}</Text>;
       }
-      else{
+      else {
         return <></>;
       }
     }
@@ -163,7 +163,7 @@ class ResourcesList extends Component {
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#fff"
-                    onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
+                    onPress={() => this.onPress(this.props, item.subtype, this.props.isAdmin)}>
                     <View style={styles.textContainer}>
                       <Text style={styles.itemName}>{item.subtype}</Text>
                       <View style={styles.countContainer}>
@@ -189,8 +189,8 @@ const styles = StyleSheet.create({
   
   gridView: {
     flex: 1,
-    marginLeft: "10%",
-    marginRight: "10%",
+    marginLeft: '10%',
+    marginRight: '10%',
   },
 
   itemContainer: {
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   mainBtn: {
@@ -215,8 +215,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth:6,
-    borderColor:'#E3F2FD', 
+    borderWidth: 6,
+    borderColor: '#E3F2FD', 
   },
   itemName: {
     textAlign: 'center',
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
 
   countContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
   },
 

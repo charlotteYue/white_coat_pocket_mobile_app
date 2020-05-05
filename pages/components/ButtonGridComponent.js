@@ -14,29 +14,29 @@ import {FlatGrid} from 'react-native-super-grid';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class ButtonGridComponent extends React.Component {
-constructor(props){
+constructor(props) {
   super(props);
   this.onPress = this.onPress.bind(this);
-  this.state={
+  this.state = {
     data: [],
   };
 }
 
 
-  onPress(item,isAdminPortal) {
+  onPress(item, isAdminPortal) {
     this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
   
   }
 
   render() {
     function Count(props) {
-      if(props.isAdmin){
+      if (props.isAdmin) {
         // return <Text style={styles.itemCount}>Count: {props.count}</Text>;
         // console.log(`~~~~~~~~~~~~~~~~~~~~~~~count in Count: ${props.count}`);
         // console.log(props.count);
         return <Text style={styles.itemCount}>{props.count}</Text>;
       }
-      else{
+      else {
         return <></>;
       }
     }
@@ -74,7 +74,7 @@ constructor(props){
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#fff"
-                    onPress={() => this.onPress(item,this.props.isAdmin)}>
+                    onPress={() => this.onPress(item, this.props.isAdmin)}>
                     <View style={styles.textContainer}>
                       <Text style={styles.itemName}>{item.name}</Text>
                       <View style={styles.countContainer}>
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   mainBtn: {
@@ -155,9 +155,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth:6,
-    borderColor:'#E3F2FD', 
-    shadowRadius:10, 
+    borderWidth: 6,
+    borderColor: '#E3F2FD', 
+    shadowRadius: 10, 
     shadowColor: '#4FC3F7', 
   },
   itemName: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   },
 
   countContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
   },
 

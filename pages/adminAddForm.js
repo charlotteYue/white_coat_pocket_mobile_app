@@ -9,11 +9,11 @@ import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
 
 import AddFormComponent from './components/AddFormComponent.js';
 export default class AdminAddForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   render() {
-    const { route }=this.props;
+    const { route } = this.props;
     console.log('catagory list params is', route.params.categoryList);
     return (
       <>
@@ -25,7 +25,6 @@ export default class AdminAddForm extends Component {
           <ScrollView>
               <AddFormComponent 
               navigation={this.props.navigation} 
-              connection={route.params.connection}
               username={route.params.username}
               password={route.params.password}
               name="AdminHome"
@@ -40,9 +39,9 @@ export default class AdminAddForm extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     backgroundColor: '#1565C0',
   },
-})
+});
 
 

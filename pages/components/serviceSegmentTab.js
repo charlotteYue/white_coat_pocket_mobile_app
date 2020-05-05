@@ -31,17 +31,17 @@ class ServiceSegmentedControlTab extends Component {
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     height: 50,
-    width: "100%",
+    width: '100%',
     paddingTop: 10,
   },
   tab: {
-    backgroundColor: "#0D47A1",
+    backgroundColor: '#0D47A1',
   },
   text: {
-    color:"#0D47A1",
+    color: '#0D47A1',
   }
-})
+});
 
 export default ServiceSegmentedControlTab;

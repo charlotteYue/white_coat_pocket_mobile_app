@@ -16,7 +16,7 @@ import ClientHome from './pages/clientHome.js';
 import AdminHome from './pages/adminHome';
 import ClientResources from './pages/clientResources.js';
 import ClientServices from './pages/clientServices.js';
-import AdminAddForm from './pages/adminAddForm.js'
+import AdminAddForm from './pages/adminAddForm.js';
 import Login from './pages/login.js';
 
 const Stack = createStackNavigator();

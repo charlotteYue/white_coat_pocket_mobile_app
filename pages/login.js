@@ -12,12 +12,12 @@ import FooterComponent from './components/FooterComponent.js';
 
 
 class Login extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
   render() {
-    const { route }=this.props;
+    const { route } = this.props;
     return (
       <>
         <SafeAreaView style={styles.container}>
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-})
+});
 
 export default Login;
