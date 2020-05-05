@@ -100,6 +100,7 @@ componentDidMount() {
             buttons={route.params.buttons}
             name="ClientHome" 
             portal="Client portal"
+            feedback="AdminFeedback"
             />
         </SafeAreaView>
   

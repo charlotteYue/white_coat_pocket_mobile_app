@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 
 import {SafeAreaView, View, StyleSheet} from 'react-native';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
-import ServicesList from './components/ServicesList.js';
-import Footer from './components/FooterComponent.js';
-import SegmentTab from './components/serviceSegmentTab.js';
-
+import FeedbackList from './components/FeedbackListComponent.js';
 
 class ClientServices extends Component {
   constructor(props) {
@@ -27,30 +24,16 @@ class ClientServices extends Component {
   }
 
   render() {
-    const {route} = this.props;
-    console.log('here in the clientService file');
-    console.log('service chosen is ', route.params.serviceName);
-    console.log('service chosen is ', route.params.categoryName);
     return (
       <>
         <SafeAreaView style={styles.container}>
           <HeaderWithIconComponent
           navigation={this.props.navigation}
-          back="ClientResources"
-          home={this.navHome()}/>
-          <SegmentTab
-            categoryName={route.params.categoryName}
-            serviceName ={route.params.serviceName}
-            />
+          back="AdminHome"
+          home="AdminHome"/>
           <View style={styles.middle}>
-            <ServicesList
-            serviceName ={route.params.serviceName}
-            categoryName = {route.params.categoryName}
-            isAdmin={route.params.isAdmin}/>
+            <FeedbackList/>
           </View>
-          <Footer 
-          navigation={this.props.navigation}
-          feedback="Feedback"/>
         </SafeAreaView>
       </>
     );

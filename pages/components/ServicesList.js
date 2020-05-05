@@ -60,7 +60,6 @@ class ServiceList extends Component {
           const db = conn.collection('providers');
 
           // Find 10 documents and log them to console.
-          const hospitalList = new Array();
           db.find(query, option)
               .toArray()
               .then(res => {

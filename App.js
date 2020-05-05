@@ -19,6 +19,7 @@ import ClientServices from './pages/clientServices.js';
 import AdminAddForm from './pages/adminAddForm.js';
 import Login from './pages/login.js';
 import Feedback from './pages/feedback.js';
+import AdminFeedback from './pages/adminFeedback.js';
 
 const Stack = createStackNavigator();
 
@@ -64,6 +65,10 @@ export default class App extends React.Component {
             <Stack.Screen 
               name="Feedback"
               component={Feedback}
+            />
+            <Stack.Screen 
+              name="AdminFeedback"
+              component={AdminFeedback}
             />
           </Stack.Navigator>
         </NavigationContainer>

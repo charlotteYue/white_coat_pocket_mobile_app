@@ -28,7 +28,9 @@ class Login extends Component {
           <ScrollView>
             <LoginComponent navigation={this.props.navigation} buttons={route.params.buttons}/>
           </ScrollView>
-          <FooterComponent style={styles.footer} />
+          <FooterComponent style={styles.footer}
+          navigation={this.props.navigation}
+          feedback="Feedback" />
         </SafeAreaView>
       </>
     );

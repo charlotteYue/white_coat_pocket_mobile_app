@@ -65,7 +65,9 @@ class ClientResources extends Component {
             name="ClientServices"
             isAdmin={route.params.isAdmin}/>
           </View>
-          <FooterComponent />
+          <FooterComponent 
+          navigation={this.props.navigation}
+          feedback="Feedback"/>
         </SafeAreaView>
       </>
     );
