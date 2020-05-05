@@ -28,7 +28,8 @@ export default class AdminAddForm extends Component {
               username={route.params.username}
               password={route.params.password}
               name="AdminHome"
-              categoryList={route.params.categoryList}/>
+              categoryList={route.params.categoryList}
+              action={route.params.action}/>
           </ScrollView>
         </SafeAreaView>
       </>

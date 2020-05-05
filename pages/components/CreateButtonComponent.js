@@ -19,7 +19,7 @@ class CreateButtonComponent extends React.Component {
             <View style={styles.itemContainer}>
               <Icon name="plus-square-o" size={120}  color='#9DC8EC'
               onPress={() => this.props.navigation.navigate(this.props.name, 
-              {categoryList: this.props.category, username: this.props.username, password: this.props.password})}/>
+              {categoryList: this.props.category, username: this.props.username, password: this.props.password, action: this.props.action})}/>
             </View>
             <Text style={styles.itemName}>Create A Category</Text>
       </View>

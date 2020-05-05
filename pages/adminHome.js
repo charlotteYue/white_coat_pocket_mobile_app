@@ -1,10 +1,6 @@
 import React from 'react';
 import {
   StyleSheet, 
-  View, 
-  Text, 
-  Alert, 
-  // ScrollView,
   SafeAreaView, 
   StatusBar
 } from 'react-native';
@@ -21,17 +17,25 @@ class AdminHome extends React.Component {
     super(props);
     this.state = {
       data: [],
+      isAdmin: true,
     };
+    this.getCount = this.getCount.bind(this);
+    this.handler = this.handler.bind(this);
   }
 
 componentDidMount() {
-  this.getCount();
+  const categories = this.props.route.params.buttons;
+  this.getCount(categories);
+}
+
+handler(arr) {
+    this.getCount(arr);
 }
 
 
-  getCount = () => {
+  getCount = (categories) => {
 
-    const categories = this.props.route.params.buttons;
+    // const categories = this.props.route.params.buttons;
     const stitchAppClient = Stitch.defaultAppClient;
     const mongoClient = Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
     stitchAppClient.auth
@@ -52,15 +56,9 @@ componentDidMount() {
                 const obj = new Object();
                 obj['name'] = category;
                 obj['count'] = res[0].totalCount;
-                // console.log(obj);
                 arr.push(obj);
-                // console.log(categories.length);
                 if (arr.length === categories.length) {
-                  // console.log(arr);
-                  // console.log(obj);
                   this.setState({data: arr}, function() {
-                    // console.log('count in button grid');
-                    // console.log(this.state.data);
                   });
                 }
             }).catch(err => console.error(`Failed to group aggregation: ${err}`));
@@ -74,8 +72,10 @@ componentDidMount() {
 
   render() {
     const { route } = this.props;
-    console.log('data is :');
-    console.log(this.state.data);
+    // console.log('data IN ADMIN HOME is :');
+    // console.log(route.params.buttons);
+    // console.log('is admin');
+    // console.log(this.state.isAdmin);
     return (
       <>
         <StatusBar barStyle="light-content" />
@@ -88,13 +88,15 @@ componentDidMount() {
             buttons={this.state.data}
              navigation={this.props.navigation} 
               name="ClientResources" 
-              isAdmin={true}/>
+              isAdmin={this.state.isAdmin}/>
             <CreateButtonComponent 
             navigation={this.props.navigation} 
             name="AdminAddForm"
             category={route.params.buttons}
             username={route.params.username}
-            password={route.params.password}/>
+            password={route.params.password}
+            action={this.handler}
+            />
           </ScrollView>
           <FooterComponent navigation={this.props.navigation} 
             buttons={route.params.buttons}

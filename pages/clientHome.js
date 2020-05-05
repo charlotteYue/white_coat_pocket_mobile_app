@@ -21,6 +21,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
       currentUserId: undefined,
       client: undefined,
       data: [],
+      isAdmin: false,
      };
      this._loadClient = this._loadClient.bind(this);
      this._getCategories = this._getCategories.bind(this);
@@ -62,7 +63,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
           .toArray()
           .then( res => {
             const arr = new Array();
-            const obj = new Object();
+            // const obj = new Object();
             for (let i = 0; i < res.length; i++) {
               const obj = new Object();
               obj['name'] = res[i]._id;
@@ -92,7 +93,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
               buttons={items}
               navigation={this.props.navigation} 
               name="ClientResources"
-              isAdmin={false}
+              isAdmin={this.state.isAdmin}
             />
           </ScrollView>
           <FooterComponent

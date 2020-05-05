@@ -5,9 +5,7 @@ import {
   SafeAreaView,
   View,
   Text,
-  Alert,
   TouchableHighlight,
-  Dimensions,
 } from 'react-native';
 
 import {FlatGrid} from 'react-native-super-grid';
@@ -31,9 +29,6 @@ constructor(props) {
   render() {
     function Count(props) {
       if (props.isAdmin) {
-        // return <Text style={styles.itemCount}>Count: {props.count}</Text>;
-        // console.log(`~~~~~~~~~~~~~~~~~~~~~~~count in Count: ${props.count}`);
-        // console.log(props.count);
         return <Text style={styles.itemCount}>{props.count}</Text>;
       }
       else {
@@ -42,7 +37,9 @@ constructor(props) {
     }
 
 
-    
+    console.log('is admin for count:');
+    console.log(this.props.isAdmin);
+
     return (
       <ScrollView>
         <View style={styles.intro}>

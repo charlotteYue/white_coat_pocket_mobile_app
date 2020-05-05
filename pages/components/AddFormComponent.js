@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, StyleSheet, View, TextInput, TouchableHighlight} from 'react-native';
 
 
-import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+import { Stitch, UserPasswordCredential, RemoteMongoClient, AnonymousCredential } from 'mongodb-stitch-react-native-sdk';
 
 
 const initialState = {
@@ -16,7 +16,10 @@ const initialState = {
 class AddFormComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = initialState;
+        this.state = {
+          initialState,
+          data: [],
+        };
     }
     reset() {
       this.setState(initialState);
@@ -51,8 +54,7 @@ class AddFormComponent extends Component {
             console.log('Successfully inserted item with _id', result.insertedId);
             alert('Successfully inserted new service');
             this.reset();
-            this.props.navigation.navigate(this.props.name, 
-              {categoryList: this.props.category, username: this.props.username, password: this.props.password});
+            this.getCategories(); // navigation is inside
           })
           .catch(err => {
             console.error(err);
@@ -62,7 +64,44 @@ class AddFormComponent extends Component {
               {categoryList: this.props.category, username: this.props.username, password: this.props.password});
           });
         }).catch(console.error);
+        // this.getCategories(props);
       
+    }
+    getCategories () {
+      console.log('get category');
+      const stitchAppClient = Stitch.defaultAppClient;
+      console.log('here');
+      const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
+    
+      stitchAppClient.auth
+          .loginWithCredential(new AnonymousCredential())
+          .then(() => { 
+            const conn = mongoClient.db('test');
+            const db = conn.collection('providers');
+            db.aggregate(
+              [{'$group': { '_id': '$type' }}]
+            )
+            .toArray()
+            .then( res => {
+              const arr = new Array();
+              for (let i = 0; i < res.length; i++) {
+                const obj = new Object();
+                obj['name'] = res[i]._id;
+                arr.push(obj);
+              }
+              console.log(arr);
+              this.setState({data: arr}, function() {
+                console.log('get new list:');
+                  console.log(this.state.data);
+                });
+                console.log('data after insert');
+                this.props.action(this.state.data);
+                this.props.navigation.navigate(this.props.name, 
+                  {username: this.props.username, password: this.props.password});
+            }).catch(err => console.error(`Failed to group aggregation: ${err}`));
+    
+          }).catch(console.error);
+    
     }
   render() {
     return (
@@ -111,7 +150,7 @@ class AddFormComponent extends Component {
                   activeOpacity={1}
                   style={styles.btn}
                   underlayColor="#fff"
-                  onPress={() => this._updateNewInstance()}>
+                  onPress={() => this._updateNewInstance(this.props)}>
                   <View style={styles.textContainer}>
                     <Text style={styles.itemName}>Submit</Text>
                   </View>
