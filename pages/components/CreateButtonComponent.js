@@ -10,8 +10,8 @@ import {
 
 // function CreateButtonComponent() 
 class CreateButtonComponent extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
   render() {
     return (
@@ -28,8 +28,8 @@ class CreateButtonComponent extends React.Component {
   }
 }
 
-const styles=StyleSheet.create({
-    container:{
+const styles = StyleSheet.create({
+    container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
@@ -51,6 +51,6 @@ const styles=StyleSheet.create({
         textAlign: 'center',
         color: '#B2DFDB',
       },
-})
+});
 
 export default CreateButtonComponent;

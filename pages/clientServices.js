@@ -1,4 +1,4 @@
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
 
 import {SafeAreaView, View, StyleSheet} from 'react-native';
 import HeaderWithIconComponent from './components/HeaderWithIconComponent.js';
@@ -8,21 +8,21 @@ import SegmentTab from './components/serviceSegmentTab.js';
 
 
 class ClientServices extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
 
-  navHome(){
-    console.log('navhome')
-    const isAdmin=this.props.route.params.isAdmin;
+  navHome() {
+    console.log('navhome');
+    const isAdmin = this.props.route.params.isAdmin;
     console.log(isAdmin);
-    if(isAdmin){
-      console.log("admin home")
-      return "AdminHome"
-    }else{
-      console.log("client home")
-      return "ClientHome"
+    if (isAdmin) {
+      console.log('admin home');
+      return 'AdminHome';
+    } else {
+      console.log('client home');
+      return 'ClientHome';
     }
   }
 
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
 
   middle: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "stretch",
-    width: "100%",
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    width: '100%',
   },
 
-})
+});
 
 
 export default ClientServices;

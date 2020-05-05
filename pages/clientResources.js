@@ -13,41 +13,41 @@ import FooterComponent from './components/FooterComponent.js';
 import SegmentTab from './components/segmentTabBar.js';
 
 class ClientResources extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.navBack = this.navBack.bind(this);
     this.navHome = this.navBack.bind(this);
   }
 
-  navBack(){
-    console.log('navback')
-    const isAdmin=this.props.route.params.isAdmin;
+  navBack() {
+    console.log('navback');
+    const isAdmin = this.props.route.params.isAdmin;
     console.log(isAdmin);
-    if(isAdmin){
-      console.log("admin home")
-      return "AdminHome"
-    }else{
-      console.log("client home")
-      return "ClientHome"
+    if (isAdmin) {
+      console.log('admin home');
+      return 'AdminHome';
+    } else {
+      console.log('client home');
+      return 'ClientHome';
     }
   }
 
-  navHome(){
-    console.log('navhome')
-    const isAdmin=this.props.route.params.isAdmin;
+  navHome() {
+    console.log('navhome');
+    const isAdmin = this.props.route.params.isAdmin;
     console.log(isAdmin);
-    if(isAdmin){
-      console.log("admin home")
-      return "AdminHome"
-    }else{
-      console.log("client home")
-      return "ClientHome"
+    if (isAdmin) {
+      console.log('admin home');
+      return 'AdminHome';
+    } else {
+      console.log('client home');
+      return 'ClientHome';
     }
   }
 
   // navHome
   render() {
-    const { route }=this.props;
+    const { route } = this.props;
     return (
       <>
         <StatusBar barStyle="light-content" />
@@ -82,12 +82,12 @@ const styles = StyleSheet.create({
 
   middle: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "stretch",
-    width: "100%",
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    width: '100%',
   },
 
 
-})
+});
 
 export default ClientResources;

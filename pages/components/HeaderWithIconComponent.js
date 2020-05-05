@@ -36,13 +36,13 @@ class HeaderWithIcon extends Component {
 }
 
 const styles = StyleSheet.create({
-  left:{
+  left: {
     flex: 1,
     left: 0,
   },
   center: {
     flex: 3,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   header: {
     backgroundColor: '#1565C0',

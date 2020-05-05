@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 // import {ListAccordion, ListItem, Checkbox} from 'react-native-paper';
 
-import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
+import {Collapse, CollapseHeader, CollapseBody} from 'accordion-collapse-react-native';
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 import { Row } from 'native-base';
 // import { ScrollView } from 'react-native-gesture-handler';
@@ -19,7 +19,7 @@ class ServiceList extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this._onFetch();
     this._renderServiceName();
   }
@@ -41,84 +41,84 @@ class ServiceList extends Component {
     // console.log('the category chosen is', this.props.categoryName);
     // console.log('the service chosen is', this.props.serviceName);
     const query = {'type': this.props.categoryName, 'subtype': this.props.serviceName };
-    const option = {"projection": {
-      "name": 1,
-      "phone": 1,
-      "description": 1,
-      "supportSpanish": 1,
-      "_id": 0,
-      "count": 1,
-    },};
-    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+    const option = {'projection': {
+      'name': 1,
+      'phone': 1,
+      'description': 1,
+      'supportSpanish': 1,
+      '_id': 0,
+      'count': 1,
+    }, };
+    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
           // Retrieve a database object
-          const conn = mongoClient.db('test')
+          const conn = mongoClient.db('test');
 
           // Retrieve the collection in the database
-          const db = conn.collection('providers')
+          const db = conn.collection('providers');
 
           // Find 10 documents and log them to console.
-          let hospitalList = new Array()
+          const hospitalList = new Array();
           db.find(query, option)
               .toArray()
               .then(res => {
                 // console.log('res is', res);
-                let hospitalList = new Array()
-                res.forEach(function(item){
-                  let instance = new Object();
-                  instance["name"] = item.name;
-                  instance["phone"] = item.phone;
-                  instance["description"] = item.description;
-                  instance["supportSpanish"] = item.supportSpanish;
-                  instance["count"]=item.count;
+                const hospitalList = new Array();
+                res.forEach(function(item) {
+                  const instance = new Object();
+                  instance['name'] = item.name;
+                  instance['phone'] = item.phone;
+                  instance['description'] = item.description;
+                  instance['supportSpanish'] = item.supportSpanish;
+                  instance['count'] = item.count;
                   hospitalList.push(instance);
-                })
-                this.setState({data: hospitalList}, function(){
+                });
+                this.setState({data: hospitalList}, function() {
                   // console.log('data is', this.state.data);
-                })
+                });
               })
-              .catch(console.error)
+              .catch(console.error);
         })
-        .catch(console.error)
+        .catch(console.error);
   }
 
 
-  onPress(props,item,isAdminPortal) {
-    if(!isAdminPortal){
+  onPress(props, item, isAdminPortal) {
+    if (!isAdminPortal) {
       this._updateCount(item);
     }
 
   }
 
-  _updateCount=(item)=> {
+  _updateCount=(item) => {
 
     this.setState({serviceItemName: item.name});
     const stitchAppClient = Stitch.defaultAppClient;
     const query = {'name': item.name };
-    const update={"$inc": {"count": 1}};
-    const options = { "upsert": false };
-    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+    const update = {'$inc': {'count': 1}};
+    const options = { 'upsert': false };
+    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
-          const conn = mongoClient.db('test')
-          const db = conn.collection('providers')
+          const conn = mongoClient.db('test');
+          const db = conn.collection('providers');
           // console.log('query');
           // console.log(query)
-          db.updateOne(query, update,options).then(result => {
+          db.updateOne(query, update, options).then(result => {
             const { matchedCount, modifiedCount } = result;
-            if(matchedCount && modifiedCount) {
+            if (matchedCount && modifiedCount) {
 
               // console.log(`Successfully updated the item.`)
               // console.log(matchedCount);
               // console.log(modifiedCount);
             }
           })
-          .catch(err => console.error(`Failed to update the item: ${err}`))
+          .catch(err => console.error(`Failed to update the item: ${err}`));
         })
-        .catch(console.error)
+        .catch(console.error);
   }
 
 
@@ -127,10 +127,10 @@ class ServiceList extends Component {
     function Count(props) {
       // console.log('count isadmin in service');
       // console.log(props)
-      if(props.isAdmin){
+      if (props.isAdmin) {
         return <Text style={styles.itemCount}>{props.count}</Text>;
       }
-      else{
+      else {
         return <></>;
       }
     }
@@ -167,7 +167,7 @@ class ServiceList extends Component {
                 <View style={{flex: 1}}>
                   <Collapse>
                     <CollapseHeader style={styles.container}  >
-                      <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props,item,this.props.isAdmin)}>
+                      <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props, item, this.props.isAdmin)}>
                         <View style={styles.itemContainer}>
                           <Text style={styles.text}>{item.name}</Text>
                           <View style={styles.countContainer}>
@@ -176,7 +176,7 @@ class ServiceList extends Component {
                         </View>
                       </TouchableOpacity>
                     </CollapseHeader>
-                    <CollapseBody style={{alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+                    <CollapseBody style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
                       <Text style={styles.subtext}>{item.phone}</Text>
                       <Text style={styles.subtext}>{item.description}</Text>
                     </CollapseBody>
@@ -246,9 +246,9 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     backgroundColor: '#BBDEFB',
     elevation: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    borderBottomWidth:5, 
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderBottomWidth: 5, 
     borderColor: '#90CAF9', 
     // height: 50,
   },
@@ -259,8 +259,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     // height: 50,
   },
   description: {
@@ -268,12 +268,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: '#0D47A1', 
     // height: 50,
   },
   subtext: {
-    color: "#ffffff",
+    color: '#ffffff',
   },
 
   itemCount: {
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     height: 60,
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
     justifyContent: 'center',
     // alignItems: "center",
   },
