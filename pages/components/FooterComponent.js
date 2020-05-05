@@ -14,7 +14,8 @@ class FooterComponent extends React.Component {
     return (
       // <AppContainer>
         <View style={styles.footer}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.name, {buttons: this.props.buttons})}>
+          <TouchableOpacity onPress={() => 
+            this.props.navigation.navigate(this.props.name, {buttons: this.props.buttons})}>
             <Text style={styles.footerText}>{this.props.portal}</Text>
           </TouchableOpacity>
           
@@ -23,7 +24,8 @@ class FooterComponent extends React.Component {
               <Text style={styles.footerText}>Contact us</Text>
             </TouchableOpacity>
             <Text> | </Text>
-            <TouchableOpacity onPress={toFeedback}>
+            <TouchableOpacity onPress={() =>
+            this.props.navigation.navigate(this.props.feedback)}>
               <Text style={styles.footerText}>Feedback</Text>
             </TouchableOpacity>
           </View>
@@ -37,10 +39,6 @@ class FooterComponent extends React.Component {
 
 function toContact() {
   Alert.alert('navigate to contact page');
-}
-
-function toFeedback() {
-  Alert.alert('navigate to feedback page');
 }
 
 const styles = StyleSheet.create({

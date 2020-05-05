@@ -99,6 +99,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
               navigation={this.props.navigation}
               buttons={items}
               name="Login"
+              feedback="Feedback"
               portal="Admin portal"
             />
         </SafeAreaView>
