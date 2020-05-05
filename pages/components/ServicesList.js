@@ -134,7 +134,7 @@ class ServiceList extends Component {
       }
     }
     return (
-      // <FlatList 
+      // <FlatList
       //     data={this.state.data}
       //     keyExtractor={(item, index) => index.toString()}
       //     renderItem={({item}) =>
@@ -159,7 +159,7 @@ class ServiceList extends Component {
       //       </View>
       //     </View>}
       // />
-        <FlatList
+        <FlatList style={styles.scrolling}
             data={this.state.data}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) =>
@@ -247,8 +247,8 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 5, 
-    borderColor: '#90CAF9', 
+    borderBottomWidth: 5,
+    borderColor: '#90CAF9',
     // height: 50,
   },
   title: {
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#0D47A1', 
+    color: '#0D47A1',
     // height: 50,
   },
   subtext: {
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     maxWidth: 100,
-    marginLeft: 10, 
+    marginLeft: 10,
   },
   itemContainer: {
     height: 60,
@@ -289,6 +289,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     // alignItems: "center",
+  },
+  scrolling: {
+    marginBottom: 60,
   },
 });
 

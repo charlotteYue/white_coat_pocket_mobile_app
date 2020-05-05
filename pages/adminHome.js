@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  StyleSheet, 
-  View, 
-  Text, 
-  Alert, 
+  StyleSheet,
+  View,
+  Text,
+  Alert,
   // ScrollView,
-  SafeAreaView, 
+  SafeAreaView,
   StatusBar
 } from 'react-native';
 
@@ -81,33 +81,33 @@ componentDidMount() {
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.container}>
           <HeaderComponent />
-          <ScrollView>
-            <ButtonGridComponent 
+          <ScrollView style={styles.scrolling}>
+            <ButtonGridComponent
             text='Welcome Administrator'
             // buttons={route.params.buttons}
             buttons={this.state.data}
-             navigation={this.props.navigation} 
-              name="ClientResources" 
+             navigation={this.props.navigation}
+              name="ClientResources"
               isAdmin={true}/>
-            <CreateButtonComponent 
-            navigation={this.props.navigation} 
+            <CreateButtonComponent
+            navigation={this.props.navigation}
             name="AdminAddForm"
             category={route.params.buttons}
             username={route.params.username}
             password={route.params.password}/>
           </ScrollView>
-          <FooterComponent navigation={this.props.navigation} 
+          <FooterComponent navigation={this.props.navigation}
             buttons={route.params.buttons}
-            name="ClientHome" 
+            name="ClientHome"
             portal="Client portal"
             feedback="AdminFeedback"
             />
         </SafeAreaView>
-  
+
       </>
     );
   }
-  
+
 }
 const styles = StyleSheet.create({
   container: {
@@ -115,6 +115,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#1565C0',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  scrolling: {
+    marginBottom: 60,
   },
 });
 export default AdminHome;

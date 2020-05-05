@@ -149,7 +149,7 @@ class ResourcesList extends Component {
         //         </View>}
         // />
 
-        <ScrollView >
+        <ScrollView style={styles.scrolling}>
           <SafeAreaView>
           <FlatGrid
             itemDimension={120}
@@ -186,7 +186,7 @@ class ResourcesList extends Component {
 }
 
 const styles = StyleSheet.create({
-  
+
   gridView: {
     flex: 1,
     marginLeft: '10%',
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     // padding: 10,
     height: 100,
   },
-  
+
   textContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 6,
-    borderColor: '#E3F2FD', 
+    borderColor: '#E3F2FD',
   },
   itemName: {
     textAlign: 'center',
@@ -237,9 +237,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
     maxWidth: 100,
-
   },
-  
+  scrolling: {
+    marginBottom: 60,
+  },
   // container: {
   //   flex: 1,
   //   flexDirection: 'row',
