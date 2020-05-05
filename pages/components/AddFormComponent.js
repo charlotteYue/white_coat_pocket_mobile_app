@@ -25,6 +25,8 @@ class AddFormComponent extends Component {
     }
 
     _updateNewInstance () {
+      console.log('username is:', this.props.username);
+      console.log('password is:', this.password);
       // Retrieve the collection in the database
       const connection = this.props.connection.collection('providers');
       const newItem = {
@@ -32,43 +34,39 @@ class AddFormComponent extends Component {
         'description': this.state.description,
         'phone': this.state.contact,
         'type': this.state.category,
-        'subtype': this.state.service
+        'subtype': this.state.service,
+        'count': 0,
       }
-      // const stitchAppClient = Stitch.defaultAppClient;
-      // const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
-      // stitchAppClient.auth
-      //   .loginWithCredential(new UserPasswordCredential(this.props.username, this.props.password))
-      //   .then((user)=>{
-      //     console.log(`Logged in as user with id: ${user.id}`);
-      //     // Retrieve a database object
-      //     const conn = mongoClient.db('test')
+      const stitchAppClient = Stitch.defaultAppClient;
+      const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+      stitchAppClient.auth
+        .loginWithCredential(new UserPasswordCredential(this.props.username, this.props.password))
+        .then((user)=>{
+          console.log(`Logged in as user with id: ${user.id}`);
+          // Retrieve a database object
+          const conn = mongoClient.db('test')
 
-      //     // Retrieve the collection in the database
-      //     const db = conn.collection('providers')
+          // Retrieve the collection in the database
+          const db = conn.collection('providers')
 
-      //     db.insertOne(newItem)
-      //       .then(result=>{console.log('Successfully inserted item with _id', result._id)})
-      //       .catch(err=>console.error(err))
-      //   }).catch(console.error)
-
-      connection.insertOne(newItem)
-        .then(result=>{
-          console.log('Successfully inserted item with _id', result.insertedId);
-          alert('Successfully inserted new service');
-          this.reset();
-          this.props.navigation.navigate(this.props.name, 
-            {categoryList: this.props.category, connection: this.props.connection,
-             username: this.props.username, password: this.props.password})
-        })
-        .catch(err=>{
-          console.error(err)
-          alert('Failed to inserted new service');
-          this.reset();
-          this.props.navigation.navigate(this.props.name, 
-            {categoryList: this.props.category, connection: this.props.connection,
-             username: this.props.username, password: this.props.password})
-        })
-
+          db.insertOne(newItem)
+          .then(result=>{
+            console.log('Successfully inserted item with _id', result.insertedId);
+            alert('Successfully inserted new service');
+            this.reset();
+            this.props.navigation.navigate(this.props.name, 
+              {categoryList: this.props.category, connection: this.props.connection,
+              username: this.props.username, password: this.props.password})
+          })
+          .catch(err=>{
+            console.error(err)
+            alert('Failed to inserted new service');
+            this.reset();
+            this.props.navigation.navigate(this.props.name, 
+              {categoryList: this.props.category, connection: this.props.connection,
+              username: this.props.username, password: this.props.password})
+          })
+        }).catch(console.error)
       
     }
   render(){
