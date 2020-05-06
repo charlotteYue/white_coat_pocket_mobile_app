@@ -4,13 +4,14 @@ import {
   SafeAreaView, 
   StatusBar,
   Alert,
+  ScrollView
 } from 'react-native';
 
 import HeaderComponent from './components/HeaderComponent.js';
 import ButtonGridComponent from './components/ButtonGridComponent.js';
 import CreateButtonComponent from './components/CreateButtonComponent.js';
 import FooterComponent from './components/FooterComponent.js';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
 class AdminHome extends React.Component {
@@ -48,7 +49,6 @@ handler(arr) {
           for (let i = 0; i < categories.length; i++) {
 
             const category = categories[i].name;
-            // console.log(`category: ${category}, i: ${i}`)
             db.aggregate([
               {'$match': {'type': `${category}`}},
               {'$group': { '_id': null, 'totalCount': {'$sum': '$count'} }}
@@ -80,10 +80,6 @@ handler(arr) {
 
   render() {
     const { route } = this.props;
-    // console.log('data IN ADMIN HOME is :');
-    // console.log(route.params.buttons);
-    // console.log('is admin');
-    // console.log(this.state.isAdmin);
     return (
       <>
         <StatusBar barStyle="light-content" />

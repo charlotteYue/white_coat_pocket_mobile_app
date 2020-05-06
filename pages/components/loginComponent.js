@@ -16,15 +16,12 @@ class LoginComponent extends Component {
       const stitchAppClient = Stitch.defaultAppClient;
       stitchAppClient.auth
         .loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
-        .then((user) => {
-          console.log(`Logged in as user with id: ${user.id}`);
-          console.log('username is', this.state.username);
-          console.log('password is', this.state.password);
+        .then(() => {
           this.props.navigation.navigate('AdminHome', 
           {username: this.state.username, password: this.state.password, buttons: this.props.buttons});
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           alert('Username or Password is incorrect');
           this.setState({username: '', password: ''});
           this.props.navigation.navigate('Login');
@@ -65,7 +62,7 @@ class LoginComponent extends Component {
                     try {
                       this._onLoadAdmin();
                     } catch (err) {
-                      console.log(err);
+                      console.error(err);
                     }
                   }}>
                   <View style={styles.textContainer}>

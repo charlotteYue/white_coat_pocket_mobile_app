@@ -25,7 +25,6 @@ class ServiceList extends Component {
   }
 
   _renderServiceName() {
-    // console.log('get Service name');
     if (this.showName === false || this.showName === undefined) {
       this.showName = true;
       return (
@@ -38,8 +37,6 @@ class ServiceList extends Component {
 
   _onFetch = () => {
     const stitchAppClient = Stitch.defaultAppClient;
-    // console.log('the category chosen is', this.props.categoryName);
-    // console.log('the service chosen is', this.props.serviceName);
     const query = {'type': this.props.categoryName, 'subtype': this.props.serviceName };
     const option = {'projection': {
       'name': 1,
@@ -63,7 +60,6 @@ class ServiceList extends Component {
           db.find(query, option)
               .toArray()
               .then(res => {
-                // console.log('res is', res);
                 if (res.length === 0) {
                   Alert.alert('no content for your selection');
                   return;
@@ -79,7 +75,6 @@ class ServiceList extends Component {
                   hospitalList.push(instance);
                 });
                 this.setState({data: hospitalList}, function() {
-                  // console.log('data is', this.state.data);
                 });
               })
               .catch(console.error);
@@ -108,12 +103,9 @@ class ServiceList extends Component {
         .then(() => {
           const conn = mongoClient.db('test');
           const db = conn.collection('providers');
-          // console.log('query');
-          // console.log(query)
           db.updateOne(query, update, options).then(result => {
             const { matchedCount, modifiedCount } = result;
             if (matchedCount && modifiedCount) {
-
               // console.log(`Successfully updated the item.`)
               // console.log(matchedCount);
               // console.log(modifiedCount);
@@ -128,8 +120,6 @@ class ServiceList extends Component {
   render() {
 
     function Count(props) {
-      // console.log('count isadmin in service');
-      // console.log(props)
       if (props.isAdmin) {
         return <Text style={styles.itemCount}>{props.count}</Text>;
       }

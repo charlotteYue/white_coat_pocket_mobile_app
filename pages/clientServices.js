@@ -14,23 +14,16 @@ class ClientServices extends Component {
 
 
   navHome() {
-    console.log('navhome');
     const isAdmin = this.props.route.params.isAdmin;
-    console.log(isAdmin);
     if (isAdmin) {
-      console.log('admin home');
       return 'AdminHome';
     } else {
-      console.log('client home');
       return 'ClientHome';
     }
   }
 
   render() {
     const {route} = this.props;
-    console.log('here in the clientService file');
-    console.log('service chosen is ', route.params.serviceName);
-    console.log('service chosen is ', route.params.categoryName);
     return (
       <>
         <SafeAreaView style={styles.container}>

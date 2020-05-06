@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   StyleSheet,
-  // ScrollView,
+  ScrollView,
   SafeAreaView,
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import {FlatGrid} from 'react-native-super-grid';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 
 class ButtonGridComponent extends React.Component {
 constructor(props) {
@@ -35,10 +35,6 @@ constructor(props) {
         return <></>;
       }
     }
-
-
-    // console.log('is admin for count:');
-    // console.log(this.props.isAdmin);
 
     return (
       <ScrollView>

@@ -19,27 +19,19 @@ class ClientResources extends Component {
   }
 
   navBack() {
-    console.log('navback');
     const isAdmin = this.props.route.params.isAdmin;
-    console.log(isAdmin);
     if (isAdmin) {
-      console.log('admin home');
       return 'AdminHome';
     } else {
-      console.log('client home');
       return 'ClientHome';
     }
   }
 
   navHome() {
-    console.log('navhome');
     const isAdmin = this.props.route.params.isAdmin;
-    console.log(isAdmin);
     if (isAdmin) {
-      console.log('admin home');
       return 'AdminHome';
     } else {
-      console.log('client home');
       return 'ClientHome';
     }
   }
