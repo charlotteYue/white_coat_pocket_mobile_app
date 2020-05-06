@@ -38,7 +38,7 @@ class FooterComponent extends React.Component {
 }
 
 function toContact() {
-  Alert.alert('navigate to contact page');
+  Alert.alert('Please contact amspocketguide@brown.edu for inquiries');
 }
 
 const styles = StyleSheet.create({
