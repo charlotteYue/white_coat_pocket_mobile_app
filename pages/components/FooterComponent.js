@@ -13,13 +13,17 @@ class FooterComponent extends React.Component {
   render() {
     return (
       // <AppContainer>
-        <View style={styles.footer}>
+        <View style={styles.footer}
+        accessible={true}
+        accessibilityRole={'button'}>
           <TouchableOpacity onPress={() => 
             this.props.navigation.navigate(this.props.name, {buttons: this.props.buttons})}>
             <Text style={styles.footerText}>{this.props.portal}</Text>
           </TouchableOpacity>
           
-          <View style={styles.buttonsInLine}>
+          <View style={styles.buttonsInLine}
+          accessible={true}
+          accessibilityRole={'button'}>
             <TouchableOpacity onPress={toContact}>
               <Text style={styles.footerText}>Contact us</Text>
             </TouchableOpacity>

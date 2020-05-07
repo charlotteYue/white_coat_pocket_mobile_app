@@ -32,7 +32,9 @@ class LoginComponent extends Component {
         <View style={styles.container}>
           <Text style={styles.formLabel}> Admin Login</Text>
           <View>
-            <TextInput 
+            <TextInput
+            accessible={true}
+            accessibilityRole={'text'} 
               placeholder="Username" 
               value={this.state.username}
               onChangeText={(input) => this.setState(
@@ -43,6 +45,8 @@ class LoginComponent extends Component {
               style={styles.inputStyle}
               />
             <TextInput
+             accessible={true}
+             accessibilityRole={'text'} 
               secureTextEntry={true}
               placeholder="Password"
               value={this.state.password}
@@ -55,6 +59,8 @@ class LoginComponent extends Component {
           </View>
 
           <TouchableHighlight
+           accessible={true}
+           accessibilityRole={'button'} 
                   activeOpacity={1}
                   style={styles.btn}
                   underlayColor="#fff"

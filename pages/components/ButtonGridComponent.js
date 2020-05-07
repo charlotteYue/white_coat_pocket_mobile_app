@@ -29,7 +29,9 @@ constructor(props) {
   render() {
     function Count(props) {
       if (props.isAdmin) {
-        return <Text style={styles.itemCount}>{props.count}</Text>;
+        return <Text style={styles.itemCount}
+        accessible={true}
+        accessibilityLabel={`the count for ${props.name} is ${props.count}`}>{props.count}</Text>;
       }
       else {
         return <></>;
@@ -64,14 +66,18 @@ constructor(props) {
               <View>
                 <View style={styles.itemContainer}>
                   <TouchableHighlight
+                  
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#fff"
                     onPress={() => this.onPress(item, this.props.isAdmin)}>
                     <View style={styles.textContainer}>
-                      <Text style={styles.itemName}>{item.name}</Text>
+                      <Text style={styles.itemName}
+                      accessible={true}
+                      accessibilityLabel={item.name}
+                      accessibilityRole={'button'}>{item.name}</Text>
                       <View style={styles.countContainer}>
-                        <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                        <Count isAdmin={this.props.isAdmin} count={item.count} name={item.name}/>
                       </View>
                     </View>
                   </TouchableHighlight>

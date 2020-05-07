@@ -51,7 +51,7 @@ class ServiceList extends Component {
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
           // Retrieve a database object
-          const conn = mongoClient.db('test');
+          const conn = mongoClient.db('production');
 
           // Retrieve the collection in the database
           const db = conn.collection('providers');
@@ -101,7 +101,7 @@ class ServiceList extends Component {
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
-          const conn = mongoClient.db('test');
+          const conn = mongoClient.db('production');
           const db = conn.collection('providers');
           db.updateOne(query, update, options).then(result => {
             const { matchedCount, modifiedCount } = result;
@@ -121,7 +121,10 @@ class ServiceList extends Component {
 
     function Count(props) {
       if (props.isAdmin) {
-        return <Text style={styles.itemCount}>{props.count}</Text>;
+        return <Text 
+        accessible={true}
+        accessibilityLabel={`the count for ${props.name} is ${props.count}`}
+        style={styles.itemCount}>{props.count}</Text>;
       }
       else {
         return <></>;
@@ -152,10 +155,14 @@ class ServiceList extends Component {
                   <Collapse>
                     <CollapseHeader style={styles.container}  >
                       <TouchableOpacity style={styles.textContainer} onPress={() => this.onPress(this.props, item, this.props.isAdmin)}>
-                        <View style={styles.itemContainer}>
-                          <Text style={styles.text}>{item.name}</Text>
+                        <View style={styles.itemContainer}
+                        >
+                          <Text style={styles.text}
+                          accessible={true}
+                          accessibilityLabel={item.name}
+                          accessibilityRole={'button'}>{item.name}</Text>
                           <View style={styles.countContainer}>
-                            <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                            <Count isAdmin={this.props.isAdmin} count={item.count} name={item.name}/>
                           </View>
                         </View>
                       </TouchableOpacity>
