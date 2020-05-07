@@ -26,8 +26,6 @@ class AddFormComponent extends Component {
     }
 
     _updateNewInstance () {
-      console.log('username is:', this.props.username);
-      console.log('password is:', this.password);
       // Retrieve the collection in the database
       const newItem = {
         'name': this.state.name,
@@ -41,8 +39,7 @@ class AddFormComponent extends Component {
       const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
       stitchAppClient.auth
         .loginWithCredential(new UserPasswordCredential(this.props.username, this.props.password))
-        .then((user) => {
-          console.log(`Logged in as user with id: ${user.id}`);
+        .then(() => {
           // Retrieve a database object
           const conn = mongoClient.db('production');
 
@@ -50,8 +47,7 @@ class AddFormComponent extends Component {
           const db = conn.collection('providers');
 
           db.insertOne(newItem)
-          .then(result => {
-            console.log('Successfully inserted item with _id', result.insertedId);
+          .then(() => {
             alert('Successfully inserted new service');
             this.reset();
             this.getCategories(); // navigation is inside
@@ -68,9 +64,7 @@ class AddFormComponent extends Component {
       
     }
     getCategories () {
-      console.log('get category');
       const stitchAppClient = Stitch.defaultAppClient;
-      console.log('here');
       const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
     
       stitchAppClient.auth
@@ -89,12 +83,7 @@ class AddFormComponent extends Component {
                 obj['name'] = res[i]._id;
                 arr.push(obj);
               }
-              console.log(arr);
-              this.setState({data: arr}, function() {
-                console.log('get new list:');
-                  console.log(this.state.data);
-                });
-                console.log('data after insert');
+              this.setState({data: arr});
                 this.props.action(this.state.data);
                 this.props.navigation.navigate(this.props.name, 
                   {username: this.props.username, password: this.props.password});

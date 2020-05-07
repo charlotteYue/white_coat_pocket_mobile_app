@@ -19,8 +19,6 @@ class FeedbackComponent extends Component {
 
     _updateFeedback () {
       // Retrieve the collection in the database
-      console.log('contact: ', this.state.contact);
-      console.log('context: ', this.state.contact);
       const newItem = {
         'contact': this.state.contact,
         'content': this.state.content,
@@ -29,8 +27,7 @@ class FeedbackComponent extends Component {
       const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
-        .then((user) => {
-          console.log(`Logged in as user with id: ${user.id}`);
+        .then(() => {
           // Retrieve a database object
           const conn = mongoClient.db('production');
 
@@ -38,8 +35,7 @@ class FeedbackComponent extends Component {
           const db = conn.collection('feedbacks');
 
           db.insertOne(newItem)
-          .then(result => {
-            console.log('Successfully inserted item with _id', result.insertedId);
+          .then(() => {
             alert('Successfully send a feedback');
             this.reset();
             this.props.navigation.navigate(this.props.success);

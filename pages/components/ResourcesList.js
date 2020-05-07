@@ -48,7 +48,6 @@ class ResourcesList extends Component {
 
   _onFetch = () => {
     const stitchAppClient = Stitch.defaultAppClient;
-    // console.log('the category chosen is', this.props.categoryName);
     const query = {'type': this.props.categoryName};
     const option = {'projection': {
       'subtype': 1,
@@ -77,13 +76,11 @@ class ResourcesList extends Component {
                 const arr = new Array();
                   for ( let i = 0; i < ListArray.length; i++) {
                     const subtype = ListArray[i];
-                  //  console.log(subtype);
                    db.aggregate([
                     {'$match': {'subtype': `${subtype}`}},
                     {'$group': { '_id': null, 'totalCount': {'$sum': '$count'} }}
                   ]).toArray()
                   .then(subRes => {
-                    // console.log(subRes);
                     if (subRes.length === 0) {
                       Alert.alert('no content for your selection');
                       return;
@@ -93,14 +90,9 @@ class ResourcesList extends Component {
                       obj['subtype'] = subtype;
                       obj['totalCount'] = subRes[0].totalCount;
                       arr.push(obj);
-                      // console.log("arr-----------------");
-                      // console.log(arr)
 
                       if (arr.length === ListArray.length) {
-                        this.setState({data: arr}, function () {
-                          // console.log('data is');
-                          // console.log(this.state.data);
-                        });
+                        this.setState({data: arr});
                       }
 
                   }).catch(err => console.error(`Failed to group aggregation: ${err}`));
@@ -251,64 +243,6 @@ const styles = StyleSheet.create({
   scrolling: {
     marginBottom: 60,
   },
-  // container: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   padding: 20,
-  //   height: 100,
-  //   borderWidth: 0.5,
-  //   borderColor: "#e0e0e0",
-  //   backgroundColor: '#fff',
-  // },
-
-
-  // title: {
-  //   fontSize: 20,
-  //   fontWeight: 'bold',
-  //   color: '#000',
-  // },
-  // container_text: {
-  //   flex: 1,
-  //   flexDirection: 'column',
-  //   marginLeft: 12,
-  //   justifyContent: 'center',
-  //   alignItems: "center",
-  // },
-  // photo: {
-  //   height: 60,
-  //   width: 60,
-  // },
-  // itemCount: {
-  //   textAlign: 'center',
-  //   color: '#fff',
-  //   fontWeight: 'bold',
-  //   fontSize: 16,
-  //   maxWidth: 100,
-  // },
-  // itemContainer: {
-  //   flex: 1,
-  //   flexDirection: "row",
-  //   justifyContent: 'center',
-  //   // alignItems: "center",
-  // },
-  // countContainer: {
-  //   position: "absolute",
-  //   bottom: 0,
-  // },
-  // count: {
-  //   color: "#fff",
-  // },
-  // line: {
-  //   height: 0.5,
-  //   color: '#e0e0e0',
-  //   backgroundColor: '#e0e0e0',
-  // },
-  // lineBreak: {
-  //   height: 5,
-  //   color: '#e0e0e0',
-  //   backgroundColor: '#e0e0e0',
-  // }
-
 });
 
 export default ResourcesList;

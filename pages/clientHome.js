@@ -5,9 +5,10 @@ import {
   Alert,
   SafeAreaView,
   StatusBar,
+  ScrollView
 } from 'react-native';
 
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 import HeaderComponent from './components/HeaderComponent.js';
 import ButtonGridComponent from './components/ButtonGridComponent.js';
 import FooterComponent from './components/FooterComponent.js';
@@ -32,7 +33,6 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
   }
 
   async _loadClient() {
-    console.log('here in app.js');
     await Stitch.initializeDefaultAppClient(
       'wcpg-bxtzi'
     ).then(client => {
@@ -46,9 +46,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
   }
 
   _getCategories= () => {
-    console.log('here in client');
     const stitchAppClient = Stitch.defaultAppClient;
-    console.log('here');
     const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
 
     stitchAppClient.auth
@@ -73,7 +71,6 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
               arr.push(obj);
             }
             this.setState({data: arr}, function() {
-                // console.log(this.state.data);
               });
           }).catch(() => Alert.alert('no content for your selection'));
 
