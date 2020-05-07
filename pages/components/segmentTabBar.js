@@ -17,8 +17,9 @@ class CustomSegmentedControlTab extends Component {
   };
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} accessible={false}>
         <SegmentedControlTab
+        accessible={false}
           values={['Home', this.props.categoryName]}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}

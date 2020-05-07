@@ -54,7 +54,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
-          const conn = mongoClient.db('test');
+          const conn = mongoClient.db('production');
           const db = conn.collection('providers');
           db.aggregate(
             [{'$group': { '_id': '$type' }}]

@@ -3,7 +3,6 @@ import {
     StyleSheet,
     View,
     Text,
-    Alert,
   } from 'react-native';
   import Icon from 'react-native-vector-icons/FontAwesome';
 //   <Icon name="rocket" size={30} color="#900" />;
@@ -16,7 +15,9 @@ class CreateButtonComponent extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-            <View style={styles.itemContainer}>
+            <View style={styles.itemContainer}
+             accessible={true}
+             accessibilityRole={'button'} >
               <Icon name="plus-square-o" size={120}  color='#9DC8EC'
               onPress={() => this.props.navigation.navigate(this.props.name, 
               {categoryList: this.props.category, username: this.props.username, password: this.props.password, action: this.props.action})}/>

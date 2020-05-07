@@ -42,7 +42,7 @@ handler(arr) {
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
         .then( () => {
-          const conn = mongoClient.db('test');
+          const conn = mongoClient.db('production');
           const db = conn.collection('providers');
           const arr = new Array();
           for (let i = 0; i < categories.length; i++) {

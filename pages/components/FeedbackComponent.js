@@ -32,7 +32,7 @@ class FeedbackComponent extends Component {
         .then((user) => {
           console.log(`Logged in as user with id: ${user.id}`);
           // Retrieve a database object
-          const conn = mongoClient.db('test');
+          const conn = mongoClient.db('production');
 
           // Retrieve the collection in the database
           const db = conn.collection('feedbacks');

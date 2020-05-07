@@ -15,7 +15,10 @@ class HeaderWithIcon extends Component {
   render() {
     return (
       <View style={styles.header}>
-        <View style={styles.left}>
+        <View style={styles.left}
+        accessible={true}
+        accessibilityLabel="Go back"
+        accessibilityHint="Navigates to the previous screen">
           <Button transparent style={styles.left}>
             <Icon style={{color: 'white'}} name="arrow-back" 
             onPress={() => this.props.navigation.navigate(this.props.back)}/>
@@ -24,7 +27,11 @@ class HeaderWithIcon extends Component {
         <View style={styles.center}>
           <Text style={styles.headerText}>White Coat Pocket Guide</Text>
         </View>
-        <View style={styles.right}>
+        <View style={styles.right}
+        accessible={true}
+        accessibilityLabel="Go home"
+        accessibilityHint="Navigates to the home screen"
+        accessibilityRole={'button'}>
           <Button transparent style={styles.right}>
             <Icon style={{color: 'white'}} name="home" 
             onPress={() => this.props.navigation.navigate(this.props.home)}/>

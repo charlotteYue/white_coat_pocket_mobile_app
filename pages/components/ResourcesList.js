@@ -59,7 +59,7 @@ class ResourcesList extends Component {
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
           // Retrieve a database object
-          const conn = mongoClient.db('test');
+          const conn = mongoClient.db('production');
 
           // Retrieve the collection in the database
           const db = conn.collection('providers');
@@ -125,7 +125,10 @@ class ResourcesList extends Component {
   render() {
     function Count(props) {
       if (props.isAdmin) {
-        return <Text style={styles.itemCount}>{props.count}</Text>;
+        return <Text 
+        accessible={true}
+        accessibilityLabel={`the count for ${props.name} is ${props.count}`}
+        style={styles.itemCount}>{props.count}</Text>;
       }
       else {
         return <></>;
@@ -169,9 +172,12 @@ class ResourcesList extends Component {
                     underlayColor="#fff"
                     onPress={() => this.onPress(this.props, item.subtype, this.props.isAdmin)}>
                     <View style={styles.textContainer}>
-                      <Text style={styles.itemName}>{item.subtype}</Text>
+                      <Text style={styles.itemName}
+                      accessible={true}
+                      accessibilityLabel={item.subtype}
+                      accessibilityRole={'button'}>{item.subtype}</Text>
                       <View style={styles.countContainer}>
-                        <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
+                        <Count isAdmin={this.props.isAdmin} count={item.totalCount} name={item.subtype}/>
                       </View>
                     </View>
                   </TouchableHighlight>
