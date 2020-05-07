@@ -41,15 +41,19 @@ const styles = StyleSheet.create({
     left: 0,
   },
   center: {
-    flex: 3,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+  },
+  right: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   header: {
     backgroundColor: '#1565C0',
-    // height: 50,
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 40,
   },
   headerText: {
     color: '#ffffff',
