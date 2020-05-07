@@ -1,3 +1,6 @@
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -52,11 +55,11 @@ export default class App extends React.Component {
               name="Login"
               component={Login}
             />
-            <Stack.Screen 
+            <Stack.Screen
               name="Feedback"
               component={Feedback}
             />
-            <Stack.Screen 
+            <Stack.Screen
               name="AdminFeedback"
               component={AdminFeedback}
             />
