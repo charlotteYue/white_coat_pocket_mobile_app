@@ -86,7 +86,7 @@ import { Stitch, AnonymousCredential, RemoteMongoClient } from 'mongodb-stitch-r
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.container}>
           <HeaderComponent />
-          <ScrollView style={styles.scrolling}>
+          <ScrollView testID='sview' style={styles.scrolling}>
             <ButtonGridComponent
               text="What resources are you looking for today?"
               hint="(Select One)"
