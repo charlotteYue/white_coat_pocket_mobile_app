@@ -29,7 +29,7 @@ class FeedbackListComponent extends Component {
             .loginWithCredential(new AnonymousCredential())
             .then(() => {
               // Retrieve a database object
-              const conn = mongoClient.db('test');
+              const conn = mongoClient.db('production');
     
               // Retrieve the collection in the database
               const db = conn.collection('feedbacks');

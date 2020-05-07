@@ -41,7 +41,7 @@ class AddFormComponent extends Component {
         .loginWithCredential(new UserPasswordCredential(this.props.username, this.props.password))
         .then(() => {
           // Retrieve a database object
-          const conn = mongoClient.db('test');
+          const conn = mongoClient.db('production');
 
           // Retrieve the collection in the database
           const db = conn.collection('providers');
@@ -70,7 +70,7 @@ class AddFormComponent extends Component {
       stitchAppClient.auth
           .loginWithCredential(new AnonymousCredential())
           .then(() => { 
-            const conn = mongoClient.db('test');
+            const conn = mongoClient.db('production');
             const db = conn.collection('providers');
             db.aggregate(
               [{'$group': { '_id': '$type' }}]
