@@ -38,9 +38,7 @@ class LoginComponent extends Component {
               placeholder="Username" 
               value={this.state.username}
               onChangeText={(input) => this.setState(
-                // hardcode for testing
-                { username: 'admin' })}
-                // { username: input })}
+                { username: input })}
               autoCapitalize = 'none'
               style={styles.inputStyle}
               />
@@ -51,8 +49,7 @@ class LoginComponent extends Component {
               placeholder="Password"
               value={this.state.password}
               onChangeText={(input) => this.setState(
-                { password: '7iEY28O4b5' })}
-                // { password: input })}
+                { password: input })}
               autoCapitalize = 'none'
               style={styles.inputStyle}
             />
