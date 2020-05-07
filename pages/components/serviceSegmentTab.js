@@ -6,7 +6,7 @@ class ServiceSegmentedControlTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0,
+      selectedIndex: 2,
     };
   }
   handleIndexChange = index => {
@@ -17,8 +17,9 @@ class ServiceSegmentedControlTab extends Component {
   };
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} accessible={false}>
         <SegmentedControlTab
+        accessible={false}
           values={['Home', this.props.categoryName, this.props.serviceName]}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}
@@ -31,17 +32,17 @@ class ServiceSegmentedControlTab extends Component {
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     height: 50,
-    width: "100%",
+    width: '100%',
     paddingTop: 10,
   },
   tab: {
-    backgroundColor: "#00695C",
+    backgroundColor: '#0D47A1',
   },
   text: {
-    color:"#004D40",
+    color: '#0D47A1',
   }
-})
+});
 
 export default ServiceSegmentedControlTab;

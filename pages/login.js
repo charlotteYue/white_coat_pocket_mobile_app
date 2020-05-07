@@ -12,12 +12,12 @@ import FooterComponent from './components/FooterComponent.js';
 
 
 class Login extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
   render() {
-    const { route }=this.props;
+    const { route } = this.props;
     return (
       <>
         <SafeAreaView style={styles.container}>
@@ -28,7 +28,9 @@ class Login extends Component {
           <ScrollView>
             <LoginComponent navigation={this.props.navigation} buttons={route.params.buttons}/>
           </ScrollView>
-          <FooterComponent style={styles.footer} />
+          <FooterComponent style={styles.footer}
+          navigation={this.props.navigation}
+          feedback="Feedback" />
         </SafeAreaView>
       </>
     );
@@ -37,10 +39,10 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#356859',
+    backgroundColor: '#1565C0',
     alignItems: 'center',
     justifyContent: 'center',
   },
-})
+});
 
 export default Login;

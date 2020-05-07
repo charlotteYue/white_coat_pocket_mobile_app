@@ -13,17 +13,23 @@ class FooterComponent extends React.Component {
   render() {
     return (
       // <AppContainer>
-        <View style={styles.footer}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.name, {buttons: this.props.buttons})}>
+        <View style={styles.footer}
+        accessible={true}
+        accessibilityRole={'button'}>
+          <TouchableOpacity onPress={() => 
+            this.props.navigation.navigate(this.props.name, {buttons: this.props.buttons})}>
             <Text style={styles.footerText}>{this.props.portal}</Text>
           </TouchableOpacity>
           
-          <View style={styles.buttonsInLine}>
+          <View style={styles.buttonsInLine}
+          accessible={true}
+          accessibilityRole={'button'}>
             <TouchableOpacity onPress={toContact}>
               <Text style={styles.footerText}>Contact us</Text>
             </TouchableOpacity>
             <Text> | </Text>
-            <TouchableOpacity onPress={toFeedback}>
+            <TouchableOpacity onPress={() =>
+            this.props.navigation.navigate(this.props.feedback)}>
               <Text style={styles.footerText}>Feedback</Text>
             </TouchableOpacity>
           </View>
@@ -36,11 +42,7 @@ class FooterComponent extends React.Component {
 }
 
 function toContact() {
-  Alert.alert('navigate to contact page');
-}
-
-function toFeedback() {
-  Alert.alert('navigate to feedback page');
+  Alert.alert('Please contact amspocketguide@brown.edu for inquiries');
 }
 
 const styles = StyleSheet.create({

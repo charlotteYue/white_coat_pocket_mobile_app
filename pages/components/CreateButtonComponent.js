@@ -3,24 +3,24 @@ import {
     StyleSheet,
     View,
     Text,
-    Alert,
   } from 'react-native';
   import Icon from 'react-native-vector-icons/FontAwesome';
 //   <Icon name="rocket" size={30} color="#900" />;
 
 // function CreateButtonComponent() 
 class CreateButtonComponent extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
   render() {
     return (
       <View style={styles.container}>
-            <View style={styles.itemContainer}>
+            <View style={styles.itemContainer}
+             accessible={true}
+             accessibilityRole={'button'} >
               <Icon name="plus-square-o" size={120}  color='#9DC8EC'
               onPress={() => this.props.navigation.navigate(this.props.name, 
-              {categoryList: this.props.category, connection: this.props.connection,
-               username: this.props.username, password: this.props.password})}/>
+              {categoryList: this.props.category, username: this.props.username, password: this.props.password, action: this.props.action})}/>
             </View>
             <Text style={styles.itemName}>Create A Category</Text>
       </View>
@@ -28,8 +28,8 @@ class CreateButtonComponent extends React.Component {
   }
 }
 
-const styles=StyleSheet.create({
-    container:{
+const styles = StyleSheet.create({
+    container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
@@ -51,6 +51,6 @@ const styles=StyleSheet.create({
         textAlign: 'center',
         color: '#B2DFDB',
       },
-})
+});
 
 export default CreateButtonComponent;

@@ -1,53 +1,52 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
+import {Text, StyleSheet, View, TextInput, TouchableHighlight} from 'react-native';
 import { Stitch, UserPasswordCredential, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
 
 
 class LoginComponent extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             username: '',
             password: '',
-        }
+        };
     }
 
-    _onLoadAdmin(){
+    _onLoadAdmin() {
       const stitchAppClient = Stitch.defaultAppClient;
-      const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
       stitchAppClient.auth
         .loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
-        .then((user) => {
-          console.log(`Logged in as user with id: ${user.id}`);
-          const conn = mongoClient.db('test');
-          console.log('username is', this.state.username);
-          console.log('password is', this.state.password);
-          this.props.navigation.navigate("AdminHome", 
-          {connection: conn, username: this.state.username, password: this.state.password,buttons: this.props.buttons});
+        .then(() => {
+          this.props.navigation.navigate('AdminHome', 
+          {username: this.state.username, password: this.state.password, buttons: this.props.buttons});
         })
-        .catch((err)=> {
-          console.log(err);
+        .catch((err) => {
+          console.error(err);
           alert('Username or Password is incorrect');
           this.setState({username: '', password: ''});
-          this.props.navigation.navigate("Login");
-        })
+          this.props.navigation.navigate('Login');
+        });
     }
-  render(){
+  render() {
     return (
         <View style={styles.container}>
           <Text style={styles.formLabel}> Admin Login</Text>
           <View>
-            <TextInput 
+            <TextInput
+            accessible={true}
+            accessibilityRole={'text'} 
               placeholder="Username" 
               value={this.state.username}
               onChangeText={(input) => this.setState(
-                //hardcode for testing
+                // hardcode for testing
                 { username: 'admin' })}
                 // { username: input })}
               autoCapitalize = 'none'
               style={styles.inputStyle}
               />
             <TextInput
+             accessible={true}
+             accessibilityRole={'text'} 
               secureTextEntry={true}
               placeholder="Password"
               value={this.state.password}
@@ -58,27 +57,34 @@ class LoginComponent extends Component {
               style={styles.inputStyle}
             />
           </View>
-          <Button
-              title="Submit"
-              color="#fff"
-              onPress={() => {
-                try{
-                  this._onLoadAdmin();
-                }catch(err){
-                  console.log(err);
-                }
-              }}
-            />
+
+          <TouchableHighlight
+           accessible={true}
+           accessibilityRole={'button'} 
+                  activeOpacity={1}
+                  style={styles.btn}
+                  underlayColor="#fff"
+                  onPress={() => {
+                    try {
+                      this._onLoadAdmin();
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }}>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.itemName}>Submit</Text>
+                  </View>
+          </TouchableHighlight>
         </View>
       );
   }
-};
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#356859',
+    backgroundColor: '#1565C0',
     alignItems: 'center',
-    marginTop: "60%",
+    marginTop: '60%',
   },
 
   formLabel: {
@@ -94,7 +100,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     borderRadius: 50,
-    backgroundColor: '#b9e4c9',
+    backgroundColor: '#E3F2FD',
   },
   formText: {
     alignItems: 'center',
@@ -106,6 +112,24 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 20,
   },
+  btn: {
+    height: 40,
+    width: 120,
+    marginTop: 30,
+    borderRadius: 20,
+    backgroundColor: '#1E88E5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#1976D2', 
+    borderWidth: 5, 
+  },
+  itemName: {
+    textAlign: 'center',
+    color: '#E3F2FD',
+    fontWeight: 'bold',
+    fontSize: 15,
+    maxWidth: 100,
+  }
 
 });
 

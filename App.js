@@ -1,14 +1,7 @@
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
 import React from 'react';
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {
-  Stitch,
-  AnonymousCredential,
-} from 'mongodb-stitch-react-native-sdk';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -16,8 +9,10 @@ import ClientHome from './pages/clientHome.js';
 import AdminHome from './pages/adminHome';
 import ClientResources from './pages/clientResources.js';
 import ClientServices from './pages/clientServices.js';
-import AdminAddForm from './pages/adminAddForm.js'
+import AdminAddForm from './pages/adminAddForm.js';
 import Login from './pages/login.js';
+import Feedback from './pages/feedback.js';
+import AdminFeedback from './pages/adminFeedback.js';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +20,7 @@ const Stack = createStackNavigator();
 export default class App extends React.Component {
   constructor() {
     super();
+<<<<<<< HEAD
     // this.state = {
     //   currentUserId: undefined,
     //   client: undefined,
@@ -58,6 +54,10 @@ export default class App extends React.Component {
     //     title="Logout"
     //   />
     // );
+=======
+  }
+  render() {
+>>>>>>> blue-version
     return (
       <>
         <NavigationContainer>
@@ -91,11 +91,20 @@ export default class App extends React.Component {
               name="Login"
               component={Login}
             />
+            <Stack.Screen
+              name="Feedback"
+              component={Feedback}
+            />
+            <Stack.Screen
+              name="AdminFeedback"
+              component={AdminFeedback}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </>
     );
   }
+<<<<<<< HEAD
 
   // async _loadClient() {
   //   console.log('here in app.js');
@@ -150,13 +159,6 @@ export default class App extends React.Component {
   //       });
   //     });
   // }
+=======
+>>>>>>> blue-version
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

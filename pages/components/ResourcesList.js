@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
+  Alert,
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
@@ -42,77 +42,73 @@ class ResourcesList extends Component {
     return null;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this._onFetch();
   }
 
-  _onFetch = () =>{
+  _onFetch = () => {
     const stitchAppClient = Stitch.defaultAppClient;
-    // console.log('the category chosen is', this.props.categoryName);
     const query = {'type': this.props.categoryName};
-    const option = {"projection": {
-      "subtype": 1,
-      "_id": 0,
-    },};
-    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+    const option = {'projection': {
+      'subtype': 1,
+      '_id': 0,
+    }, };
+    const mongoClient = stitchAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas');
     stitchAppClient.auth
         .loginWithCredential(new AnonymousCredential())
         .then(() => {
           // Retrieve a database object
-          const conn = mongoClient.db('test')
+          const conn = mongoClient.db('production');
 
           // Retrieve the collection in the database
-          const db = conn.collection('providers')
+          const db = conn.collection('providers');
 
           // Find 10 documents and log them to console.
           db.find(query, option)
               .toArray()
               .then(res => {
-                let listSet = new Set();
-                res.forEach(function(item){
+                const listSet = new Set();
+                res.forEach(function(item) {
                   listSet.add(item.subtype);
-                })
+                });
                 let ListArray = new Array();
                 ListArray = Array.from(listSet);
-                let arr=new Array();
-                  for( var i=0;i<ListArray.length;i++) {
-                    let subtype=ListArray[i];
-                  //  console.log(subtype);
+                const arr = new Array();
+                  for ( let i = 0; i < ListArray.length; i++) {
+                    const subtype = ListArray[i];
                    db.aggregate([
-                    {"$match": {"subtype": `${subtype}`}},
-                    {"$group": { "_id": null,"totalCount": {"$sum": "$count"} }}
+                    {'$match': {'subtype': `${subtype}`}},
+                    {'$group': { '_id': null, 'totalCount': {'$sum': '$count'} }}
                   ]).toArray()
                   .then(subRes => {
+                    if (subRes.length === 0) {
+                      Alert.alert('no content for your selection');
+                      return;
+                    }
+                      const obj = new Object();
 
-                      let obj=new Object();
+                      obj['subtype'] = subtype;
+                      obj['totalCount'] = subRes[0].totalCount;
+                      arr.push(obj);
 
-                      obj['subtype']=subtype;
-                      obj['totalCount']=subRes[0].totalCount;
-                      arr.push(obj)
-                      // console.log("arr-----------------");
-                      // console.log(arr)
-
-                      if(arr.length===ListArray.length){
-                        this.setState({data:arr},function (){
-                          // console.log('data is');
-                          // console.log(this.state.data);
-                        })
+                      if (arr.length === ListArray.length) {
+                        this.setState({data: arr});
                       }
 
-                  }).catch(err => console.error(`Failed to group aggregation: ${err}`))
+                  }).catch(err => console.error(`Failed to group aggregation: ${err}`));
 
 
                   }
 
               })
-              .catch(console.error)
+              .catch(console.error);
         })
-        .catch(console.error)
+        .catch(console.error);
   }
 
 
-  onPress(props,item,isAdminPortal){
-    props.navigation.navigate(this.props.name, {serviceName: item, categoryName: this.props.categoryName, isAdmin: isAdminPortal})
+  onPress(props, item, isAdminPortal) {
+    props.navigation.navigate(this.props.name, {serviceName: item, categoryName: this.props.categoryName, isAdmin: isAdminPortal});
   }
 
 
@@ -120,10 +116,13 @@ class ResourcesList extends Component {
 
   render() {
     function Count(props) {
-      if(props.isAdmin){
-        return <Text style={styles.itemCount}>{props.count}</Text>;
+      if (props.isAdmin) {
+        return <Text 
+        accessible={true}
+        accessibilityLabel={`the count for ${props.name} is ${props.count}`}
+        style={styles.itemCount}>{props.count}</Text>;
       }
-      else{
+      else {
         return <></>;
       }
     }
@@ -149,7 +148,7 @@ class ResourcesList extends Component {
         //         </View>}
         // />
 
-        <ScrollView >
+        <ScrollView style={styles.scrolling}>
           <SafeAreaView>
           <FlatGrid
             itemDimension={120}
@@ -163,11 +162,14 @@ class ResourcesList extends Component {
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#fff"
-                    onPress={() => this.onPress(this.props,item.subtype,this.props.isAdmin)}>
+                    onPress={() => this.onPress(this.props, item.subtype, this.props.isAdmin)}>
                     <View style={styles.textContainer}>
-                      <Text style={styles.itemName}>{item.subtype}</Text>
+                      <Text style={styles.itemName}
+                      accessible={true}
+                      accessibilityLabel={item.subtype}
+                      accessibilityRole={'button'}>{item.subtype}</Text>
                       <View style={styles.countContainer}>
-                        <Count isAdmin={this.props.isAdmin} count={item.totalCount}/>
+                        <Count isAdmin={this.props.isAdmin} count={item.totalCount} name={item.subtype}/>
                       </View>
                     </View>
                   </TouchableHighlight>
@@ -186,11 +188,11 @@ class ResourcesList extends Component {
 }
 
 const styles = StyleSheet.create({
-  
+
   gridView: {
     flex: 1,
-    marginLeft: "10%",
-    marginRight: "10%",
+    marginLeft: '10%',
+    marginRight: '10%',
   },
 
   itemContainer: {
@@ -200,102 +202,47 @@ const styles = StyleSheet.create({
     // padding: 10,
     height: 100,
   },
-  
+
   textContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   mainBtn: {
     height: 130,
     width: 130,
     borderRadius: 20,
-    backgroundColor: '#B2DFDB',
+    backgroundColor: '#ffff',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 6,
+    borderColor: '#E3F2FD',
   },
   itemName: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#01579B',
     fontWeight: 'bold',
     fontSize: 15,
     maxWidth: 100,
   },
 
   countContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
   },
 
   itemCount: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#448AFF',
     fontWeight: 'bold',
     fontSize: 24,
     maxWidth: 100,
-
   },
-  
-  // container: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   padding: 20,
-  //   height: 100,
-  //   borderWidth: 0.5,
-  //   borderColor: "#e0e0e0",
-  //   backgroundColor: '#fff',
-  // },
-
-
-  // title: {
-  //   fontSize: 20,
-  //   fontWeight: 'bold',
-  //   color: '#000',
-  // },
-  // container_text: {
-  //   flex: 1,
-  //   flexDirection: 'column',
-  //   marginLeft: 12,
-  //   justifyContent: 'center',
-  //   alignItems: "center",
-  // },
-  // photo: {
-  //   height: 60,
-  //   width: 60,
-  // },
-  // itemCount: {
-  //   textAlign: 'center',
-  //   color: '#fff',
-  //   fontWeight: 'bold',
-  //   fontSize: 16,
-  //   maxWidth: 100,
-  // },
-  // itemContainer: {
-  //   flex: 1,
-  //   flexDirection: "row",
-  //   justifyContent: 'center',
-  //   // alignItems: "center",
-  // },
-  // countContainer: {
-  //   position: "absolute",
-  //   bottom: 0,
-  // },
-  // count: {
-  //   color: "#fff",
-  // },
-  // line: {
-  //   height: 0.5,
-  //   color: '#e0e0e0',
-  //   backgroundColor: '#e0e0e0',
-  // },
-  // lineBreak: {
-  //   height: 5,
-  //   color: '#e0e0e0',
-  //   backgroundColor: '#e0e0e0',
-  // }
-
+  scrolling: {
+    marginBottom: 60,
+  },
 });
 
 export default ResourcesList;

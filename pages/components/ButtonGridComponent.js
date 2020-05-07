@@ -1,48 +1,43 @@
 import React from 'react';
 import {
   StyleSheet,
-  // ScrollView,
+  ScrollView,
   SafeAreaView,
   View,
   Text,
-  Alert,
   TouchableHighlight,
-  Dimensions,
 } from 'react-native';
 
 import {FlatGrid} from 'react-native-super-grid';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { ScrollView } from 'react-native-gesture-handler';
 
 class ButtonGridComponent extends React.Component {
-constructor(props){
+constructor(props) {
   super(props);
   this.onPress = this.onPress.bind(this);
-  this.state={
+  this.state = {
     data: [],
   };
 }
 
 
-  onPress(item,isAdminPortal) {
+  onPress(item, isAdminPortal) {
     this.props.navigation.navigate(this.props.name, {categoryName: item.name, isAdmin: isAdminPortal});
   
   }
 
   render() {
     function Count(props) {
-      if(props.isAdmin){
-        // return <Text style={styles.itemCount}>Count: {props.count}</Text>;
-        // console.log(`~~~~~~~~~~~~~~~~~~~~~~~count in Count: ${props.count}`);
-        // console.log(props.count);
-        return <Text style={styles.itemCount}>{props.count}</Text>;
+      if (props.isAdmin) {
+        return <Text style={styles.itemCount}
+        accessible={true}
+        accessibilityLabel={`the count for ${props.name} is ${props.count}`}>{props.count}</Text>;
       }
-      else{
+      else {
         return <></>;
       }
     }
 
-
-    
     return (
       <ScrollView>
         <View style={styles.intro}>
@@ -71,14 +66,18 @@ constructor(props){
               <View>
                 <View style={styles.itemContainer}>
                   <TouchableHighlight
+                  
                     activeOpacity={1}
                     style={styles.mainBtn}
                     underlayColor="#fff"
-                    onPress={() => this.onPress(item,this.props.isAdmin)}>
+                    onPress={() => this.onPress(item, this.props.isAdmin)}>
                     <View style={styles.textContainer}>
-                      <Text style={styles.itemName}>{item.name}</Text>
+                      <Text style={styles.itemName}
+                      accessible={true}
+                      accessibilityLabel={item.name}
+                      accessibilityRole={'button'}>{item.name}</Text>
                       <View style={styles.countContainer}>
-                        <Count isAdmin={this.props.isAdmin} count={item.count}/>
+                        <Count isAdmin={this.props.isAdmin} count={item.count} name={item.name}/>
                       </View>
                     </View>
                   </TouchableHighlight>
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
   introText: {
     textAlign: 'center',
     fontSize: 15,
-    color: '#B2DFDB',
+    color: '#E3F2FD',
     marginBottom: '10%',
   },
 
@@ -145,33 +144,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   mainBtn: {
     height: 110,
     width: 110,
     borderRadius: 20,
-    backgroundColor: '#b9e4c9',
+    backgroundColor: '#ffff',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 6,
+    borderColor: '#E3F2FD', 
+    shadowRadius: 10, 
+    shadowColor: '#4FC3F7', 
   },
   itemName: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#0D47A1',
     fontWeight: 'bold',
     fontSize: 15,
     maxWidth: 100,
   },
 
   countContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
   },
 
   itemCount: {
     textAlign: 'center',
-    color: '#004D40',
+    color: '#448AFF',
     fontWeight: 'bold',
     fontSize: 24,
     maxWidth: 100,

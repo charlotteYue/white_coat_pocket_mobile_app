@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 // function HeaderComponent() 
-class HeaderComponent extends React.Component{
+class HeaderComponent extends React.Component {
   render() {
     return (
       <View style={styles.header}>
